@@ -1,6 +1,7 @@
 package com.good.mycuseme.data.remote
 
 import com.good.mycuseme.data.card.CardResponse
+import com.good.mycuseme.data.login.LoginResponse
 import com.good.mycuseme.data.start.StartResponse
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -22,5 +23,9 @@ object CardRemoteDataSource {
 
     fun getVisibleCard(uuid: String): Single<CardResponse> =
         retrofit.getVisibleCard(uuid)
+            .subscribeOn(Schedulers.io())
+
+    fun postLogin(uuid: String, password: String): Single<LoginResponse> =
+        retrofit.postLogin(uuid, password)
             .subscribeOn(Schedulers.io())
 }
