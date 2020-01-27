@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyCuseme</string>
+    <string name="login_main_text">관리자 모드 로그인</string>
+    <string name="login_wrong_password">*비밀번호가 틀렸습니다.</string>
+    <string name="login_btn_unlock">잠금해제</string>
+    <string name="login_input_text">비밀번호를 입력하세요</string>
 </resources>

@@ -24,8 +24,9 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.good.mycuseme.ui.login.LoginActivity" />
         <activity android:name="com.good.mycuseme.ui.cardedit.EditActivity" />
-        <activity android:name="com.good.mycuseme.ui.manage.ManageActivity" />
+        <activity android:name="com.good.mycuseme.ui.manage.ManageCardActivity" />
         <activity android:name="com.good.mycuseme.ui.user.UserActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

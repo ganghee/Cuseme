@@ -10,11 +10,11 @@ import com.good.mycuseme.data.start.StartRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 
 class UserViewModel : BaseViewModel() {
-    val startRepository by lazy { StartRepository() }
-    val cardRepository by lazy { CardRepository() }
+    private val startRepository by lazy { StartRepository() }
+    private val cardRepository by lazy { CardRepository() }
     val cardList = MutableLiveData<List<CardData>>()
-    val sortList = listOf("basic", "ascent", "count")
-    var index = 0
+    private val sortList = listOf("basic", "ascent", "count")
+    private var index = 0
 
     @SuppressLint("CheckResult")
     fun getUUID(uuid: String) {

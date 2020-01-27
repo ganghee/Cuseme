@@ -1,6 +1,7 @@
 package com.good.mycuseme.ui.user
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.provider.Settings
@@ -18,8 +19,11 @@ import com.good.mycuseme.base.BaseActivity
 import com.good.mycuseme.base.BaseRecyclerViewAdapter
 import com.good.mycuseme.base.BaseViewHolder
 import com.good.mycuseme.data.card.CardData
+import com.good.mycuseme.data.local.SharedPreferenceController
+import com.good.mycuseme.data.local.UserData
 import com.good.mycuseme.databinding.ActivityUserBinding
 import com.good.mycuseme.databinding.RecyclerUserItemBinding
+import com.good.mycuseme.ui.login.LoginActivity
 import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.recycler_user_item.view.*
@@ -33,22 +37,37 @@ class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
     private val player: MediaPlayer by lazy { MediaPlayer() }
     lateinit var textToSpeech: TextToSpeech
     var recordFlag = 0
-    private val androidId by lazy {
-        Settings.Secure.getString(
-            this.contentResolver,
-            Settings.Secure.ANDROID_ID
-        )
-    }
+    private lateinit var androidId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.userViewModel = userViewModel
 
+        setUUID()
         coordinateMotion() //TODO
         initViewModel(androidId)
         getUUID(androidId)
         setCardList(androidId)
         setTextToSpeech()
+        startLoginActivity()
+    }
+
+    private fun setUUID() {
+        androidId = Settings.Secure.getString(
+            this.contentResolver,
+            Settings.Secure.ANDROID_ID
+        )
+        val userData = UserData(androidId, null, null)
+        Log.d("uuidandroid", userData.toString())
+        SharedPreferenceController.setUserInfo(this, userData)
+    }
+
+    private fun startLoginActivity() {
+        button_user_login.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.putExtra("uuid", androidId)
+            startActivity(intent)
+        }
     }
 
     private fun setTextToSpeech() {
@@ -93,22 +112,24 @@ class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
                 ): BaseViewHolder<RecyclerUserItemBinding> {
                     return super.onCreateViewHolder(parent, viewType).apply {
                         itemView.setOnClickListener {
+                            singleItemClick(parent, it)
                             textview_user_cardcontent.text = items[adapterPosition].content
-
-                            for (i in 0 until parent.childCount) {
-                                parent.getChildAt(i).view_masking.isSelected = false
-                            }
-                            if (!it.view_masking.isSelected) {
-                                it.view_masking.isSelected = true
-                            } else if (it.view_masking.isSelected) {
-                                it.view_masking.isSelected = true
-                            }
-
                             if (recordFlag == 0) startRecord(items[adapterPosition], it)
                         }
                     }
                 }
             }
+        }
+    }
+
+    private fun singleItemClick(parent: ViewGroup, itemView: View) {
+        for (i in 0 until parent.childCount) {
+            parent.getChildAt(i).view_masking.isSelected = false
+        }
+        if (!itemView.view_masking.isSelected) {
+            itemView.view_masking.isSelected = true
+        } else if (itemView.view_masking.isSelected) {
+            itemView.view_masking.isSelected = true
         }
     }
 

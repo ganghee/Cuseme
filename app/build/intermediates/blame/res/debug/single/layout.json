@@ -6,5 +6,9 @@
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_user.xml",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_user.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_login.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_login.xml"
     }
 ]

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-28:12
-INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-28:12
-INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-28:12
-INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-28:12
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-31:12
 MERGED from [androidx.databinding:databinding-adapters:4.0.0-alpha01] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/5c6d7e4315f6e659e896945bcddcabd0/databinding-adapters-4.0.0-alpha01/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.databinding:databinding-runtime:4.0.0-alpha01] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/2ce7156f40d15518211f67f139d78dd0/databinding-runtime-4.0.0-alpha01/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-beta4] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/0adf45cef5d9f157a0d38b0315204b15/constraintlayout-2.0.0-beta4/AndroidManifest.xml:2:1-11:12
@@ -41,37 +41,39 @@ MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /Users/ganghee/.gradle
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/249d2e11b630eb6c8127a37f637eee13/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/8fcf0d91a9bb4d7e55f2d3e3e5102738/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.annotation:annotation-experimental:1.0.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/69937e5414720c65f20d4e0874a24a2f/jetified-annotation-experimental-1.0.0/AndroidManifest.xml:17:1-24:12
-INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-28:12
-INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-28:12
-INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-28:12
+INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-31:12
+INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-31:12
 	package
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:3:5-32
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:4:5-32
 		INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-28:12
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-31:12
 		INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml
+	xmlns:tools
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-28:12
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:1-31:12
 		INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.READ_PHONE_STATE
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:5:5-74
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:6:5-75
 	android:name
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:5:22-72
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:6:22-72
 uses-permission#android.permission.INTERNET
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:6:5-66
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:7:5-67
 	android:name
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:6:22-64
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:7:22-64
 uses-permission#android.permission.WAKE_LOCK
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:7:5-68
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:8:5-68
 	android:name
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:7:22-65
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:8:22-65
 application
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:9:5-26:19
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:10:5-29:19
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-beta4] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/0adf45cef5d9f157a0d38b0315204b15/constraintlayout-2.0.0-beta4/AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.0-beta4] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/0adf45cef5d9f157a0d38b0315204b15/constraintlayout-2.0.0-beta4/AndroidManifest.xml:9:5-20
 MERGED from [com.google.android.material:material:1.2.0-alpha04] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/ff0519b8e71aedb9df11b382311ea4cb/material-1.2.0-alpha04/AndroidManifest.xml:22:5-20
@@ -89,41 +91,47 @@ MERGED from [com.github.bumptech.glide:gifdecoder:4.10.0] /Users/ganghee/.gradle
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/8ecbcab7ffa2a7d138c7debed0da993e/core-1.1.0/AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:14:9-35
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:16:9-35
 	android:label
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:12:9-41
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:13:9-41
+	tools:ignore
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:18:9-39
 	android:roundIcon
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:13:9-54
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:15:9-54
 	android:icon
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:11:9-43
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:12:9-43
 	android:allowBackup
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:10:9-35
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:11:9-35
 	android:theme
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:16:9-40
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:17:9-40
 	android:networkSecurityConfig
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:15:9-69
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:14:9-69
+activity#com.good.mycuseme.ui.login.LoginActivity
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:19:9-60
+	android:name
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:19:19-57
 activity#com.good.mycuseme.ui.cardedit.EditActivity
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:17:9-62
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:20:9-62
 	android:name
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:17:19-59
-activity#com.good.mycuseme.ui.manage.ManageActivity
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:18:9-62
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:20:19-59
+activity#com.good.mycuseme.ui.manage.ManageCardActivity
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:9-66
 	android:name
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:18:19-59
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:19-63
 activity#com.good.mycuseme.ui.user.UserActivity
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:19:9-25:20
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:22:9-28:20
 	android:name
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:19:19-55
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:22:19-55
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:20:13-24:29
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:13-27:29
 action#android.intent.action.MAIN
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:17-69
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:24:17-69
 	android:name
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:25-66
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:24:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:17-77
+ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:26:17-77
 	android:name
-		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:27-74
+		ADDED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:26:27-74
 uses-sdk
 INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml
