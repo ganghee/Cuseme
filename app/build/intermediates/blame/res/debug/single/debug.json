@@ -4,6 +4,114 @@
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/img_home_cumi.png"
     },
     {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxhdpi_img_home_quote_left.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxhdpi/img_home_quote_left.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_img_home_cumi.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/img_home_cumi.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-mdpi_img_home_quote_right.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-mdpi/img_home_quote_right.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_btn_home_reload.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxxhdpi/btn_home_reload.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_round_image_top.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable/round_image_top.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-v24/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_btn_home_lock.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/btn_home_lock.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_img_home_quote_right.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/img_home_quote_right.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxhdpi_img_home_quote_right.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxhdpi/img_home_quote_right.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_btn_home_lock.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/btn_home_lock.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/layout_recycler_user_item.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_user_item.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-mdpi_btn_home_reload.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-mdpi/btn_home_reload.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_img_home_quote_right.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/img_home_quote_right.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_btn_home_reload.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/btn_home_reload.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_btn_home_reload.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/btn_home_reload.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_card_background_selector.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable/card_background_selector.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/layout_activity_user.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_user.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_img_home_quote_left.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/img_home_quote_left.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_img_home_quote_left.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxxhdpi/img_home_quote_left.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_round_top.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable/round_top.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_img_home_quote_left.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/img_home_quote_left.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-mdpi_img_home_quote_left.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-mdpi/img_home_quote_left.png"
+    },
+    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/layout_activity_edit.xml.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_edit.xml"
     },
@@ -28,36 +136,12 @@
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
-    },
-    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxhdpi_img_home_cumi.png.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxhdpi/img_home_cumi.png"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_img_home_cumi.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/img_home_cumi.png"
-    },
-    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
-    },
-    {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-mdpi_ic_launcher.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-mdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_btn_home_reload.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxxhdpi/btn_home_reload.png"
-    },
-    {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_ic_launcher_background.xml.flat",
@@ -72,24 +156,8 @@
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-mdpi/btn_home_lock.png"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-v24_ic_launcher_foreground.xml.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-v24/ic_launcher_foreground.xml"
-    },
-    {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_btn_home_lock.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/btn_home_lock.png"
-    },
-    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher.png.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
-    },
-    {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
-    },
-    {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_btn_home_lock.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/btn_home_lock.png"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/xml_user.xml.flat",
@@ -100,28 +168,28 @@
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },
     {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/xml_network_security_config.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/xml/network_security_config.xml"
+    },
+    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxhdpi_btn_home_lock.png.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxhdpi/btn_home_lock.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_round_all.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable/round_all.xml"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_img_home_cumi.png.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxxhdpi/img_home_cumi.png"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-mdpi_btn_home_reload.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-mdpi/btn_home_reload.png"
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_round_all_red.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable/round_all_red.xml"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_btn_home_reload.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/btn_home_reload.png"
-    },
-    {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_btn_home_reload.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/btn_home_reload.png"
-    },
-    {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/layout_activity_user.xml.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_user.xml"
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_img_home_quote_right.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxxhdpi/img_home_quote_right.png"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",

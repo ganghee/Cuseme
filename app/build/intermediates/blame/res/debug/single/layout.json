@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/recycler_user_item.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_user_item.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_user.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_user.xml"
+    }
+]

@@ -1,7 +1,7 @@
 package com.good.mycuseme.ui.manage
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.good.mycuseme.R
 
 class ManageActivity : AppCompatActivity() {

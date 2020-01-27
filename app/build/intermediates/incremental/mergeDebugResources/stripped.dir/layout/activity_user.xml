@@ -1,39 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.user.UserActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_user"
+                                                       
+                                                   
+
+    
+
+                 
+                                
+                                                             
+           
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent"
+        android:background="#4630B5C6"
+        tools:context=".ui.user.UserActivity" android:tag="layout/activity_user_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
 
-        <androidx.constraintlayout.motion.widget.MotionLayout
-            android:id="@+id/motionlayout_user"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_user"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:minHeight="40dp"
-            app:layoutDescription="@xml/user"
-            app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
+            android:layout_height="220dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <Button
-                android:id="@+id/button_managerlogin"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:background="@drawable/btn_home_lock"
-                android:tint="?colorOnPrimary"
-                android:layout_margin="20dp"
-                />
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/motionlayout_user"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:minHeight="40dp"
+                app:layoutDescription="@xml/user"
+                app:motionDebug="SHOW_PATH"
+                app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
 
+                <Button
+                    android:id="@+id/button_user_login"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_home_lock"
+                    android:tint="?colorOnPrimary" />
 
+                <Button
+                    android:id="@+id/button_user_refresh"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/btn_home_reload"
+                    android:tag="binding_1"                                            
+                    android:tint="?colorOnPrimary"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-        </androidx.constraintlayout.motion.widget.MotionLayout>
+                <ImageView
+                    android:id="@+id/imageview_quote_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_home_quote_left" />
 
-    </com.google.android.material.appbar.AppBarLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/imageview_quote_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/img_home_quote_right" />
+
+                <TextView
+                    android:id="@+id/textview_user_cardcontent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="40dp"
+                    android:gravity="center"
+                    android:textColor="@color/greyish_brown_four"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/imageview_cumi"
+                    android:layout_width="88dp"
+                    android:layout_height="80dp"
+                    android:elevation="4dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_home_cumi"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/lottieAnimView"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="144dp"
+                    android:layout_marginEnd="0dp"
+                    android:scaleType="fitXY"
+                    app:lottie_autoPlay="true"
+                    app:lottie_fileName="home_wave_android.json"
+                    app:lottie_loop="true" />
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@drawable/round_top"
+            android:paddingHorizontal="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintTop_toBottomOf="@+id/appbar_user">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_user_cardlist"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="binding_2"               
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appbar_user" />
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+         
