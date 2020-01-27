@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="cardData"
+            type="com.good.mycuseme.data.card.CardData" />
+
+        <variable
+            name="vm"
+            type="com.good.mycuseme.ui.user.UserViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_card_container"
+        android:layout_width="180dp"
+        android:layout_height="220dp"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="16dp">
+
+        <View
+            android:id="@+id/view_masking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/card_background_selector"
+            android:elevation="1dp"
+            android:orientation="vertical" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imageview_user_item"
+                setImage="@{cardData.image}"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_margin="1dp"
+                android:scaleType="fitXY"
+                android:src="@color/white" />
+
+            <TextView
+                android:id="@+id/textview_user_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="@{cardData.title}"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>
