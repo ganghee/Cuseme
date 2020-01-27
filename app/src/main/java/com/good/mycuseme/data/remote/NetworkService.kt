@@ -1,6 +1,7 @@
 package com.good.mycuseme.data.remote
 
 import com.good.mycuseme.data.card.CardResponse
+import com.good.mycuseme.data.login.LoginResponse
 import com.good.mycuseme.data.start.StartResponse
 import io.reactivex.Single
 import retrofit2.http.Field
@@ -16,4 +17,11 @@ interface NetworkService {
     @FormUrlEncoded
     @POST("/cards/visible")
     fun getVisibleCard(@Field("uuid") uuid: String): Single<CardResponse>
+
+    @FormUrlEncoded
+    @POST("/auth/signin")
+    fun postLogin(
+        @Field("uuid") uuid: String,
+        @Field("password") password: String
+    ): Single<LoginResponse>
 }
