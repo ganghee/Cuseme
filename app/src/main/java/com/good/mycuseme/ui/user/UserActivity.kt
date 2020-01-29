@@ -35,7 +35,7 @@ class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
 
     private val userViewModel by lazy { ViewModelProvider(this).get(UserViewModel::class.java) }
     private val player: MediaPlayer by lazy { MediaPlayer() }
-    lateinit var textToSpeech: TextToSpeech
+    private lateinit var textToSpeech: TextToSpeech
     var recordFlag = 0
     private lateinit var androidId: String
 

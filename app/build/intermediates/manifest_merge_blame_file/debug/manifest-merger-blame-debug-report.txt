@@ -21,7 +21,7 @@
 13-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:8:22-65
 14
 15    <application
-15-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:10:5-29:19
+15-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:10:5-31:19
 16        android:allowBackup="true"
 16-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:11:9-35
 17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -46,23 +46,35 @@
 27        <activity android:name="com.good.mycuseme.ui.cardedit.EditActivity" />
 27-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:20:9-62
 27-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:20:19-59
-28        <activity android:name="com.good.mycuseme.ui.manage.ManageCardActivity" />
-28-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:9-66
+28        <activity android:name="com.good.mycuseme.ui.manage.ManageCardActivity" >
+28-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:9-27:20
 28-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:19-63
-29        <activity android:name="com.good.mycuseme.ui.user.UserActivity" >
-29-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:22:9-28:20
-29-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:22:19-55
-30            <intent-filter>
-30-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:13-27:29
-31                <action android:name="android.intent.action.MAIN" />
-31-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:24:17-69
-31-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:24:25-66
-32
-33                <category android:name="android.intent.category.LAUNCHER" />
-33-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:26:17-77
-33-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:26:27-74
-34            </intent-filter>
-35        </activity>
-36    </application>
+29            <intent-filter>
+29-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:22:13-26:29
+30                <action android:name="android.intent.action.MAIN" />
+30-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:17-69
+30-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:25-66
+31
+32                <category android:name="android.intent.category.LAUNCHER" />
+32-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:25:17-77
+32-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:25:27-74
+33            </intent-filter>
+34        </activity>
+35        <activity android:name="com.good.mycuseme.ui.user.UserActivity" >
+35-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:28:9-30:20
+35-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:28:19-55
+36        </activity>
 37
-38</manifest>
+38        <provider
+38-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:25:9-29:43
+39            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+39-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:26:13-79
+40            android:authorities="com.good.mycuseme.lifecycle-process"
+40-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:27:13-69
+41            android:exported="false"
+41-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:28:13-37
+42            android:multiprocess="true" />
+42-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:29:13-40
+43    </application>
+44
+45</manifest>

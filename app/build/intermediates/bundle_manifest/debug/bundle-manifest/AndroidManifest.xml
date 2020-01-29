@@ -25,14 +25,21 @@
         android:theme="@style/AppTheme" >
         <activity android:name="com.good.mycuseme.ui.login.LoginActivity" />
         <activity android:name="com.good.mycuseme.ui.cardedit.EditActivity" />
-        <activity android:name="com.good.mycuseme.ui.manage.ManageCardActivity" />
-        <activity android:name="com.good.mycuseme.ui.user.UserActivity" >
+        <activity android:name="com.good.mycuseme.ui.manage.ManageCardActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.good.mycuseme.ui.user.UserActivity" >
+        </activity>
+
+        <provider
+            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+            android:authorities="com.good.mycuseme.lifecycle-process"
+            android:exported="false"
+            android:multiprocess="true" />
     </application>
 
 </manifest>

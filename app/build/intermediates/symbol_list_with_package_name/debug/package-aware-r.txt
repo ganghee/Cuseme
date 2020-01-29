@@ -27,6 +27,13 @@ anim design_bottom_sheet_slide_in
 anim design_bottom_sheet_slide_out
 anim design_snackbar_in
 anim design_snackbar_out
+anim fragment_close_enter
+anim fragment_close_exit
+anim fragment_fade_enter
+anim fragment_fade_exit
+anim fragment_fast_out_extra_slow_in
+anim fragment_open_enter
+anim fragment_open_exit
 anim mtrl_bottom_sheet_slide_in
 anim mtrl_bottom_sheet_slide_out
 anim mtrl_card_lowers_interpolator
@@ -1181,6 +1188,7 @@ color navajo_white
 color navy
 color notification_action_color_filter
 color notification_icon_bg_color
+color notification_material_background_media_default_color
 color old_lace
 color olive
 color olive_drab
@@ -1595,6 +1603,10 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen subtitle_corner_radius
+dimen subtitle_outline_width
+dimen subtitle_shadow_offset
+dimen subtitle_shadow_radius
 dimen test_mtrl_calendar_day_cornerSize
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
@@ -1697,13 +1709,21 @@ drawable btn_checkbox_checked_mtrl
 drawable btn_checkbox_checked_to_unchecked_mtrl_animation
 drawable btn_checkbox_unchecked_mtrl
 drawable btn_checkbox_unchecked_to_checked_mtrl_animation
+drawable btn_home_download
 drawable btn_home_lock
+drawable btn_home_newcard
 drawable btn_home_reload
 drawable btn_login_selector
 drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable btn_tabbar_cardcare_selected
+drawable btn_tabbar_cardcare_selector
+drawable btn_tabbar_cardcare_unselected
+drawable btn_tabbar_home_selected
+drawable btn_tabbar_home_selector
+drawable btn_tabbar_home_unselected
 drawable card_background_selector
 drawable design_bottom_navigation_item_background
 drawable design_fab_background
@@ -1711,6 +1731,8 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable ic_add_32
+drawable ic_add_white
 drawable ic_calendar_black_24dp
 drawable ic_clear_black_24dp
 drawable ic_edit_black_24dp
@@ -1718,12 +1740,14 @@ drawable ic_keyboard_arrow_left_black_24dp
 drawable ic_keyboard_arrow_right_black_24dp
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_managerhome_search
 drawable ic_menu_arrow_down_black_24dp
 drawable ic_menu_arrow_up_black_24dp
 drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_person
 drawable img_home_cumi
 drawable img_home_quote_left
 drawable img_home_quote_right
@@ -1754,6 +1778,7 @@ drawable round_all_red
 drawable round_image_top
 drawable round_top
 drawable test_custom_background
+drawable text_color_selector
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 id ALT
@@ -1804,6 +1829,7 @@ id accessibility_custom_action_6
 id accessibility_custom_action_7
 id accessibility_custom_action_8
 id accessibility_custom_action_9
+id action0
 id action_bar
 id action_bar_activity_content
 id action_bar_container
@@ -1848,6 +1874,7 @@ id btn_login
 id buttonPanel
 id button_user_login
 id button_user_refresh
+id cancel_action
 id cancel_button
 id card_view_card_container
 id center
@@ -1904,6 +1931,7 @@ id easeOut
 id edit_query
 id edit_text_login_password
 id end
+id end_padder
 id enterAlways
 id enterAlwaysCollapsed
 id exitUntilCollapsed
@@ -1916,9 +1944,11 @@ id fill_vertical
 id filled
 id fitToContents
 id fixed
+id fl_manage
 id flip
 id floating
 id forever
+id fragment_container_view_tag
 id ghost_view
 id ghost_view_holder
 id glide_custom_view_target_tag
@@ -1948,6 +1978,9 @@ id invisible
 id italic
 id item_touch_helper_previous_elevation
 id iv_back
+id iv_bottom_preview
+id iv_bottom_search
+id iv_user
 id jumpToEnd
 id jumpToStart
 id labeled
@@ -1959,9 +1992,12 @@ id line3
 id linear
 id listMode
 id list_item
+id ll_bottom_preview
+id ll_bottom_search
 id lottieAnimView
 id lottie_layer_name
 id masked
+id media_actions
 id message
 id middle
 id mini
@@ -2035,6 +2071,7 @@ id right_icon
 id right_side
 id rounded
 id row_index_key
+id rv_preview
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -2085,6 +2122,7 @@ id startHorizontal
 id startVertical
 id staticLayout
 id staticPostLayout
+id status_bar_latest_event_content
 id stop
 id stretch
 id submenuarrow
@@ -2121,6 +2159,7 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id tl_search
 id toggle
 id top
 id topPanel
@@ -2134,6 +2173,8 @@ id transition_scene_layoutid_cache
 id transition_transform
 id triangle
 id tv_main_text
+id tv_preview
+id tv_search
 id tv_wrong_text
 id unchecked
 id uniform
@@ -2143,6 +2184,8 @@ id useLogo
 id view_masking
 id view_offset_helper
 id visible
+id visible_removing_fragment_view_tag
+id vp_search
 id withText
 id withinBounds
 id wrap
@@ -2227,6 +2270,9 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_preview
+layout fragment_search
+layout fragment_search_list
 layout mtrl_alert_dialog
 layout mtrl_alert_dialog_actions
 layout mtrl_alert_dialog_title
@@ -2257,8 +2303,17 @@ layout mtrl_picker_text_input_date
 layout mtrl_picker_text_input_date_range
 layout notification_action
 layout notification_action_tombstone
+layout notification_media_action
+layout notification_media_cancel_action
+layout notification_template_big_media
+layout notification_template_big_media_custom
+layout notification_template_big_media_narrow
+layout notification_template_big_media_narrow_custom
 layout notification_template_custom_big
 layout notification_template_icon_group
+layout notification_template_lines_media
+layout notification_template_media
+layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
 layout recycler_user_item
@@ -2279,6 +2334,8 @@ layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
 layout toolbar_back
+layout toolbar_manager_edit
+layout toolbar_manager_search
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
@@ -2321,6 +2378,7 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string login_btn_unlock
@@ -2368,6 +2426,9 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string search_menu_title
 string status_bar_notification_info_overflow
+string text_card_edit
+string text_card_search
+string text_preview
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style AndroidThemeColorAccentYellow
@@ -2714,9 +2775,14 @@ style TextAppearance_AppCompat_Widget_Switch
 style TextAppearance_AppCompat_Widget_TextView_SpinnerItem
 style TextAppearance_Compat_Notification
 style TextAppearance_Compat_Notification_Info
+style TextAppearance_Compat_Notification_Info_Media
 style TextAppearance_Compat_Notification_Line2
+style TextAppearance_Compat_Notification_Line2_Media
+style TextAppearance_Compat_Notification_Media
 style TextAppearance_Compat_Notification_Time
+style TextAppearance_Compat_Notification_Time_Media
 style TextAppearance_Compat_Notification_Title
+style TextAppearance_Compat_Notification_Title_Media
 style TextAppearance_Design_CollapsingToolbar_Expanded
 style TextAppearance_Design_Counter
 style TextAppearance_Design_Counter_Overflow
@@ -3051,6 +3117,7 @@ style Widget_MaterialComponents_Toolbar_PrimarySurface
 style Widget_MaterialComponents_Toolbar_Surface
 style Widget_MaterialComponents_Tooltip
 style Widget_Support_CoordinatorLayout
+style tab_text
 styleable ActionBar background backgroundSplit backgroundStacked contentInsetEnd contentInsetEndWithActions contentInsetLeft contentInsetRight contentInsetStart contentInsetStartWithNavigation customNavigationLayout displayOptions divider elevation height hideOnContentScroll homeAsUpIndicator homeLayout icon indeterminateProgressStyle itemPadding logo navigationMode popupTheme progressBarPadding progressBarStyle subtitle subtitleTextStyle title titleTextStyle
 styleable ActionBarLayout android_layout_gravity
 styleable ActionMenuItemView android_minWidth
@@ -3097,6 +3164,8 @@ styleable FlowLayout itemSpacing lineSpacing
 styleable FontFamily fontProviderAuthority fontProviderCerts fontProviderFetchStrategy fontProviderFetchTimeout fontProviderPackage fontProviderQuery
 styleable FontFamilyFont android_font android_fontWeight android_fontStyle android_ttcIndex android_fontVariationSettings font fontStyle fontVariationSettings fontWeight ttcIndex
 styleable ForegroundLinearLayout android_foreground android_foregroundGravity foregroundInsidePadding
+styleable Fragment android_name android_id android_tag
+styleable FragmentContainerView android_name android_tag
 styleable GradientColor android_startColor android_endColor android_type android_centerX android_centerY android_gradientRadius android_tileMode android_centerColor android_startX android_startY android_endX android_endY
 styleable GradientColorItem android_color android_offset
 styleable ImageFilterView altSrc brightness contrast crossfade overlay round roundPercent saturation warmth

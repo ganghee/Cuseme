@@ -7,7 +7,11 @@ import androidx.databinding.DataBinderMapper;
 import androidx.databinding.DataBindingComponent;
 import androidx.databinding.ViewDataBinding;
 import com.good.mycuseme.databinding.ActivityLoginBindingImpl;
+import com.good.mycuseme.databinding.ActivityManageBindingImpl;
 import com.good.mycuseme.databinding.ActivityUserBindingImpl;
+import com.good.mycuseme.databinding.FragmentPreviewBindingImpl;
+import com.good.mycuseme.databinding.FragmentSearchBindingImpl;
+import com.good.mycuseme.databinding.FragmentSearchListBindingImpl;
 import com.good.mycuseme.databinding.RecyclerUserItemBindingImpl;
 import java.lang.IllegalArgumentException;
 import java.lang.Integer;
@@ -22,15 +26,27 @@ import java.util.List;
 public class DataBinderMapperImpl extends DataBinderMapper {
   private static final int LAYOUT_ACTIVITYLOGIN = 1;
 
-  private static final int LAYOUT_ACTIVITYUSER = 2;
+  private static final int LAYOUT_ACTIVITYMANAGE = 2;
 
-  private static final int LAYOUT_RECYCLERUSERITEM = 3;
+  private static final int LAYOUT_ACTIVITYUSER = 3;
 
-  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(3);
+  private static final int LAYOUT_FRAGMENTPREVIEW = 4;
+
+  private static final int LAYOUT_FRAGMENTSEARCH = 5;
+
+  private static final int LAYOUT_FRAGMENTSEARCHLIST = 6;
+
+  private static final int LAYOUT_RECYCLERUSERITEM = 7;
+
+  private static final SparseIntArray INTERNAL_LAYOUT_ID_LOOKUP = new SparseIntArray(7);
 
   static {
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.good.mycuseme.R.layout.activity_login, LAYOUT_ACTIVITYLOGIN);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.good.mycuseme.R.layout.activity_manage, LAYOUT_ACTIVITYMANAGE);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.good.mycuseme.R.layout.activity_user, LAYOUT_ACTIVITYUSER);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.good.mycuseme.R.layout.fragment_preview, LAYOUT_FRAGMENTPREVIEW);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.good.mycuseme.R.layout.fragment_search, LAYOUT_FRAGMENTSEARCH);
+    INTERNAL_LAYOUT_ID_LOOKUP.put(com.good.mycuseme.R.layout.fragment_search_list, LAYOUT_FRAGMENTSEARCHLIST);
     INTERNAL_LAYOUT_ID_LOOKUP.put(com.good.mycuseme.R.layout.recycler_user_item, LAYOUT_RECYCLERUSERITEM);
   }
 
@@ -49,11 +65,35 @@ public class DataBinderMapperImpl extends DataBinderMapper {
           }
           throw new IllegalArgumentException("The tag for activity_login is invalid. Received: " + tag);
         }
+        case  LAYOUT_ACTIVITYMANAGE: {
+          if ("layout/activity_manage_0".equals(tag)) {
+            return new ActivityManageBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for activity_manage is invalid. Received: " + tag);
+        }
         case  LAYOUT_ACTIVITYUSER: {
           if ("layout/activity_user_0".equals(tag)) {
             return new ActivityUserBindingImpl(component, view);
           }
           throw new IllegalArgumentException("The tag for activity_user is invalid. Received: " + tag);
+        }
+        case  LAYOUT_FRAGMENTPREVIEW: {
+          if ("layout/fragment_preview_0".equals(tag)) {
+            return new FragmentPreviewBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for fragment_preview is invalid. Received: " + tag);
+        }
+        case  LAYOUT_FRAGMENTSEARCH: {
+          if ("layout/fragment_search_0".equals(tag)) {
+            return new FragmentSearchBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for fragment_search is invalid. Received: " + tag);
+        }
+        case  LAYOUT_FRAGMENTSEARCHLIST: {
+          if ("layout/fragment_search_list_0".equals(tag)) {
+            return new FragmentSearchListBindingImpl(component, view);
+          }
+          throw new IllegalArgumentException("The tag for fragment_search_list is invalid. Received: " + tag);
         }
         case  LAYOUT_RECYCLERUSERITEM: {
           if ("layout/recycler_user_item_0".equals(tag)) {
@@ -106,23 +146,31 @@ public class DataBinderMapperImpl extends DataBinderMapper {
   }
 
   private static class InnerBrLookup {
-    static final SparseArray<String> sKeys = new SparseArray<String>(5);
+    static final SparseArray<String> sKeys = new SparseArray<String>(9);
 
     static {
       sKeys.put(0, "_all");
       sKeys.put(1, "cardData");
       sKeys.put(2, "loginViewModel");
-      sKeys.put(3, "userViewModel");
-      sKeys.put(4, "vm");
+      sKeys.put(3, "manageViewModel");
+      sKeys.put(4, "previewViewModel");
+      sKeys.put(5, "searchListViewModel");
+      sKeys.put(6, "searchViewModel");
+      sKeys.put(7, "userViewModel");
+      sKeys.put(8, "vm");
     }
   }
 
   private static class InnerLayoutIdLookup {
-    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(3);
+    static final HashMap<String, Integer> sKeys = new HashMap<String, Integer>(7);
 
     static {
       sKeys.put("layout/activity_login_0", com.good.mycuseme.R.layout.activity_login);
+      sKeys.put("layout/activity_manage_0", com.good.mycuseme.R.layout.activity_manage);
       sKeys.put("layout/activity_user_0", com.good.mycuseme.R.layout.activity_user);
+      sKeys.put("layout/fragment_preview_0", com.good.mycuseme.R.layout.fragment_preview);
+      sKeys.put("layout/fragment_search_0", com.good.mycuseme.R.layout.fragment_search);
+      sKeys.put("layout/fragment_search_list_0", com.good.mycuseme.R.layout.fragment_search_list);
       sKeys.put("layout/recycler_user_item_0", com.good.mycuseme.R.layout.recycler_user_item);
     }
   }

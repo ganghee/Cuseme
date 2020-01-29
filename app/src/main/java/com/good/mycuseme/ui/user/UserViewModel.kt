@@ -13,7 +13,7 @@ class UserViewModel : BaseViewModel() {
     private val startRepository by lazy { StartRepository() }
     private val cardRepository by lazy { CardRepository() }
     val cardList = MutableLiveData<List<CardData>>()
-    private val sortList = listOf("basic", "ascent", "count")
+    private val sortList = listOf("visibility", "title", "count")
     private var index = 0
 
     @SuppressLint("CheckResult")
@@ -41,11 +41,11 @@ class UserViewModel : BaseViewModel() {
 
     fun sort(sortedList: List<CardData>?) {
         when (sortList[index]) {
-            "basic" -> {
+            "visibility" -> {
                 cardList.value = sortedList?.sortedBy { it.sequence }
                 index = 1
             }
-            "ascent" -> {
+            "title" -> {
                 cardList.value = sortedList?.sortedBy { it.title }
                 index = 2
             }
