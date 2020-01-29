@@ -11,6 +11,7 @@ import com.good.mycuseme.data.local.SharedPreferenceController
 import com.good.mycuseme.data.local.UserData
 import com.good.mycuseme.databinding.ActivityLoginBinding
 import com.good.mycuseme.ui.manage.ManageCardActivity
+import com.good.mycuseme.ui.user.UserActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
@@ -25,7 +26,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         binding.loginViewModel = loginViewModel
 
         initButton()
+        backToUserActivity()
         startManageActivity()
+    }
+
+    private fun backToUserActivity() {
+        val intent = Intent(this, UserActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun initButton() {
@@ -52,7 +60,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     private fun startManageActivity() {
         btn_login.setOnClickListener {
-            loginViewModel.login(uuid!!, loginViewModel.password.value!!)
+            loginViewModel.login(uuid, loginViewModel.password.value!!)
         }
     }
 }
