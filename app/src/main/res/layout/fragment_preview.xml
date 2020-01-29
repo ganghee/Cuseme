@@ -15,7 +15,7 @@
         android:orientation="vertical"
         tools:context=".ui.manage.PreviewFragment">
 
-        <include layout="@layout/toolbar_manager_edit" />
+        <include layout="@layout/toolbar_manager_preview" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
