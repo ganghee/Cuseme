@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.good.mycuseme.base.BaseViewModel
-import com.good.mycuseme.data.local.UserData
 import com.good.mycuseme.data.login.LoginRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
