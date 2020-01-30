@@ -1,3 +1,3 @@
-package com.good.mycuseme.ui.cardedit
+package com.good.mycuseme.ui.card
 
 class EditViewModel
