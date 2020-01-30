@@ -1,12 +1,11 @@
 package com.good.mycuseme.data.remote
 
 import com.good.mycuseme.data.card.CardResponse
+import com.good.mycuseme.data.card.DownloadResponse
 import com.good.mycuseme.data.login.LoginResponse
 import com.good.mycuseme.data.start.StartResponse
 import io.reactivex.Single
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface NetworkService {
 
@@ -24,4 +23,10 @@ interface NetworkService {
         @Field("uuid") uuid: String,
         @Field("password") password: String
     ): Single<LoginResponse>
+
+    @POST("/cards/{serialNum}")
+    fun postCardDownload(
+        @Header("token") token: String,
+        @Path("serialNum") serialNum: String
+    ): Single<DownloadResponse>
 }
