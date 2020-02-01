@@ -1,10 +1,13 @@
 package com.good.mycuseme.data.remote
 
 import com.good.mycuseme.data.card.CardResponse
+import com.good.mycuseme.data.card.CreateCardResponse
 import com.good.mycuseme.data.card.DownloadResponse
 import com.good.mycuseme.data.login.LoginResponse
 import com.good.mycuseme.data.start.StartResponse
 import io.reactivex.Single
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface NetworkService {
@@ -29,4 +32,15 @@ interface NetworkService {
         @Header("token") token: String,
         @Path("serialNum") serialNum: String
     ): Single<DownloadResponse>
+
+    @Multipart
+    @POST("/cards/")
+    fun postCreateCard(
+        @Header("token") token: String,
+        @Part image: MultipartBody.Part,
+        @Part record: MultipartBody.Part?,
+        @Part("title") title: RequestBody,
+        @Part("content") content: RequestBody,
+        @Part("visible") visible: RequestBody
+    ): Single<CreateCardResponse>
 }
