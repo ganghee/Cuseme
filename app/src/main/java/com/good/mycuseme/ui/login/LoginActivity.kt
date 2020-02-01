@@ -2,6 +2,7 @@ package com.good.mycuseme.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import com.good.mycuseme.databinding.ActivityLoginBinding
 import com.good.mycuseme.ui.manage.ManageCardActivity
 import com.good.mycuseme.ui.user.UserActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.toolbar_back.*
 
 class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login) {
 
@@ -23,6 +25,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("activity", "LoginActivity here")
         binding.loginViewModel = loginViewModel
 
         initButton()
@@ -31,9 +34,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
     }
 
     private fun backToUserActivity() {
-        val intent = Intent(this, UserActivity::class.java)
-        startActivity(intent)
-        finish()
+        iv_back.setOnClickListener {
+            val intent = Intent(this, UserActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun initButton() {
@@ -43,7 +48,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 btn_login.isSelected = isClickable.value!!
             })
             wrongPassword.observe(this@LoginActivity, Observer {
-                tv_wrong_text.isVisible = it
+                tv_login_wrong_text.isVisible = it
             })
             token.observe(this@LoginActivity, Observer {
                 val userData = UserData(uuid, it, null)
