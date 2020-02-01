@@ -1,6 +1,8 @@
 package com.good.mycuseme.data.remote
 
+import android.util.Log
 import com.good.mycuseme.data.card.CardResponse
+import com.good.mycuseme.data.card.DownloadResponse
 import com.good.mycuseme.data.login.LoginResponse
 import com.good.mycuseme.data.start.StartResponse
 import io.reactivex.Single
@@ -28,4 +30,10 @@ object CardRemoteDataSource {
     fun postLogin(uuid: String, password: String): Single<LoginResponse> =
         retrofit.postLogin(uuid, password)
             .subscribeOn(Schedulers.io())
+
+    fun postDownload(token: String, serialNumber: String): Single<DownloadResponse> {
+        Log.d("postdownload1", serialNumber)
+        return retrofit.postCardDownload(token, serialNumber)
+            .subscribeOn(Schedulers.io())
+    }
 }
