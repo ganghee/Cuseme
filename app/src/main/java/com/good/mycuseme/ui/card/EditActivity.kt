@@ -1,4 +1,4 @@
-package com.good.mycuseme.ui.cardedit
+package com.good.mycuseme.ui.card
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
