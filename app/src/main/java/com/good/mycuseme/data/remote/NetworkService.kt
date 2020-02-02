@@ -1,8 +1,7 @@
 package com.good.mycuseme.data.remote
 
+import com.good.mycuseme.data.card.CardListResponse
 import com.good.mycuseme.data.card.CardResponse
-import com.good.mycuseme.data.card.CreateCardResponse
-import com.good.mycuseme.data.card.DownloadResponse
 import com.good.mycuseme.data.login.LoginResponse
 import com.good.mycuseme.data.start.StartResponse
 import io.reactivex.Single
@@ -18,7 +17,7 @@ interface NetworkService {
 
     @FormUrlEncoded
     @POST("/cards/visible")
-    fun getVisibleCard(@Field("uuid") uuid: String): Single<CardResponse>
+    fun getVisibleCard(@Field("uuid") uuid: String): Single<CardListResponse>
 
     @FormUrlEncoded
     @POST("/auth/signin")
@@ -31,7 +30,7 @@ interface NetworkService {
     fun postCardDownload(
         @Header("token") token: String,
         @Path("serialNum") serialNum: String
-    ): Single<DownloadResponse>
+    ): Single<CardResponse>
 
     @Multipart
     @POST("/cards/")
@@ -42,5 +41,23 @@ interface NetworkService {
         @Part("title") title: RequestBody,
         @Part("content") content: RequestBody,
         @Part("visible") visible: RequestBody
-    ): Single<CreateCardResponse>
+    ): Single<CardResponse>
+
+    @Multipart
+    @PUT("/cards/{cardIdx}")
+    fun putUpdateCard(
+        @Header("token") token: String,
+        @Path("cardIdx") cardIdx: Int,
+        @Part image: MultipartBody.Part,
+        @Part record: MultipartBody.Part?,
+        @Part("title") title: RequestBody,
+        @Part("content") content: RequestBody,
+        @Part("visible") visible: RequestBody
+    ): Single<CardResponse>
+
+    @GET("cards/{cardIdx}")
+    fun getCard(
+        @Header("token") token: String,
+        @Path("cardIdx") cardIdx: Int
+    ): Single<CardResponse>
 }
