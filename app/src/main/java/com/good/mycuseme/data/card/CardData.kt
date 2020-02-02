@@ -13,7 +13,7 @@ data class CardData(
     @SerializedName("image")
     val image: String,
     @SerializedName("record")
-    val record: String,
+    val record: String?,
     @SerializedName("sequence")
     val sequence: Int,
     @SerializedName("serialNum")
