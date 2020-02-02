@@ -1,8 +1,7 @@
 package com.good.mycuseme.data.remote
 
+import com.good.mycuseme.data.card.CardListResponse
 import com.good.mycuseme.data.card.CardResponse
-import com.good.mycuseme.data.card.CreateCardResponse
-import com.good.mycuseme.data.card.DownloadResponse
 import com.good.mycuseme.data.login.LoginResponse
 import com.good.mycuseme.data.start.StartResponse
 import io.reactivex.Single
@@ -25,7 +24,7 @@ object CardRemoteDataSource {
         retrofit.postStart(uuid)
             .subscribeOn(Schedulers.io())
 
-    fun getVisibleCard(uuid: String): Single<CardResponse> =
+    fun getVisibleCard(uuid: String): Single<CardListResponse> =
         retrofit.getVisibleCard(uuid)
             .subscribeOn(Schedulers.io())
 
@@ -33,7 +32,7 @@ object CardRemoteDataSource {
         retrofit.postLogin(uuid, password)
             .subscribeOn(Schedulers.io())
 
-    fun postDownload(token: String, serialNumber: String): Single<DownloadResponse> =
+    fun postDownload(token: String, serialNumber: String): Single<CardResponse> =
         retrofit.postCardDownload(token, serialNumber)
             .subscribeOn(Schedulers.io())
 
@@ -43,7 +42,24 @@ object CardRemoteDataSource {
         record: MultipartBody.Part?,
         title: RequestBody,
         content: RequestBody,
-        visible: RequestBody): Single<CreateCardResponse> =
+        visible: RequestBody
+    ): Single<CardResponse> =
         retrofit.postCreateCard(token, image, record, title, content, visible)
+            .subscribeOn(Schedulers.io())
+
+    fun putUpdateCard(
+        token: String,
+        cardIdx: Int,
+        image: MultipartBody.Part,
+        record: MultipartBody.Part?,
+        title: RequestBody,
+        content: RequestBody,
+        visible: RequestBody
+    ): Single<CardResponse> =
+        retrofit.putUpdateCard(token, cardIdx, image, record, title, content, visible)
+            .subscribeOn(Schedulers.io())
+
+    fun getCard(token: String, cardIdx: Int): Single<CardResponse> =
+        retrofit.getCard(token, cardIdx)
             .subscribeOn(Schedulers.io())
 }
