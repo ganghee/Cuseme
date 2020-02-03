@@ -1,8 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.cardedit.EditActivity">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+        <variable
+            name="editViewModel"
+            type="com.good.mycuseme.ui.card.EditViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/tb_update_card"
+            layout="@layout/toolbar_card" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp"
+                tools:context=".ui.card.EditActivity">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="360dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:id="@+id/ll_update_default_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="70dp"
+                            android:layout_marginTop="108dp"
+                            android:layout_marginBottom="32dp"
+                            android:src="@drawable/ic_newcard_photo" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="60dp"
+                            android:text="@string/bring_picture_from_album"
+                            android:textColor="@color/pinkish_grey_two"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_update_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitCenter" />
+
+                </androidx.cardview.widget.CardView>
+
+                <EditText
+                    android:id="@+id/et_update_card_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@drawable/round_all_white"
+                    android:hint="@string/input_card_title"
+                    android:padding="20dp"
+                    android:text="@={editViewModel.title}"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView"
+                    tools:layout_editor_absoluteX="20dp" />
+
+                <EditText
+                    android:id="@+id/et_update_card_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@drawable/round_all_white"
+                    android:gravity="top"
+                    android:hint="@string/input_card_content"
+                    android:padding="20dp"
+                    android:text="@={editViewModel.content}"
+                    android:textColor="@color/black"
+                    app:layout_constraintTop_toBottomOf="@+id/et_update_card_title" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="12dp"
+                    android:text="@string/record_text"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_update_card_content" />
+
+                <ImageView
+                    android:id="@+id/iv_update_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:onClick="@{view->editViewModel.clickAutoSpeak(view)}"
+                    android:src="@drawable/btn_auto_record_selector"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/tv_update_save_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/save_record"
+                    android:textColor="@color/mainpink"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/tv_update_no_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@color/white_two"
+                    android:gravity="center"
+                    android:text="@string/no_record"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_update_save_record" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ll_update_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_update_save_record"
+                    tools:layout_editor_absoluteX="20dp">
+
+
+                    <ImageView
+                        android:id="@+id/iv_update_stop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="56dp"
+                        android:clickable="@{editViewModel.isStopClickable}"
+                        android:src="@drawable/btn_newcard_play_unslected"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_update_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="@{editViewModel.isStartClickable}"
+                        app:cardCornerRadius="60dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_update_save_record"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_update_save_record"
+                        app:layout_constraintHorizontal_bias="0.561"
+                        app:layout_constraintStart_toEndOf="@+id/iv_update_stop"
+                        app:layout_constraintTop_toTopOf="@+id/iv_update_save_record">
+
+                        <ImageView
+                            android:id="@+id/iv_update_start"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/btn_record_start_selector" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <Button
+                        android:id="@+id/iv_update_save_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/btn_newcard_complete_selector"
+                        android:clickable="@{editViewModel.isRecordClickable}"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_update_stop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_update_stop" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+</layout>
