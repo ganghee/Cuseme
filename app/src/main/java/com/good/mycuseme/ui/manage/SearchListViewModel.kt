@@ -13,8 +13,8 @@ class SearchListViewModel : BaseViewModel() {
     private val cardRepository by lazy { CardRepository() }
 
     @SuppressLint("CheckResult")
-    fun getCard(uuid: String, sorting: String?) {
-        cardRepository.getVisibleCard(uuid)
+    fun getAllCard(token: String, sorting: String?) {
+        cardRepository.getAllCard(token)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Log.d("UserViewModel getCard", it.message)
