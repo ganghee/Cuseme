@@ -1,11 +1,14 @@
 package com.good.mycuseme.ui.manage
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseActivity
 import com.good.mycuseme.databinding.ActivityManageBinding
+import com.good.mycuseme.ui.card.CreateActivity
+import com.good.mycuseme.ui.card.DownloadActivity
 import kotlinx.android.synthetic.main.activity_manage.*
 
 class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity_manage) {
@@ -26,6 +29,23 @@ class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity
 
         callFragment(1)
         setClickListener()
+        startCreateActivity()
+        startDownloadActivity()
+    }
+
+    private fun startDownloadActivity() {
+        ll_manage_down_load.setOnClickListener {
+            val intent = Intent(this, DownloadActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun startCreateActivity() {
+        ll_manage_new_card.setOnClickListener {
+            val intent = Intent(this, CreateActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun setClickListener() {
