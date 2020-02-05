@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.good.mycuseme.BR
-
 import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseFragment
 import com.good.mycuseme.base.BaseRecyclerViewAdapter
