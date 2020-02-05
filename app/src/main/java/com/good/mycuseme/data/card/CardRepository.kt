@@ -36,4 +36,10 @@ class CardRepository {
     fun getCard(token: String, cardIdx: Int): Single<CardResponse> =
         CardRemoteDataSource.getCard(token, cardIdx)
 
+    fun deleteCard(token: String, cardIdx: Int) =
+        CardRemoteDataSource.deleteCard(token, cardIdx)
+
+    fun getAllCard(token: String) =
+        CardRemoteDataSource.getAllCard(token)
+
 }
