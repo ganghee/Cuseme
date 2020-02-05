@@ -8,20 +8,22 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseActivity
+import com.good.mycuseme.data.local.SharedPreferenceController
 import com.good.mycuseme.databinding.ActivityCreateBinding
+import com.good.mycuseme.ui.manage.ManageCardActivity
 import kotlinx.android.synthetic.main.activity_create.*
-import kotlinx.android.synthetic.main.toolbar_create_card.*
+import kotlinx.android.synthetic.main.toolbar_card.*
 
 class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_create) {
 
     private val createViewModel by lazy { ViewModelProvider(this).get(CreateViewModel::class.java) }
-    private lateinit var fileName: String
-    private var selectPicUri: Uri? = null
-
+    val token by lazy { SharedPreferenceController.getUserToken(this) }
+    private var imageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +36,13 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
         saveRecord()
         isTextToSpeak()
         pressAddCardButton()
+        backButton()
+    }
+
+    private fun backButton() {
+        iv_back.setOnClickListener {
+            finish()
+        }
     }
 
     private fun bringImage() {
@@ -47,31 +56,48 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
-            selectPicUri = data?.data!!
-            iv_create_card.setImageURI(selectPicUri)
+            imageUri = data?.data!!
+            iv_create_card.setImageURI(imageUri)
+            iv_create_card.setBackgroundResource(R.drawable.round_all_transparent)
             ll_create_default_picture.visibility = View.INVISIBLE
         }
     }
 
     private fun pressAddCardButton() {
-        iv_user.setOnClickListener {
-            Log.d("sss", selectPicUri.toString())
-            createViewModel.apply {
+        createViewModel.apply {
+            isSuccess.observe(this@CreateActivity, Observer {
+                if (it) {
+                    val intent = Intent(this@CreateActivity, ManageCardActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            })
+            btn_user.setOnClickListener {
                 when {
-                    selectPicUri.toString() == "null" -> {
+                    imageUri.toString() == "null" -> {
                         iv_create_card.setBackgroundResource(R.drawable.round_all_border_pink_transparent_4)
                         et_create_card_title.setBackgroundResource(R.drawable.round_all_transparent)
                         et_create_card_content.setBackgroundResource(R.drawable.round_all_transparent)
+                        Toast.makeText(this@CreateActivity, "선택한 사진이 없습니다.", Toast.LENGTH_SHORT)
+                            .show()
                     }
                     title.value.isNullOrEmpty() -> {
                         et_create_card_title.setBackgroundResource(R.drawable.round_all_border_pink_white_4)
                         et_create_card_content.setBackgroundResource(R.drawable.round_all_transparent)
                         iv_create_card.setBackgroundResource(R.drawable.round_all_transparent)
+                        Toast.makeText(this@CreateActivity, "제목을 입력해 주세요", Toast.LENGTH_SHORT)
+                            .show()
                     }
                     content.value.isNullOrEmpty() -> {
                         et_create_card_content.setBackgroundResource(R.drawable.round_all_border_pink_white_4)
                         et_create_card_title.setBackgroundResource(R.drawable.round_all_transparent)
                         iv_create_card.setBackgroundResource(R.drawable.round_all_transparent)
+                        Toast.makeText(this@CreateActivity, "내용을 입력해 주세요.", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    else -> {
+                        Log.d("contentResolver", contentResolver.toString())
+                        createCard(token!!, imageUri!!, contentResolver)
                     }
                 }
             }
@@ -91,7 +117,6 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
                 }
             })
         }
-
     }
 
     private fun checkPermission(context: Context, activity: CreateActivity) {
@@ -128,8 +153,6 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
     private fun setRecordFileName() {
         createViewModel.apply {
             setFlieName(externalCacheDir!!.absolutePath)
-            Log.d("click1", "click1")
-//            fileName = recordFileName
         }
     }
 
@@ -143,6 +166,13 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
                 startRecord()
             }
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this@CreateActivity, ManageCardActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     companion object {
