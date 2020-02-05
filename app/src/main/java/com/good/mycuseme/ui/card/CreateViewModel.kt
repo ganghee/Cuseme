@@ -2,23 +2,36 @@ package com.good.mycuseme.ui.card
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.MediaPlayer
 import android.media.MediaRecorder
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.MutableLiveData
 import com.good.mycuseme.base.BaseViewModel
+import com.good.mycuseme.data.card.CardRepository
 import com.good.mycuseme.util.isPermissionNotGranted
 import com.good.mycuseme.util.startSettingActivity
+import io.reactivex.android.schedulers.AndroidSchedulers
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.HttpException
+import java.io.ByteArrayOutputStream
+import java.io.File
 import java.io.IOException
+import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
 class CreateViewModel : BaseViewModel() {
-    val isStartRecord = MutableLiveData<Boolean>().apply {
+    private val isStartRecord = MutableLiveData<Boolean>().apply {
         value = false
     }
     val isAutoSpeak = MutableLiveData<Boolean>().apply {
@@ -42,12 +55,20 @@ class CreateViewModel : BaseViewModel() {
     val isPlayingRecord = MutableLiveData<Boolean>().apply {
         value = false
     }
+    val isSuccess = MutableLiveData<Boolean>().apply {
+        value = false
+    }
     private lateinit var dialogBuilder: AlertDialog.Builder
-    lateinit var recordFileName: String
+    private lateinit var recordFileName: String
     private var recorder: MediaRecorder? = null
     private var player: MediaPlayer? = null
-    val title = MutableLiveData<String>()
-    val content = MutableLiveData<String>()
+    val title = MutableLiveData<String>().apply {
+        value = "title"
+    }
+    val content = MutableLiveData<String>().apply {
+        value = "content"
+    }
+    private val repository by lazy { CardRepository() }
 
     @SuppressLint("SimpleDateFormat")
     fun setFlieName(cacheDir: String) {
@@ -144,12 +165,64 @@ class CreateViewModel : BaseViewModel() {
     }
 
     fun clickAutoSpeak(view: View) {
+        Log.d("view.select12", view.isSelected.toString())
+        if (!view.isSelected) {
+            recorder?.apply {
+                stop()
+                release()
+            }
+            player?.apply {
+                stop()
+                release()
+            }
+            recorder = null
+            player = null
+        }
         view.isSelected = !view.isSelected
         isAutoSpeak.value = view.isSelected
-        Log.d("view.select", view.isSelected.toString())
+        Log.d("view.select", isAutoSpeak.value.toString())
     }
 
-    fun createCard() {
-        //TODO: 서버 연결
+    @SuppressLint("CheckResult")
+    fun createCard(token: String, image: Uri, contentResolver: ContentResolver) {
+        val options = BitmapFactory.Options()
+        val inputStream: InputStream = contentResolver.openInputStream(image)!!
+        val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
+        val photoBody =
+            RequestBody.create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray())
+        val photo =
+            MultipartBody.Part.createFormData(
+                "image",
+                File(image.toString()).name + ".jpg",
+                photoBody
+            )
+        val audioFile = File(recordFileName)
+        val audioUri = Uri.fromFile(File(recordFileName))
+        val audioBody =
+            RequestBody.create(
+                MediaType.parse(contentResolver.getType(audioUri).toString()),
+                audioFile
+            )
+        var record: MultipartBody.Part? =
+            MultipartBody.Part.createFormData("record", audioFile.name + ".mp3", audioBody)
+        val title = RequestBody.create(MediaType.parse("text/plain"), title.value!!)
+        val content = RequestBody.create(MediaType.parse("text/plain"), content.value!!)
+        val visibility = RequestBody.create(MediaType.parse("text/plain"), "true")
+        if (recorder == null) {
+            record = null
+        }
+        Log.d("record", record.toString())
+        repository.postCreateCard(token, photo, record, title, content, visibility)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                isSuccess.value = true
+                Log.d("CreateViewModel", it.message)
+
+            }, { error ->
+                error as HttpException
+                Log.d("CreateViewModel err", error.message())
+            })
     }
 }
