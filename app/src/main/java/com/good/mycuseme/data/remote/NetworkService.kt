@@ -60,4 +60,13 @@ interface NetworkService {
         @Header("token") token: String,
         @Path("cardIdx") cardIdx: Int
     ): Single<CardResponse>
+
+    @DELETE("/cards/{cardIdx}")
+    fun deleteCard(
+        @Header("token") token: String,
+        @Path("cardIdx") cardIdx: Int
+    ): Single<CardResponse>
+
+    @GET("/cards")
+    fun getAllCard(@Header("token") token: String): Single<CardListResponse>
 }
