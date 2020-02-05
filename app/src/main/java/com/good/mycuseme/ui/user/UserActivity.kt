@@ -8,6 +8,7 @@ import android.provider.Settings
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
 import android.util.Log
+import android.view.ScaleGestureDetector
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -24,7 +25,6 @@ import com.good.mycuseme.data.local.UserData
 import com.good.mycuseme.databinding.ActivityUserBinding
 import com.good.mycuseme.databinding.RecyclerUserItemBinding
 import com.good.mycuseme.ui.login.LoginActivity
-import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_user.*
 import kotlinx.android.synthetic.main.recycler_user_item.view.*
 import java.io.IOException
@@ -38,18 +38,46 @@ class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
     private lateinit var textToSpeech: TextToSpeech
     var recordFlag = 0
     private lateinit var androidId: String
+    private var gridLayoutManager = GridLayoutManager(this@UserActivity, 1)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.userViewModel = userViewModel
 
         setUUID()
-        coordinateMotion() //TODO
+        //coordinateMotion() //TODO
+        touchEvent()
         initViewModel(androidId)
         getUUID(androidId)
         setCardList(androidId)
         setTextToSpeech()
         startLoginActivity()
+    }
+
+    private fun touchEvent() {
+        val mScaleGestureDetector = ScaleGestureDetector(
+            this,
+            object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+                override fun onScaleEnd(detector: ScaleGestureDetector?) {
+                    if (detector?.scaleFactor!! > 1.0f && gridLayoutManager.spanCount == 2) {
+                        gridLayoutManager.spanCount = 1
+                    } else if (detector.scaleFactor > 1.0f && gridLayoutManager.spanCount == 3) {
+                        gridLayoutManager.spanCount = 2
+                    } else if (detector.scaleFactor < 1.0f && gridLayoutManager.spanCount == 2) {
+                        gridLayoutManager.spanCount = 3
+                    } else if (detector.scaleFactor < 1.0f && gridLayoutManager.spanCount == 1) {
+                        gridLayoutManager.spanCount = 2
+                    }
+                    binding.recyclerUserCardlist.adapter?.notifyItemRangeChanged(
+                        binding.recyclerUserCardlist.adapter?.itemCount ?: 0,
+                        binding.recyclerUserCardlist.adapter?.itemCount ?: 0
+                    )
+                }
+            })
+        recycler_user_cardlist.setOnTouchListener { _, event ->
+            mScaleGestureDetector.onTouchEvent(event)
+            false
+        }
     }
 
     private fun setUUID() {
@@ -85,14 +113,13 @@ class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
             })
     }
 
-    private fun coordinateMotion() {
-
-        val listener = AppBarLayout.OnOffsetChangedListener { unused, verticalOffset ->
-            val seekPosition = -verticalOffset / binding.appbarUser.totalScrollRange.toFloat()
-            binding.motionlayoutUser.progress = seekPosition
-        }
-        binding.appbarUser.addOnOffsetChangedListener(listener)
-    }
+//    private fun coordinateMotion() {
+//        val listener = AppBarLayout.OnOffsetChangedListener { unused, verticalOffset ->
+//            val seekPosition = -verticalOffset / binding.appbarUser.totalScrollRange.toFloat()
+//            binding.motionlayoutUser.progress = seekPosition
+//        }
+//        binding.appbarUser.addOnOffsetChangedListener(listener)
+//    }
 
     private fun getUUID(androidId: String) {
         userViewModel.getUUID(androidId)
@@ -101,7 +128,7 @@ class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
     private fun setCardList(androidId: String) {
         userViewModel.getCard(androidId)
         binding.recyclerUserCardlist.apply {
-            layoutManager = GridLayoutManager(this.context, 2)
+            layoutManager = gridLayoutManager
             adapter = object : BaseRecyclerViewAdapter<CardData, RecyclerUserItemBinding>(
                 layoutRes = R.layout.recycler_user_item,
                 bindingId = BR.cardData
@@ -134,9 +161,9 @@ class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
     }
 
     private fun startRecord(item: CardData, view: View) {
-        if (item.record.isEmpty()) {
+        if (item.record == null) {
             (view.context as UserActivity).textToSpeech.speak(
-                item.record,
+                item.content,
                 TextToSpeech.QUEUE_FLUSH,
                 null,
                 null
