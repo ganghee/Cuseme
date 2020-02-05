@@ -62,4 +62,12 @@ object CardRemoteDataSource {
     fun getCard(token: String, cardIdx: Int): Single<CardResponse> =
         retrofit.getCard(token, cardIdx)
             .subscribeOn(Schedulers.io())
+
+    fun deleteCard(token: String, cardIdx: Int): Single<CardResponse> =
+        retrofit.deleteCard(token, cardIdx)
+            .subscribeOn(Schedulers.io())
+
+    fun getAllCard(token: String) =
+        retrofit.getAllCard(token)
+            .subscribeOn(Schedulers.io())
 }
