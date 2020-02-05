@@ -1,5 +1,6 @@
 package com.good.mycuseme.ui.manage
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
@@ -15,26 +16,27 @@ import com.good.mycuseme.data.card.CardData
 import com.good.mycuseme.data.local.SharedPreferenceController
 import com.good.mycuseme.databinding.FragmentSearchListBinding
 import com.good.mycuseme.databinding.RecyclerUserItemBinding
+import com.good.mycuseme.ui.card.ContentCardActivity
 
 class SearchListFragment : BaseFragment<FragmentSearchListBinding>(R.layout.fragment_search_list) {
 
     private val searchListViewModel by lazy { ViewModelProvider(this).get(SearchListViewModel::class.java) }
-    private lateinit var androidId: String
     private val categoryName by lazy { arguments?.getString(SORT_NAME) }
+    private var token: String? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.searchListViewModel = searchListViewModel
-        getUUID()
-        setCardList(androidId)
+        getToken()
+        setCardList(token!!)
     }
 
-    private fun getUUID() {
-        androidId = SharedPreferenceController.getUserUUID(activity!!.applicationContext)
+    private fun getToken() {
+        token = SharedPreferenceController.getUserToken(activity!!.applicationContext)
     }
 
-    private fun setCardList(androidId: String) {
-        searchListViewModel.getCard(androidId, categoryName)
+    private fun setCardList(token: String) {
+        searchListViewModel.getAllCard(token, categoryName)
         binding.rvPreview.apply {
             layoutManager = GridLayoutManager(this.context, 2)
             adapter = object : BaseRecyclerViewAdapter<CardData, RecyclerUserItemBinding>(
@@ -47,7 +49,9 @@ class SearchListFragment : BaseFragment<FragmentSearchListBinding>(R.layout.frag
                 ): BaseViewHolder<RecyclerUserItemBinding> {
                     return super.onCreateViewHolder(parent, viewType).apply {
                         itemView.setOnClickListener {
-
+                            val intent = Intent(context, ContentCardActivity::class.java)
+                            intent.putExtra("cardIdx", items[position].cardIdx)
+                            startActivity(intent)
                         }
                     }
                 }
