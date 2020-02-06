@@ -15,8 +15,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_card_container"
-        android:layout_width="180dp"
-        android:layout_height="220dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:clickable="true"
         android:focusable="true"
@@ -31,6 +31,7 @@
             android:orientation="vertical" />
 
         <LinearLayout
+            android:id="@+id/rl_user_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -39,9 +40,10 @@
                 android:id="@+id/imageview_user_item"
                 setImage="@{cardData.image}"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="1dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
+                android:adjustViewBounds="true"
                 android:src="@color/white" />
 
             <TextView
