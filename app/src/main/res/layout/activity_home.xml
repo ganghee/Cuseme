@@ -6,113 +6,132 @@
     <data>
 
         <variable
-            name="userViewModel"
-            type="com.good.mycuseme.ui.user.UserViewModel" />
+            name="homeViewModel"
+            type="com.good.mycuseme.ui.home.HomeViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/constraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#4630B5C6"
-        tools:context=".ui.user.UserActivity">
+        app:layoutDescription="@xml/activity_home_xml_constraint_scene"
+        tools:context=".ui.home.HomeActivity">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar_user"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@color/white"
+        <Button
+            android:id="@+id/button_home_login"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/btn_home_lock"
+            android:tint="?colorOnPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_home_refresh"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/btn_home_reload"
+            android:tint="?colorOnPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageview_quote_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/img_home_quote_left"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_home_cardcontent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textview_home_cardcontent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <ImageView
+            android:id="@+id/imageview_quote_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/img_home_quote_right"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_home_cardcontent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textview_home_cardcontent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <TextView
+            android:id="@+id/tv_home_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/greyish_brown_four"
+            android:textSize="18sp"
+            android:alpha="0"
+            app:layout_constraintBottom_toBottomOf="@+id/lottieAnimView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.motion.widget.MotionLayout
-                android:id="@+id/motionlayout_user"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:minHeight="40dp"
-                app:layoutDescription="@xml/user"
-                app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed"
-                app:motionDebug="SHOW_PATH">
-
-                <Button
-                    android:id="@+id/button_user_login"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/btn_home_lock"
-                    android:tint="?colorOnPrimary" />
-
-                <Button
-                    android:id="@+id/button_user_refresh"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/btn_home_reload"
-                    android:onClick="@{()->userViewModel.sort(userViewModel.cardList)}"
-                    android:tint="?colorOnPrimary"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imageview_quote_left"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/img_home_quote_left" />
-
-                <ImageView
-                    android:id="@+id/imageview_quote_right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/img_home_quote_right" />
-
-                <TextView
-                    android:id="@+id/textview_user_cardcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="40dp"
-                    android:gravity="center"
-                    android:textColor="@color/greyish_brown_four"
-                    android:textSize="20sp" />
-
-                <ImageView
-                    android:id="@+id/imageview_cumi"
-                    android:layout_width="88dp"
-                    android:layout_height="80dp"
-                    android:elevation="4dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/img_home_cumi"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/lottieAnimView"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="144dp"
-                    android:layout_marginEnd="0dp"
-                    android:scaleType="fitXY"
-                    app:lottie_autoPlay="true"
-                    app:lottie_fileName="home_wave_android.json"
-                    app:lottie_loop="true" />
-            </androidx.constraintlayout.motion.widget.MotionLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/ns_scroll_view"
+        <TextView
+            android:id="@+id/textview_home_cardcontent"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="36dp"
+            android:layout_marginBottom="24dp"
+            android:paddingHorizontal="48dp"
+            android:gravity="center"
+            android:textColor="@color/greyish_brown_four"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/view_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5" />
+
+        <ImageView
+            android:id="@+id/imageview_cumi"
+            android:layout_width="88dp"
+            android:layout_height="80dp"
+            android:layout_marginEnd="40dp"
+            android:elevation="4dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_home_cumi"
+            app:layout_constraintBottom_toBottomOf="@+id/lottieAnimView"
+            app:layout_constraintEnd_toEndOf="@+id/lottieAnimView" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimView"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginTop="120dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="home_wave_android.json"
+            app:lottie_loop="true" />
+
+        <View
+            android:id="@+id/view_green"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="#4630B5C6"
+            app:layout_constraintTop_toBottomOf="@+id/lottieAnimView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_home_cardlist"
+            replaceAll="@{homeViewModel.cardList}"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/round_top"
-            android:paddingHorizontal="4dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appbar_user">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_user_cardlist"
-                replaceAll="@{userViewModel.cardList}"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appbar_user" />
-        </androidx.core.widget.NestedScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lottieAnimView" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
