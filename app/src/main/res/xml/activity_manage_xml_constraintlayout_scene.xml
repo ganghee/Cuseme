@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="500">
+        <OnClick
+            app:clickAction="toggle"
+            app:targetId="@id/fb_manage_add_card" />
+        <KeyFrameSet>
+            <KeyAttribute
+                android:rotation="45"
+                motion:framePosition="100"
+                motion:motionTarget="@+id/fb_manage_add_card" />
+            <KeyAttribute
+                android:alpha="0.0"
+                motion:framePosition="70"
+                motion:motionTarget="@+id/tv_manage_download" />
+            <KeyAttribute
+                android:alpha="0.0"
+                motion:framePosition="70"
+                motion:motionTarget="@+id/tv_manage_download" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/cl_manage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Constraint
+            android:id="@+id/fb_manage_add_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/ll_manage_new_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            android:alpha="0.0"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_bottom_bar"
+            app:layout_constraintStart_toStartOf="@+id/fb_manage_add_card" />
+        <Constraint
+            android:id="@+id/ll_manage_down_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"
+            android:alpha="0.0"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_bottom_bar"
+            app:layout_constraintStart_toStartOf="@+id/fb_manage_add_card" />
+        <Constraint
+            android:id="@+id/fl_manage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="52dp" />
+        <Constraint
+            android:id="@+id/cv_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/border_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/bottom_tab"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/cl_manage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Constraint
+            android:id="@+id/fb_manage_add_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/iv_manage_download"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:alpha="1.0"
+            app:layout_constraintBottom_toTopOf="@+id/iv_manage_new_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/fl_manage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="52dp" />
+        <Constraint
+            android:id="@+id/cv_bottom_bar"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:background="@drawable/border_top"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/ll_manage_new_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:alpha="1.0"
+            app:layout_constraintBottom_toTopOf="@+id/fb_manage_add_card"
+            app:layout_constraintStart_toStartOf="@+id/fb_manage_add_card" />
+        <Constraint
+            android:id="@+id/ll_manage_down_load"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:alpha="1.0"
+            app:layout_constraintBottom_toTopOf="@+id/ll_manage_new_card"
+            app:layout_constraintStart_toStartOf="@+id/fb_manage_add_card" />
+        <Constraint
+            android:id="@+id/bottom_tab"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </ConstraintSet>
+</MotionScene>
