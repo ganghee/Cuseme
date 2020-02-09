@@ -8,7 +8,7 @@ import com.good.mycuseme.data.card.CardData
 import com.good.mycuseme.data.card.CardRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 
-class SearchListViewModel : BaseViewModel() {
+class PreviewArrayViewModel : BaseViewModel() {
     val cardList = MutableLiveData<List<CardData>>()
     private val cardRepository by lazy { CardRepository() }
 
@@ -17,25 +17,24 @@ class SearchListViewModel : BaseViewModel() {
         cardRepository.getAllCard(token)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d("UserViewModel getCard", it.message)
+                Log.d("ArrayViewModel getCard", it.message)
                 sort(it.data, sorting)
             }, {
-                Log.d("UserViewModel getCard", it.message!!)
+                Log.d("ArrayViewModel getCard", it.message!!)
             })
     }
 
     private fun sort(sortedList: List<CardData>?, sorting: String?) {
         when (sorting) {
             "visibility" -> {
-                cardList.value = sortedList?.sortedBy { it.sequence }
+                cardList.value = sortedList?.sortedBy { it.sequence }?.filter { it.visible }
             }
             "title" -> {
-                cardList.value = sortedList?.sortedBy { it.title }
+                cardList.value = sortedList?.sortedBy { it.title }?.filter { it.visible }
             }
             "count" -> {
-                cardList.value = sortedList?.sortedBy { it.count }
+                cardList.value = sortedList?.sortedBy { it.count }?.filter { it.visible }
             }
         }
     }
-
 }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:motion="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Transition
+        motion:constraintSetStart="@layout/activity_home"
+        motion:constraintSetEnd="@layout/activity_home_end"
+        motion:duration="500">
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorId="@id/recycler_home_cardlist"
+            motion:touchAnchorSide="top" />
+    </Transition>
+
+    <KeyFrameSet>
+    <KeyAttribute
+        android:alpha="0.0"
+        motion:framePosition="40"
+        motion:motionTarget="@id/textview_home_cardcontent" />
+    </KeyFrameSet>
+    <KeyFrameSet>
+        <KeyAttribute
+            android:alpha="0.0"
+            motion:framePosition="100"
+            motion:motionTarget="@id/textview_home_cardcontent" />
+    </KeyFrameSet>
+    <KeyFrameSet>
+        <KeyAttribute
+            android:alpha="0.0"
+            motion:framePosition="40"
+            motion:motionTarget="@id/tv_home_title" />
+    </KeyFrameSet>
+    <KeyFrameSet>
+        <KeyAttribute
+            android:alpha="1.0"
+            motion:framePosition="100"
+            motion:motionTarget="@id/tv_home_title" />
+    </KeyFrameSet>
+</MotionScene>

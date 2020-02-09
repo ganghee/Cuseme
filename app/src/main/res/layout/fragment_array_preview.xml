@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
         <variable
-            name="previewViewModel"
-            type="com.good.mycuseme.ui.manage.PreviewViewModel" />
+            name="previewArrayViewModel"
+            type="com.good.mycuseme.ui.manage.PreviewArrayViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".ui.manage.PreviewFragment">
-
-        <include layout="@layout/toolbar_manager_preview" />
+        android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -23,11 +18,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_preview"
-                replaceAll="@{previewViewModel.cardList}"
+                replaceAll="@{previewArrayViewModel.cardList}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="12dp" />
         </androidx.core.widget.NestedScrollView>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
