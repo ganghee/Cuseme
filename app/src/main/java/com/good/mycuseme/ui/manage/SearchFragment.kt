@@ -12,11 +12,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        configureMainTab()
+        //configureMainTab()
     }
 
-    private fun configureMainTab() {
-        vp_search.adapter = CategoryViewPagerAdapter(childFragmentManager)
-        tl_search.setupWithViewPager(vp_search)
-    }
 }
