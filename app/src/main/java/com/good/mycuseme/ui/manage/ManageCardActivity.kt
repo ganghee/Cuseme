@@ -2,10 +2,12 @@ package com.good.mycuseme.ui.manage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseActivity
+import com.good.mycuseme.data.local.SharedPreferenceController
 import com.good.mycuseme.databinding.ActivityManageBinding
 import com.good.mycuseme.ui.card.CreateActivity
 import com.good.mycuseme.ui.card.DownloadActivity
@@ -37,6 +39,7 @@ class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity
         ll_manage_down_load.setOnClickListener {
             val intent = Intent(this, DownloadActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 
