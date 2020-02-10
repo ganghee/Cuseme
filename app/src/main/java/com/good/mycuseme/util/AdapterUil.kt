@@ -14,14 +14,20 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
+import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseRecyclerViewAdapter
+
 
 @BindingAdapter("setImage")
 fun setImageUrl(view: ImageView, profile: String?) {
     Glide.with(view.context)
         .load(profile)
+        .placeholder(R.drawable.bg_green)
         .listener(createLoggerListener("original"))
         .override(500, 500)
         .into(view)
