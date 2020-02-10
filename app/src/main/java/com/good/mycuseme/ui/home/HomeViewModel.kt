@@ -1,26 +1,43 @@
-package com.good.mycuseme.ui.user
+package com.good.mycuseme.ui.home
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.media.MediaPlayer
+import android.speech.tts.TextToSpeech
+import android.speech.tts.UtteranceProgressListener
 import android.util.Log
+import android.view.View
+import android.view.ViewGroup
 import androidx.lifecycle.MutableLiveData
 import com.good.mycuseme.base.BaseViewModel
 import com.good.mycuseme.data.card.CardData
 import com.good.mycuseme.data.card.CardRepository
+import com.good.mycuseme.data.card.CountBody
 import com.good.mycuseme.data.start.StartRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.recycler_card_item.view.*
+import retrofit2.HttpException
+import java.io.IOException
+import java.util.*
 
-class UserViewModel : BaseViewModel() {
+class HomeViewModel : BaseViewModel() {
     private val startRepository by lazy { StartRepository() }
     private val cardRepository by lazy { CardRepository() }
     val cardList = MutableLiveData<List<CardData>>()
     private val sortList = listOf("visibility", "title", "count")
     private var index = 0
+    lateinit var textToSpeech: TextToSpeech
+    private val player: MediaPlayer by lazy { MediaPlayer() }
+
+
+    var recordFlag = 0
 
     @SuppressLint("CheckResult")
-    fun getUUID(uuid: String) {
+    fun getCards(uuid: String) {
         startRepository.postStart(uuid)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                getCard(uuid)
                 Log.d("UserViewModel getUUID", it.message)
             }, {
                 Log.d("UserViewModel getUUID", it.message)
@@ -56,5 +73,90 @@ class UserViewModel : BaseViewModel() {
         }
     }
 
+    @SuppressLint("CheckResult")
+    fun addCount(cardIdx: Int, uuid: CountBody) {
+        cardRepository.addCount(cardIdx, uuid)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d("addCount success", it.message)
+            }, { error ->
+                error as HttpException
+                Log.d("addCount error", error.message!!)
+            })
+    }
 
+    fun setTextToSpeech(context: Context) {
+        textToSpeech = TextToSpeech(context,
+            TextToSpeech.OnInitListener { status ->
+                if (status == TextToSpeech.SUCCESS) {
+                    textToSpeech.setLanguage(Locale.KOREA).let {
+                        if (it == TextToSpeech.LANG_MISSING_DATA
+                            || it == TextToSpeech.LANG_NOT_SUPPORTED
+                        ) {
+                            //Toast.makeText(this, "지금 지원되지 않습니다.", Toast.LENGTH_LONG).show()
+                        }
+                    }
+                }
+            })
+    }
+
+    fun startRecord(item: CardData, cardIdx: Int, uuid: CountBody) {
+        if (item.record == null) {
+            textToSpeech.speak(
+                item.content,
+                TextToSpeech.QUEUE_FLUSH,
+                null,
+                TextToSpeech.ACTION_TTS_QUEUE_PROCESSING_COMPLETED
+            )
+            textToSpeech.setOnUtteranceProgressListener(object : UtteranceProgressListener() {
+                override fun onDone(utteranceId: String?) {
+                    recordFlag = 0
+                }
+
+                override fun onError(utteranceId: String?) {
+                    Log.d("recordError  ", utteranceId.toString())
+                }
+
+                override fun onStart(utteranceId: String?) {
+                    recordFlag = -1
+                    addCount(cardIdx, uuid)
+                }
+            })
+        } else {
+            player.apply {
+                try {
+                    reset() //매우 중요 초기화 되지 않은 처음 생태로 되돌리며 이후 재 초기화 하여 다시 사용 할 수 있다. release는 객체를 완전히 파괴하여 더 이상 사용할 수 없는 상태이다.
+                    setDataSource(item.record)
+                    prepareAsync()   //비동기
+                    setOnPreparedListener {
+                        it.start()
+                        addCount(cardIdx, uuid)
+                    }
+                    recordFlag = -1
+                } catch (e: IOException) {
+                }
+            }
+            player.setOnCompletionListener {
+                recordFlag = 0
+            }
+        }
+    }
+
+    fun singleItemClick(parent: ViewGroup, itemView: View) {
+        for (i in 0 until parent.childCount) {
+            parent.getChildAt(i).view_masking.isSelected = false
+        }
+        if (!itemView.view_masking.isSelected) {
+            itemView.view_masking.isSelected = true
+        } else if (itemView.view_masking.isSelected) {
+            itemView.view_masking.isSelected = true
+        }
+    }
+
+    override fun onCleared() {
+        player.stop()
+        textToSpeech.stop()
+        textToSpeech.shutdown()
+        super.onCleared()
+    }
 }
