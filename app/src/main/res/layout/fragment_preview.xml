@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="previewViewModel"
+            type="com.good.mycuseme.ui.manage.PreviewViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.manage.PreviewRearrayFragment">
+
+        <include layout="@layout/toolbar_manager_preview" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tl_preview"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingTop="8dp"
+            android:background="@color/white"
+            app:tabIndicatorFullWidth="false"
+            app:tabSelectedTextColor="@color/mainpink"
+            app:tabTextAppearance="@style/tab_text"
+            app:tabTextColor="@color/greyish_two" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_preview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+</layout>
