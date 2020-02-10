@@ -2,8 +2,10 @@ package com.good.mycuseme.data.remote
 
 import com.good.mycuseme.data.card.CardListResponse
 import com.good.mycuseme.data.card.CardResponse
-import com.good.mycuseme.data.login.LoginResponse
+import com.good.mycuseme.data.card.CountBody
+import com.good.mycuseme.data.card.HideBody
 import com.good.mycuseme.data.start.StartResponse
+import com.good.mycuseme.data.user.UserResponse
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
@@ -28,7 +30,7 @@ object CardRemoteDataSource {
         retrofit.getVisibleCard(uuid)
             .subscribeOn(Schedulers.io())
 
-    fun postLogin(uuid: String, password: String): Single<LoginResponse> =
+    fun postLogin(uuid: String, password: String): Single<UserResponse> =
         retrofit.postLogin(uuid, password)
             .subscribeOn(Schedulers.io())
 
@@ -69,5 +71,21 @@ object CardRemoteDataSource {
 
     fun getAllCard(token: String) =
         retrofit.getAllCard(token)
+            .subscribeOn(Schedulers.io())
+
+    fun changePhoneNumber(token: String, phoneNumber: String) =
+        retrofit.changePhoneNumber(token, phoneNumber)
+            .subscribeOn(Schedulers.io())
+
+    fun changePassword(token: String, password: String, newPassword: String) =
+        retrofit.changePassword(token, password, newPassword)
+            .subscribeOn(Schedulers.io())
+
+    fun hideCard(token: String, cardIdx: Int, isVisible: HideBody): Single<CardResponse> =
+        retrofit.hideCard(token, cardIdx, isVisible)
+            .subscribeOn(Schedulers.io())
+
+    fun addCount(cardIdx: Int, uuid: CountBody): Single<CardResponse> =
+        retrofit.addCount(cardIdx, uuid)
             .subscribeOn(Schedulers.io())
 }
