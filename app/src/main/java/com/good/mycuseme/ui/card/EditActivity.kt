@@ -15,7 +15,6 @@ import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseActivity
 import com.good.mycuseme.data.local.SharedPreferenceController
 import com.good.mycuseme.databinding.ActivityEditBinding
-import com.good.mycuseme.ui.manage.ManageCardActivity
 import kotlinx.android.synthetic.main.activity_edit.*
 import kotlinx.android.synthetic.main.toolbar_card.*
 
@@ -31,8 +30,6 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
 
         initData()
         initRecordButton()
-        Log.d("onCreate", "onCreate")
-
         checkPermission(this, this)
         bringImage()
         startRecord()
@@ -53,17 +50,18 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
     }
 
     private fun initData() {
-        iv_back.setOnClickListener {
-            val intent = Intent(this, ManageCardActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
+        iv_back.setOnClickListener { finish() }
         btn_user.text = "수정"
-        val cardIdx = intent.getIntExtra("cardIdx", -1)
-        Log.d("datadata", token + "   " + cardIdx)
 
         editViewModel.apply {
+            val cardIdx = intent.getIntExtra("cardIdx", -1)
             initData(token, cardIdx)
+            title.observe(this@EditActivity, Observer {
+                et_update_card_title.hint = "카드 이름: $it"
+            })
+            content.observe(this@EditActivity, Observer {
+                et_update_card_content.hint = "카드 내용: $it"
+            })
             imageServer.observe(this@EditActivity, Observer {
                 Glide.with(this@EditActivity)
                     .load(it)
@@ -100,37 +98,40 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
         editViewModel.apply {
             isSuccess.observe(this@EditActivity, Observer {
                 if (it) {
-                    val intent = Intent(this@EditActivity, ManageCardActivity::class.java)
+                    val intent = Intent(this@EditActivity, ContentCardActivity::class.java)
+                    intent.putExtra("cardIdx", updateCardIdx)
                     startActivity(intent)
                     finish()
+                    Toast.makeText(this@EditActivity, "수정되었습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
             btn_user.setOnClickListener {
+                Log.d("edit@@", imageUri.toString() + "   " + title.value + "   " + content.value)
                 when {
                     imageUri.toString() == "null" -> {
                         iv_update_card.setBackgroundResource(R.drawable.round_all_border_pink_transparent_4)
-                        et_update_card_title.setBackgroundResource(R.drawable.round_all_transparent)
-                        et_update_card_content.setBackgroundResource(R.drawable.round_all_transparent)
+                        et_update_card_title.setBackgroundResource(R.drawable.round_all_white_20)
+                        et_update_card_content.setBackgroundResource(R.drawable.round_all_white_20)
                         Toast.makeText(this@EditActivity, "선택한 사진이 없습니다.", Toast.LENGTH_SHORT)
                             .show()
                     }
-                    title.value.isNullOrEmpty() -> {
+                    et_update_card_title.text.isNullOrEmpty() -> {
                         et_update_card_title.setBackgroundResource(R.drawable.round_all_border_pink_white_4)
-                        et_update_card_content.setBackgroundResource(R.drawable.round_all_transparent)
-                        iv_update_card.setBackgroundResource(R.drawable.round_all_transparent)
+                        et_update_card_content.setBackgroundResource(R.drawable.round_all_white_20)
+                        iv_update_card.setBackgroundResource(R.drawable.round_all_white_20)
                         Toast.makeText(this@EditActivity, "제목을 입력해 주세요", Toast.LENGTH_SHORT)
                             .show()
                     }
-                    content.value.isNullOrEmpty() -> {
+                    et_update_card_content.text.isNullOrEmpty() -> {
                         et_update_card_content.setBackgroundResource(R.drawable.round_all_border_pink_white_4)
-                        et_update_card_title.setBackgroundResource(R.drawable.round_all_transparent)
-                        iv_update_card.setBackgroundResource(R.drawable.round_all_transparent)
+                        et_update_card_title.setBackgroundResource(R.drawable.round_all_white_20)
+                        iv_update_card.setBackgroundResource(R.drawable.round_all_white_20)
                         Toast.makeText(this@EditActivity, "내용을 입력해 주세요.", Toast.LENGTH_SHORT)
                             .show()
                     }
                     else -> {
-                        Log.d("contentResolver", contentResolver.toString())
-                        Log.d("imageUriData", imageUri.toString())
+                        title.value = et_update_card_title.text.toString()
+                        content.value = et_update_card_content.text.toString()
                         updateCard(token!!, imageUri!!, contentResolver)
                     }
                 }
@@ -198,8 +199,6 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        val intent = Intent(this@EditActivity, ManageCardActivity::class.java)
-        startActivity(intent)
         finish()
     }
 
