@@ -33,6 +33,13 @@ class CardRepository {
     ): Single<CardResponse> =
         CardRemoteDataSource.putUpdateCard(token, cardIdx, image, record, title, content, visible)
 
+    fun hideCard(
+        token: String,
+        cardIdx: Int,
+        isVisible: HideBody
+    ): Single<CardResponse> =
+        CardRemoteDataSource.hideCard(token, cardIdx, isVisible)
+
     fun getCard(token: String, cardIdx: Int): Single<CardResponse> =
         CardRemoteDataSource.getCard(token, cardIdx)
 
@@ -41,5 +48,8 @@ class CardRepository {
 
     fun getAllCard(token: String) =
         CardRemoteDataSource.getAllCard(token)
+
+    fun addCount(cardIdx: Int, uuid: CountBody) =
+        CardRemoteDataSource.addCount(cardIdx, uuid)
 
 }
