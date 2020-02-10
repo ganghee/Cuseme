@@ -3,24 +3,47 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="12dp">
+    android:background="@color/white"
+    android:paddingTop="16dp">
 
-    <ImageView
-        android:id="@+id/iv_back"
-        android:layout_width="20dp"
-        android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
-        android:src="@drawable/btn_back"
+    <TextView
+        android:id="@+id/tv_home_tabbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="홈 편집"
+        android:textColor="@color/greyish_brown_four"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/iv_user"
-        android:layout_width="40dp"
+        android:id="@+id/iv_reload"
+        android:layout_width="36dp"
         android:layout_height="36dp"
-        android:layout_marginEnd="28dp"
-        android:src="@drawable/ic_person"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/btn_home_reload"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_home"
+        app:layout_constraintEnd_toStartOf="@+id/iv_home"
+        app:layout_constraintTop_toTopOf="@+id/iv_home" />
+
+    <ImageView
+        android:id="@+id/iv_home"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_home_24"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_setting"
+        app:layout_constraintEnd_toStartOf="@+id/btn_setting"
+        app:layout_constraintTop_toTopOf="@+id/btn_setting" />
+
+    <ImageView
+        android:id="@+id/btn_setting"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/btn_setting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
