@@ -4,7 +4,7 @@
     android:id="@+id/bottom_tab"
     android:layout_width="match_parent"
     android:layout_height="52dp"
-    android:background="#CCFB6D6A"
+    android:background="#FF9291"
     android:paddingVertical="4dp">
 
     <LinearLayout
