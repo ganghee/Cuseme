@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#f1f3f5"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,6 +31,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_content_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@={contentViewModel.title}"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/iv_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageView
                 android:id="@+id/iv_content_update"
@@ -51,7 +64,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.core.widget.NestedScrollView
@@ -65,26 +77,27 @@
                 android:paddingTop="10dp"
                 tools:context=".ui.card.EditActivity">
 
+
                 <ImageView
                     android:id="@+id/iv_content"
+                    setImage="@{contentViewModel.image}"
                     android:layout_width="match_parent"
                     android:layout_height="360dp"
                     android:layout_margin="20dp"
-                    setImage="@{contentViewModel.image}"
+                    android:background="@drawable/round_all_white_20"
                     android:scaleType="centerCrop"
-                    android:background="@color/white_two"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_content_visibility"
-                    android:layout_width="50dp"
-                    android:layout_height="32dp"
-                    android:layout_margin="12sp"
-                    android:src="@drawable/btn_content_visibility_selector"
-                    app:layout_constraintEnd_toEndOf="@+id/iv_content"
-                    app:layout_constraintTop_toTopOf="@+id/iv_content" />
+<!--                <ImageView-->
+<!--                    android:id="@+id/iv_content_visibility"-->
+<!--                    android:layout_width="50dp"-->
+<!--                    android:layout_height="32dp"-->
+<!--                    android:layout_margin="12sp"-->
+<!--                    android:src="@drawable/btn_content_visibility_selector"-->
+<!--                    app:layout_constraintEnd_toEndOf="@id/iv_content"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/iv_content" />-->
 
                 <TextView
                     android:id="@+id/tv_content_serial_number"
@@ -92,69 +105,71 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="12sp"
                     android:background="@drawable/round_all_white"
+                    android:gravity="center"
                     android:paddingHorizontal="8dp"
                     android:paddingVertical="4dp"
-                    android:gravity="center"
                     android:text="@={contentViewModel.serialNumber}"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_content"
                     app:layout_constraintEnd_toEndOf="@+id/iv_content" />
 
                 <TextView
-                    android:id="@+id/tv_content_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="30dp"
-                    android:text="@={contentViewModel.title}"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_content" />
-
-                <TextView
                     android:id="@+id/tv_content_content"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_all_white"
+                    android:padding="20dp"
                     android:text="@={contentViewModel.content}"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_content_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/iv_content" />
 
-                <TextView
-                    android:id="@+id/tv_content_record1"
-                    android:layout_width="wrap_content"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="@string/record_title"
-                    android:textColor="@color/mainpink"
-                    android:textSize="28sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_content_content" />
-
-                <TextView
-                    android:id="@+id/tv_content_record2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="@string/record_title2"
-                    android:textSize="16sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_content_record1" />
-
-                <ImageView
-                    android:id="@+id/iv_content_record_start"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:onClick="@{view-> contentViewModel.startPlay()}"
-                    android:src="@drawable/btn_content_play"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="8dp"
+                    android:paddingBottom="20dp"
+                    android:background="@drawable/round_all_white_20"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_content_content" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_content_content">
 
+                    <TextView
+                        android:id="@+id/tv_content_record1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="@string/record_title"
+                        android:textColor="@color/mainpink"
+                        android:textSize="28sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_content_record2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="20dp"
+                        android:text="@string/record_title2"
+                        android:textSize="16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_content_record1" />
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/iv_content_record_start"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="28dp"
+                        android:onClick="@{view-> contentViewModel.startPlay()}"
+                        android:src="@drawable/ic_play"
+                        app:backgroundTint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/tv_content_record1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </LinearLayout>
