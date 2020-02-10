@@ -2,8 +2,10 @@ package com.good.mycuseme.data.remote
 
 import com.good.mycuseme.data.card.CardListResponse
 import com.good.mycuseme.data.card.CardResponse
-import com.good.mycuseme.data.login.LoginResponse
+import com.good.mycuseme.data.card.CountBody
+import com.good.mycuseme.data.card.HideBody
 import com.good.mycuseme.data.start.StartResponse
+import com.good.mycuseme.data.user.UserResponse
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -24,7 +26,7 @@ interface NetworkService {
     fun postLogin(
         @Field("uuid") uuid: String,
         @Field("password") password: String
-    ): Single<LoginResponse>
+    ): Single<UserResponse>
 
     @POST("/cards/{serialNum}")
     fun postCardDownload(
@@ -33,7 +35,7 @@ interface NetworkService {
     ): Single<CardResponse>
 
     @Multipart
-    @POST("/cards/")
+    @POST("/cards")
     fun postCreateCard(
         @Header("token") token: String,
         @Part image: MultipartBody.Part,
@@ -69,4 +71,32 @@ interface NetworkService {
 
     @GET("/cards")
     fun getAllCard(@Header("token") token: String): Single<CardListResponse>
+
+    @FormUrlEncoded
+    @PUT("/auth/phone")
+    fun changePhoneNumber(
+        @Header("token") token: String,
+        @Field("phoneNum") phoneNum: String
+    ): Single<UserResponse>
+
+    @FormUrlEncoded
+    @PUT("/auth")
+    fun changePassword(
+        @Header("token") token: String,
+        @Field("password") password: String,
+        @Field("newPassword") newPassword: String
+    ): Single<UserResponse>
+
+    @PUT("/cards/{cardIdx}/hide")
+    fun hideCard(
+        @Header("token") token: String,
+        @Path("cardIdx") cardIdx: Int,
+        @Body hideBody: HideBody
+    ): Single<CardResponse>
+
+    @PUT("/cards/{cardIdx}/count")
+    fun addCount(
+        @Path("cardIdx") cardIdx: Int,
+        @Body uuid: CountBody
+    ): Single<CardResponse>
 }
