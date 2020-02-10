@@ -21,7 +21,6 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         object : BaseViewHolder<B>(
             layoutRes = layoutRes,
@@ -29,9 +28,25 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
             bindingId = bindingId
         ) {}
 
+
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: BaseViewHolder<B>, position: Int) =
         holder.onBindViewHolder(items[position])
+
+    fun swapItems(fromPosition: Int, toPosition: Int) {
+        if (fromPosition < toPosition) {
+            for (i in fromPosition until toPosition) {
+                items[i + 1] = items[i]
+                items[i] = items[i + 1]
+            }
+        } else {
+            for (i in fromPosition..toPosition + 1) {
+                items[i - 1] = items[i]
+                items[i] = items[i - 1]
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition)
+    }
 
 }
