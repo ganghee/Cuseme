@@ -1,17 +1,11 @@
-package com.good.mycuseme.ui.user
+package com.good.mycuseme.ui.home
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.provider.Settings
-import android.speech.tts.TextToSpeech
-import android.speech.tts.UtteranceProgressListener
-import android.util.Log
 import android.view.ScaleGestureDetector
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.good.mycuseme.BR
@@ -20,38 +14,34 @@ import com.good.mycuseme.base.BaseActivity
 import com.good.mycuseme.base.BaseRecyclerViewAdapter
 import com.good.mycuseme.base.BaseViewHolder
 import com.good.mycuseme.data.card.CardData
+import com.good.mycuseme.data.card.CountBody
 import com.good.mycuseme.data.local.SharedPreferenceController
-import com.good.mycuseme.data.local.UserData
-import com.good.mycuseme.databinding.ActivityUserBinding
-import com.good.mycuseme.databinding.RecyclerUserItemBinding
+import com.good.mycuseme.databinding.ActivityHomeBinding
+import com.good.mycuseme.databinding.RecyclerCardItemBinding
 import com.good.mycuseme.ui.login.LoginActivity
-import kotlinx.android.synthetic.main.activity_user.*
-import kotlinx.android.synthetic.main.recycler_user_item.view.*
-import java.io.IOException
-import java.util.*
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.recycler_card_item.view.*
 
-@SuppressLint("HardwareIds")
-class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
+class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
-    private val userViewModel by lazy { ViewModelProvider(this).get(UserViewModel::class.java) }
-    private val player: MediaPlayer by lazy { MediaPlayer() }
-    private lateinit var textToSpeech: TextToSpeech
-    var recordFlag = 0
+    private val homeViewModel by lazy { ViewModelProvider(this).get(HomeViewModel::class.java) }
+
     private lateinit var androidId: String
-    private var gridLayoutManager = GridLayoutManager(this@UserActivity, 1)
+    private lateinit var token: String
+    private var gridLayoutManager = GridLayoutManager(this@HomeActivity, 2)
+    var mParent: ViewGroup? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.userViewModel = userViewModel
+        binding.homeViewModel = homeViewModel
 
-        setUUID()
-        //coordinateMotion() //TODO
+        setUUID()//TODO : 사용자를 DB에서 지우고 시작하는 경우
+        homeViewModel.setTextToSpeech(this)
         touchEvent()
-        initViewModel(androidId)
-        getUUID(androidId)
-        setCardList(androidId)
-        setTextToSpeech()
+        getCards(androidId)
+        setCardList()
         startLoginActivity()
+        reorderClick()
     }
 
     private fun touchEvent() {
@@ -68,80 +58,63 @@ class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
                     } else if (detector.scaleFactor < 1.0f && gridLayoutManager.spanCount == 1) {
                         gridLayoutManager.spanCount = 2
                     }
-                    binding.recyclerUserCardlist.adapter?.notifyItemRangeChanged(
-                        binding.recyclerUserCardlist.adapter?.itemCount ?: 0,
-                        binding.recyclerUserCardlist.adapter?.itemCount ?: 0
+                    binding.recyclerHomeCardlist.adapter?.notifyItemRangeChanged(
+                        binding.recyclerHomeCardlist.adapter?.itemCount ?: 0,
+                        binding.recyclerHomeCardlist.adapter?.itemCount ?: 0
                     )
                 }
             })
-        recycler_user_cardlist.setOnTouchListener { _, event ->
+        recycler_home_cardlist.setOnTouchListener { _, event ->
             mScaleGestureDetector.onTouchEvent(event)
             false
         }
     }
 
+    @SuppressLint("HardwareIds")
     private fun setUUID() {
         androidId = Settings.Secure.getString(
             this.contentResolver,
             Settings.Secure.ANDROID_ID
         )
-        val userData = UserData(androidId, null, null)
-        Log.d("uuidandroid", userData.toString())
-        SharedPreferenceController.setUserInfo(this, userData)
+        SharedPreferenceController.setUserUUID(this, androidId)
     }
 
     private fun startLoginActivity() {
-        button_user_login.setOnClickListener {
+        button_home_login.setOnClickListener {
             val intent = Intent(this, LoginActivity::class.java)
             intent.putExtra("uuid", androidId)
             startActivity(intent)
+            finish()
         }
     }
 
-    private fun setTextToSpeech() {
-        textToSpeech = TextToSpeech(this,
-            TextToSpeech.OnInitListener { status ->
-                if (status == TextToSpeech.SUCCESS) {
-                    textToSpeech.setLanguage(Locale.KOREA).let {
-                        if (it == TextToSpeech.LANG_MISSING_DATA
-                            || it == TextToSpeech.LANG_NOT_SUPPORTED
-                        ) {
-                            Toast.makeText(this, "지금 지원되지 않습니다.", Toast.LENGTH_LONG).show()
-                        }
-                    }
-                }
-            })
+    private fun getCards(androidId: String) {
+        homeViewModel.getCards(androidId)
     }
 
-//    private fun coordinateMotion() {
-//        val listener = AppBarLayout.OnOffsetChangedListener { unused, verticalOffset ->
-//            val seekPosition = -verticalOffset / binding.appbarUser.totalScrollRange.toFloat()
-//            binding.motionlayoutUser.progress = seekPosition
-//        }
-//        binding.appbarUser.addOnOffsetChangedListener(listener)
-//    }
-
-    private fun getUUID(androidId: String) {
-        userViewModel.getUUID(androidId)
-    }
-
-    private fun setCardList(androidId: String) {
-        userViewModel.getCard(androidId)
-        binding.recyclerUserCardlist.apply {
+    private fun setCardList() {
+        binding.recyclerHomeCardlist.apply {
             layoutManager = gridLayoutManager
-            adapter = object : BaseRecyclerViewAdapter<CardData, RecyclerUserItemBinding>(
-                layoutRes = R.layout.recycler_user_item,
+            adapter = object : BaseRecyclerViewAdapter<CardData, RecyclerCardItemBinding>(
+                layoutRes = R.layout.recycler_card_item,
                 bindingId = BR.cardData
             ) {
                 override fun onCreateViewHolder(
                     parent: ViewGroup,
                     viewType: Int
-                ): BaseViewHolder<RecyclerUserItemBinding> {
+                ): BaseViewHolder<RecyclerCardItemBinding> {
                     return super.onCreateViewHolder(parent, viewType).apply {
+                        mParent = parent
                         itemView.setOnClickListener {
-                            singleItemClick(parent, it)
-                            textview_user_cardcontent.text = items[adapterPosition].content
-                            if (recordFlag == 0) startRecord(items[adapterPosition], it)
+                            homeViewModel.singleItemClick(parent, it)
+                            textview_home_cardcontent.text = items[adapterPosition].content
+                            tv_home_title.text = items[adapterPosition].title
+                            token = SharedPreferenceController.getUserToken(context)!!
+                            if (homeViewModel.recordFlag == 0) homeViewModel.startRecord(
+                                items[adapterPosition],
+                                items[adapterPosition].cardIdx,
+                                CountBody(androidId)
+                            )
                         }
                     }
                 }
@@ -149,70 +122,12 @@ class UserActivity : BaseActivity<ActivityUserBinding>(R.layout.activity_user) {
         }
     }
 
-    private fun singleItemClick(parent: ViewGroup, itemView: View) {
-        for (i in 0 until parent.childCount) {
-            parent.getChildAt(i).view_masking.isSelected = false
-        }
-        if (!itemView.view_masking.isSelected) {
-            itemView.view_masking.isSelected = true
-        } else if (itemView.view_masking.isSelected) {
-            itemView.view_masking.isSelected = true
+    private fun reorderClick() {
+        button_home_refresh.setOnClickListener {
+            for (i in 0 until mParent!!.childCount) {
+                mParent?.getChildAt(i)?.view_masking?.isSelected = false
+            }
+            homeViewModel.sort(homeViewModel.cardList.value)
         }
     }
-
-    private fun startRecord(item: CardData, view: View) {
-        if (item.record == null) {
-            (view.context as UserActivity).textToSpeech.speak(
-                item.content,
-                TextToSpeech.QUEUE_FLUSH,
-                null,
-                null
-            )
-            val speechListener = object : UtteranceProgressListener() {
-                override fun onDone(utteranceId: String?) {
-                    recordFlag = 0
-                }
-
-                override fun onError(utteranceId: String?) {
-                    Log.d("recordError  ", utteranceId.toString())
-                }
-
-                override fun onStart(utteranceId: String?) {
-                    recordFlag = -1
-                }
-            }
-            textToSpeech.setOnUtteranceProgressListener(speechListener)
-        } else {
-            Log.d("player  ", player.toString())
-            player.apply {
-                try {
-                    Log.d("item.record  ", item.record)
-                    reset() //매우 중요 초기화 되지 않은 처음 생태로 되돌리며 이후 재 초기화 하여 다시 사용 할 수 있다. release는 객체를 완전히 파괴하여 더 이상 사용할 수 없는 상태이다.
-                    setDataSource(item.record)
-                    prepareAsync()   //비동기
-                    setOnPreparedListener {
-                        it.start()
-                    }
-                    recordFlag = -1
-                } catch (e: IOException) {
-                    Log.d("playerError", e.message.toString())
-                }
-            }
-            player.setOnCompletionListener {
-                Log.d("playerError2", "SDSD")
-                recordFlag = 0
-            }
-        }
-    }
-
-    private fun initViewModel(androidId: String) {
-        Toast.makeText(this.applicationContext, androidId, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        player.release()
-        textToSpeech.stop()
-    }
-
 }
