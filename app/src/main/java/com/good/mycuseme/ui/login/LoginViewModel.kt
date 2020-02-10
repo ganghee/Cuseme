@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.good.mycuseme.base.BaseViewModel
-import com.good.mycuseme.data.login.LoginRepository
+import com.good.mycuseme.data.user.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
 
@@ -20,14 +20,14 @@ class LoginViewModel : BaseViewModel() {
     val wrongPassword = MutableLiveData<Boolean>().apply {
         value = false
     }
-    private val loginRepository by lazy { LoginRepository() }
+    private val loginRepository by lazy { UserRepository() }
 
     @SuppressLint("CheckResult")
     fun login(uuid: String, password: String) {
         loginRepository.postLogin(uuid, password)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                token.value = it.tokenData.token
+                token.value = it.tokenData?.token
                 loginSuccess.value = true
                 Log.d("LoginViewModel getToken", it.message)
             }, { error ->
@@ -38,6 +38,6 @@ class LoginViewModel : BaseViewModel() {
     }
 
     fun clickable(password: String) {
-        isClickable.value = password.length >= 4
+        isClickable.value = password.isNotEmpty()
     }
 }
