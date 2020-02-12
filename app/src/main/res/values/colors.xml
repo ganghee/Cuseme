@@ -166,7 +166,8 @@
     <color name="very_light_pink">#fedad9</color>
     <color name="white_four">#f7f7f7</color>
     <color name="greyish_brown_four">#5d413f</color>
-    <color name="white_five">#f8f8f8</color>
+    <color name="white_five">#B8B8B8</color>
     <color name="transparent">#0000</color>
+    <color name="background_color">#f1f3f5</color>
 
 </resources>
