@@ -1,9 +1,6 @@
 package com.good.mycuseme.data.remote
 
-import com.good.mycuseme.data.card.CardListResponse
-import com.good.mycuseme.data.card.CardResponse
-import com.good.mycuseme.data.card.CountBody
-import com.good.mycuseme.data.card.HideBody
+import com.good.mycuseme.data.card.*
 import com.good.mycuseme.data.start.StartResponse
 import com.good.mycuseme.data.user.UserResponse
 import io.reactivex.Single
@@ -98,5 +95,11 @@ interface NetworkService {
     fun addCount(
         @Path("cardIdx") cardIdx: Int,
         @Body uuid: CountBody
+    ): Single<CardResponse>
+
+    @PUT("/cards")
+    fun reorder(
+        @Header("token") token: String,
+        @Body updateArr: UpdateArrBody
     ): Single<CardResponse>
 }
