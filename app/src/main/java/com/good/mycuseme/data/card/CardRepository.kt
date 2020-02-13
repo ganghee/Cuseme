@@ -52,4 +52,6 @@ class CardRepository {
     fun addCount(cardIdx: Int, uuid: CountBody) =
         CardRemoteDataSource.addCount(cardIdx, uuid)
 
+    fun reorder(token: String, updateArrList: UpdateArrBody) =
+        CardRemoteDataSource.reorder(token, updateArrList)
 }
