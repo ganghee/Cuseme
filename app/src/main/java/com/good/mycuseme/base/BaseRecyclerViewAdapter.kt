@@ -12,8 +12,10 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
 ) : RecyclerView.Adapter<BaseViewHolder<B>>() {
 
     val items = mutableListOf<ITEM>()
+    val temp = mutableListOf<ITEM>()
 
     fun replaceAll(items: List<ITEM>?) {
+        temp.clear()
         if (items != null) {
             this.items.run {
                 clear()
@@ -21,6 +23,7 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         object : BaseViewHolder<B>(
             layoutRes = layoutRes,
@@ -37,13 +40,15 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     fun swapItems(fromPosition: Int, toPosition: Int) {
         if (fromPosition < toPosition) {
             for (i in fromPosition until toPosition) {
-                items[i + 1] = items[i]
+                temp.add(items[i])
                 items[i] = items[i + 1]
+                items[i + 1] = temp[0]
             }
         } else {
             for (i in fromPosition..toPosition + 1) {
+                temp.add(items[i - 1])
                 items[i - 1] = items[i]
-                items[i] = items[i - 1]
+                items[i] = temp[0]
             }
         }
         notifyItemMoved(fromPosition, toPosition)
