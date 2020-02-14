@@ -1,9 +1,6 @@
 package com.good.mycuseme.data.remote
 
-import com.good.mycuseme.data.card.CardListResponse
-import com.good.mycuseme.data.card.CardResponse
-import com.good.mycuseme.data.card.CountBody
-import com.good.mycuseme.data.card.HideBody
+import com.good.mycuseme.data.card.*
 import com.good.mycuseme.data.start.StartResponse
 import com.good.mycuseme.data.user.UserResponse
 import io.reactivex.Single
@@ -88,4 +85,9 @@ object CardRemoteDataSource {
     fun addCount(cardIdx: Int, uuid: CountBody): Single<CardResponse> =
         retrofit.addCount(cardIdx, uuid)
             .subscribeOn(Schedulers.io())
+
+    fun reorder(token: String, updateArrList: UpdateArrBody) =
+        retrofit.reorder(token, updateArrList)
+            .subscribeOn(Schedulers.io())
+
 }
