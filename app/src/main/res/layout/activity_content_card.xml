@@ -43,6 +43,15 @@
                 app:layout_constraintStart_toEndOf="@+id/iv_back"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/iv_content_hide"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_visibility_off_pink"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_content_update"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/iv_content_update"
@@ -89,15 +98,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/iv_content_visibility"-->
-                <!--                    android:layout_width="50dp"-->
-                <!--                    android:layout_height="32dp"-->
-                <!--                    android:layout_margin="12sp"-->
-                <!--                    android:src="@drawable/btn_content_visibility_selector"-->
-                <!--                    app:layout_constraintEnd_toEndOf="@id/iv_content"-->
-                <!--                    app:layout_constraintTop_toTopOf="@+id/iv_content" />-->
 
                 <TextView
                     android:id="@+id/tv_content_serial_number"
