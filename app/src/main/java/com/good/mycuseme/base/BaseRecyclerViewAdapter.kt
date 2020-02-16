@@ -4,6 +4,8 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.good.mycuseme.data.card.CardData
+import java.util.*
 
 abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     @LayoutRes
@@ -13,6 +15,7 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
 
     val items = mutableListOf<ITEM>()
     val temp = mutableListOf<ITEM>()
+    val searchItems = mutableListOf<ITEM>()
 
     fun replaceAll(items: List<ITEM>?) {
         temp.clear()
@@ -30,7 +33,6 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
             parent = parent,
             bindingId = bindingId
         ) {}
-
 
     override fun getItemCount(): Int = items.size
 
@@ -54,4 +56,21 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
         notifyItemMoved(fromPosition, toPosition)
     }
 
+    fun filter(charText: String?) {
+        searchItems.addAll(items)
+        items.clear()
+        var charText = charText
+        charText = charText?.toLowerCase(Locale.getDefault())
+        if (charText!!.isNotEmpty()) {
+            for (cardData in searchItems) {
+                cardData as CardData
+                if (cardData.title.toLowerCase(Locale.getDefault()).contains(charText)) {
+                    items.add(cardData)
+                }
+            }
+        } else {
+            items.addAll(searchItems)
+        }
+        notifyDataSetChanged()
+    }
 }
