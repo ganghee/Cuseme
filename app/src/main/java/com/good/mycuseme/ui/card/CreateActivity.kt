@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+import android.os.CountDownTimer
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -15,15 +15,17 @@ import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseActivity
 import com.good.mycuseme.data.local.SharedPreferenceController
 import com.good.mycuseme.databinding.ActivityCreateBinding
-import com.good.mycuseme.ui.manage.ManageCardActivity
 import kotlinx.android.synthetic.main.activity_create.*
 import kotlinx.android.synthetic.main.toolbar_card.*
 
 class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_create) {
-
     private val createViewModel by lazy { ViewModelProvider(this).get(CreateViewModel::class.java) }
     val token by lazy { SharedPreferenceController.getUserToken(this) }
     private var imageUri: Uri? = null
+    var second = 0.0
+    private val progressBarCounter by lazy { ProgressBarCounter(100000, 10) }
+    private val secondCounter = SecondCounter(10000, 95)
+    var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,16 +34,16 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
         checkPermission(this, this)
         bringImage()
         startRecord()
-        stopRecord()
+        pressStopRecordButton()
         saveRecord()
         isTextToSpeak()
         pressAddCardButton()
         backButton()
     }
 
-    private fun backButton() {
-        iv_back.setOnClickListener {
-            finish()
+    private fun pressStopRecordButton() {
+        iv_create_stop.setOnClickListener {
+            stopRecord()
         }
     }
 
@@ -57,7 +59,13 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
             imageUri = data?.data!!
-            iv_create_card.setImageURI(imageUri)
+            //val parseUri = Uri.parse(intent.getStringExtra(data.toString()))
+            createViewModel.apply {
+                setRotateImage(imageUri!!, contentResolver)
+                rotateImage.observe(this@CreateActivity, Observer {
+                    binding.ivCreateCard.setImageBitmap(it)
+                })
+            }
             iv_create_card.setBackgroundResource(R.drawable.round_all_transparent)
             ll_create_default_picture.visibility = View.INVISIBLE
         }
@@ -67,12 +75,10 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
         createViewModel.apply {
             isSuccess.observe(this@CreateActivity, Observer {
                 if (it) {
-                    val intent = Intent(this@CreateActivity, ManageCardActivity::class.java)
-                    startActivity(intent)
                     finish()
                 }
             })
-            btn_user.setOnClickListener {
+            sv_card.setOnClickListener {
                 when {
                     imageUri.toString() == "null" -> {
                         iv_create_card.setBackgroundResource(R.drawable.round_all_border_pink_transparent_4)
@@ -96,7 +102,6 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
                             .show()
                     }
                     else -> {
-                        Log.d("contentResolver", contentResolver.toString())
                         createCard(token!!, imageUri!!, contentResolver)
                     }
                 }
@@ -133,18 +138,34 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
     }
 
     private fun stopRecord() {
+        progressBarCounter.cancel()
+        secondCounter.cancel()
+        second = 0.0
+        progressbar.progress = 0
         createViewModel.apply {
-            iv_create_stop.setOnClickListener {
-                if (isRecording.value!!) {
-                    stopRecord()
-                    iv_create_save_record.isSelected = true
-                    iv_create_start.isSelected = false
-                } else {
-                    startPlay()
-                }
+            if (isRecording.value!!) {
+                progressbar.setBackgroundResource(R.drawable.timer_gray)
+                stopRecord()
+                iv_create_save_record.isSelected = true
+                progressbar.max = count
+            } else {
+                startPlay()
+                progressBarCounter.start()
             }
             isPlayingRecord.observe(this@CreateActivity, Observer {
-                iv_create_stop.isSelected = !it
+                if (it) {
+                    iv_create_stop.isSelected = false
+                    cv_create_record.visibility = View.GONE
+                    progressbar.visibility = View.VISIBLE
+                    tv_create_timer.visibility = View.VISIBLE
+                } else {
+                    iv_create_stop.isSelected = true
+                    cv_create_record.visibility = View.VISIBLE
+                    progressbar.visibility = View.GONE
+                    tv_create_timer.visibility = View.GONE
+                    progressBarCounter.cancel()
+                    secondCounter.cancel()
+                }
             })
         }
     }
@@ -160,19 +181,53 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
         setRecordFileName()
         tv_create_save_record.visibility = View.INVISIBLE
         cv_create_record.setOnClickListener {
+            progressbar.progress = 0
+            progressbar.max = 10000
+            second = 0.0
+            progressBarCounter.start()
+            secondCounter.start()
             createViewModel.apply {
-                iv_create_stop.setImageResource(R.drawable.btn_recording_selector)
+                iv_create_stop.setImageResource(R.drawable.selector_btn_recording)
                 iv_create_start.isSelected = true
+                cv_create_record.visibility = View.GONE
+                progressbar.visibility = View.VISIBLE
+                tv_create_timer.visibility = View.VISIBLE
                 startRecord()
             }
         }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this@CreateActivity, ManageCardActivity::class.java)
-        startActivity(intent)
-        finish()
+    private fun backButton() {
+        iv_back.setOnClickListener {
+            finish()
+        }
+    }
+
+    inner class ProgressBarCounter(millisInFuture: Long, countDownInterval: Long) :
+        CountDownTimer(millisInFuture, countDownInterval) {
+        override fun onFinish() {
+            stopRecord()
+            cancel()
+        }
+
+        override fun onTick(millisUntilFinished: Long) {
+            progressbar.progress += 17
+            count = progressbar.progress
+        }
+    }
+
+    inner class SecondCounter(millisInFuture: Long, countDownInterval: Long) :
+        CountDownTimer(millisInFuture, countDownInterval) {
+        override fun onFinish() {
+            stopRecord()
+            cancel()
+        }
+
+        override fun onTick(millisUntilFinished: Long) {
+            second += 0.1
+            val sec = String.format("%.1f", second)
+            tv_create_timer.text = "$sec 초"
+        }
     }
 
     companion object {
