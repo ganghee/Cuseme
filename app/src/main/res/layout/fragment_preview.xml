@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".ui.manage.PreviewRearrayFragment">
+        tools:context=".ui.manage.PreviewReorderFragment">
 
         <include layout="@layout/toolbar_manager_preview" />
 
@@ -26,6 +26,7 @@
             android:background="@color/white"
             android:paddingTop="8dp"
             app:tabIndicatorFullWidth="false"
+            app:tabMode="scrollable"
             app:tabSelectedTextColor="@color/mainpink"
             app:tabTextAppearance="@style/tab_text"
             app:tabTextColor="@color/greyish_two" />
@@ -34,6 +35,5 @@
             android:id="@+id/vp_preview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
     </LinearLayout>
 </layout>
