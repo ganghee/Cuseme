@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="hiddenCardViewModel"
             type="com.good.mycuseme.ui.card.HiddenCardViewModel" />
@@ -33,18 +35,33 @@
             android:text="@string/save"
             android:textColor="@color/white"
             android:textSize="16sp"
-            app:layout_constraintBottom_toTopOf="@+id/rv_hiddin"
+            app:layout_constraintBottom_toBottomOf="@+id/include3"
             app:layout_constraintEnd_toEndOf="@+id/include3"
             app:layout_constraintTop_toTopOf="@+id/include3" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_hiddin"
-            replaceAll="@{hiddenCardViewModel.cardList}"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/srl_hide"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:padding="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/include3" />
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/include3">
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_hidden"
+                replaceAll="@{hiddenCardViewModel.cardList}"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:padding="20dp" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+        <ProgressBar
+            android:id="@+id/pb_order"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{hiddenCardViewModel.getSuccessCards? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
