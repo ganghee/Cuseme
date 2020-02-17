@@ -9,7 +9,6 @@ import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseActivity
 import com.good.mycuseme.data.local.SharedPreferenceController
 import com.good.mycuseme.databinding.ActivityDownloadBinding
-import com.good.mycuseme.ui.manage.ManageCardActivity
 import kotlinx.android.synthetic.main.activity_download.*
 import kotlinx.android.synthetic.main.toolbar_card.*
 
@@ -21,18 +20,15 @@ class DownloadActivity : BaseActivity<ActivityDownloadBinding>(R.layout.activity
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.downloadViewModel = downloadViewModel
-
-        initButton()
-        downloadCard(token!!)
-        startCreateActivity()
-        backButton()
+        initDownLoadButton()
+        clickButton()
     }
 
-    private fun backButton() {
+    private fun clickButton() {
+        btn_download.setOnClickListener {
+            downloadViewModel.downloadCard(token!!, downloadViewModel.serialNumber.value!!)
+        }
         iv_back.setOnClickListener { finish() }
-    }
-
-    private fun startCreateActivity() {
         tv_download_create.setOnClickListener {
             val intent = Intent(this, CreateActivity::class.java)
             startActivity(intent)
@@ -40,13 +36,7 @@ class DownloadActivity : BaseActivity<ActivityDownloadBinding>(R.layout.activity
         }
     }
 
-    private fun downloadCard(token: String) {
-        btn_download.setOnClickListener {
-            downloadViewModel.downloadCard(token, downloadViewModel.serialNumber.value!!)
-        }
-    }
-
-    private fun initButton() {
+    private fun initDownLoadButton() {
         downloadViewModel.apply {
             serialNumber.observe(this@DownloadActivity, Observer {
                 clickable(it)
@@ -59,12 +49,5 @@ class DownloadActivity : BaseActivity<ActivityDownloadBinding>(R.layout.activity
                 if (it) finish()
             })
         }
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this, ManageCardActivity::class.java)
-        startActivity(intent)
-        finish()
     }
 }
