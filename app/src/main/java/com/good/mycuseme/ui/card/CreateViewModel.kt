@@ -4,11 +4,15 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -31,23 +35,17 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class CreateViewModel : BaseViewModel() {
-    private val isStartRecord = MutableLiveData<Boolean>().apply {
-        value = false
-    }
     val isAutoSpeak = MutableLiveData<Boolean>().apply {
         value = false
     }
     val isSaveRecord = MutableLiveData<Boolean>().apply {
         value = false
     }
-    val isRecordClickable = MutableLiveData<Boolean>().apply {
+    val isSaveRecordClickable = MutableLiveData<Boolean>().apply {
         value = false
     }
     val isStopClickable = MutableLiveData<Boolean>().apply {
         value = false
-    }
-    val isStartClickable = MutableLiveData<Boolean>().apply {
-        value = true
     }
     val isRecording = MutableLiveData<Boolean>().apply {
         value = false
@@ -62,13 +60,11 @@ class CreateViewModel : BaseViewModel() {
     private lateinit var recordFileName: String
     private var recorder: MediaRecorder? = null
     private var player: MediaPlayer? = null
-    val title = MutableLiveData<String>().apply {
-        value = "title"
-    }
-    val content = MutableLiveData<String>().apply {
-        value = "content"
-    }
+    val title = MutableLiveData<String>()
+    val content = MutableLiveData<String>()
     private val repository by lazy { CardRepository() }
+    private val recordTotalTime = MutableLiveData<Int>()
+    var rotateImage = MutableLiveData<Bitmap>()
 
     @SuppressLint("SimpleDateFormat")
     fun setFlieName(cacheDir: String) {
@@ -77,10 +73,9 @@ class CreateViewModel : BaseViewModel() {
     }
 
     fun startRecord() {
-        isStartRecord.value = true
+        speakFileNull()
         isStopClickable.value = true
-        isRecordClickable.value = false
-        isStartClickable.value = false
+        isSaveRecordClickable.value = false
         isPlayingRecord.value = true
         recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -103,13 +98,18 @@ class CreateViewModel : BaseViewModel() {
             try {
                 setDataSource(recordFileName)
                 prepare()
-                start()
+                setOnPreparedListener {
+                    recordTotalTime.value = duration
+                    it.start()
+                }
+                isStopClickable.value = false
                 isPlayingRecord.value = true
             } catch (e: IOException) {
                 Log.e("startPlay", "prepare() failed")
             }
             setOnCompletionListener {
                 isPlayingRecord.value = false
+                isStopClickable.value = true
             }
         }
 
@@ -120,8 +120,7 @@ class CreateViewModel : BaseViewModel() {
             stop()
             release()
             isPlayingRecord.value = false
-            isRecordClickable.value = true
-            isStartClickable.value = true
+            isSaveRecordClickable.value = true
             isRecording.value = false
             recorder = null
         }
@@ -167,20 +166,23 @@ class CreateViewModel : BaseViewModel() {
     fun clickAutoSpeak(view: View) {
         Log.d("view.select12", view.isSelected.toString())
         if (!view.isSelected) {
-            recorder?.apply {
-                stop()
-                release()
-            }
-            player?.apply {
-                stop()
-                release()
-            }
-            recorder = null
-            player = null
+            speakFileNull()
         }
         view.isSelected = !view.isSelected
         isAutoSpeak.value = view.isSelected
-        Log.d("view.select", isAutoSpeak.value.toString())
+    }
+
+    private fun speakFileNull() {
+        recorder?.apply {
+            stop()
+            release()
+        }
+        player?.apply {
+            stop()
+            release()
+        }
+        recorder = null
+        player = null
     }
 
     @SuppressLint("CheckResult")
@@ -224,5 +226,62 @@ class CreateViewModel : BaseViewModel() {
                 error as HttpException
                 Log.d("CreateViewModel err", error.message())
             })
+    }
+
+    fun setRotateImage(imageUri: Uri, contentResolver: ContentResolver) {
+        try {
+            val imagePath = absolutelyPath(imageUri, contentResolver)
+            val image = BitmapFactory.decodeFile(imagePath)
+            val exif = ExifInterface(imagePath)
+            val exifOrientation = exif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL
+            )
+            val exifDegree = exifOrientationToDegrees(exifOrientation)
+            rotateImage.value = rotate(image, exifDegree)
+        } catch (e: Exception) {
+            Log.d("image err", e.localizedMessage!!)
+        }
+    }
+
+    private fun rotate(getBitmap: Bitmap, degrees: Int): Bitmap {
+        var bitmap = getBitmap
+        if (degrees != 0) {
+            val m = Matrix()
+            m.setRotate(
+                degrees.toFloat(), bitmap.width.toFloat() / 2,
+                bitmap.height.toFloat() / 2
+            )
+            try {
+                val converted = Bitmap.createBitmap(
+                    bitmap, 0, 0,
+                    bitmap.width, bitmap.height, m, true
+                )
+                if (bitmap != converted) {
+                    bitmap.recycle()
+                    bitmap = converted
+                }
+            } catch (ex: OutOfMemoryError) { // 메모리가 부족하여 회전을 시키지 못할 경우 그냥 원본을 반환합니다.
+            }
+        }
+        return bitmap
+    }
+
+    @SuppressLint("Recycle")
+    fun absolutelyPath(path: Uri, contentResolver: ContentResolver): String {
+        val proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
+        val c: Cursor = contentResolver.query(path, proj, null, null, null)!!
+        val index = c.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        c.moveToFirst()
+
+        return c.getString(index)
+    }
+
+    private fun exifOrientationToDegrees(exifOrientation: Int): Int {
+        return when (exifOrientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> 90
+            ExifInterface.ORIENTATION_ROTATE_180 -> 180
+            ExifInterface.ORIENTATION_ROTATE_270 -> 270
+            else -> 0
+        }
     }
 }
