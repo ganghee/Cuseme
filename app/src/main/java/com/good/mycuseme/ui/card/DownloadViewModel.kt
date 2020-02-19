@@ -31,6 +31,7 @@ class DownloadViewModel : BaseViewModel() {
             }, { error ->
                 error as HttpException
                 if (error.message == "존재하지 않는 카드 입니다.") wrongDownload.value = true
+                Log.d("download err", error.message)
             })
     }
 

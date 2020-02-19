@@ -59,11 +59,10 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
             imageUri = data?.data!!
-            //val parseUri = Uri.parse(intent.getStringExtra(data.toString()))
             createViewModel.apply {
                 setRotateImage(imageUri!!, contentResolver)
-                rotateImage.observe(this@CreateActivity, Observer {
-                    binding.ivCreateCard.setImageBitmap(it)
+                uriRotateImage.observe(this@CreateActivity, Observer {
+                    binding.ivCreateCard.setImageURI(it)
                 })
             }
             iv_create_card.setBackgroundResource(R.drawable.round_all_transparent)
@@ -102,7 +101,7 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
                             .show()
                     }
                     else -> {
-                        createCard(token!!, imageUri!!, contentResolver)
+                        createCard(token!!, uriRotateImage.value!!, contentResolver)
                     }
                 }
             }

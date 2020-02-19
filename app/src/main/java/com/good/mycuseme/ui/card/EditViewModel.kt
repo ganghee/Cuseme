@@ -60,12 +60,13 @@ class EditViewModel : BaseViewModel() {
     var recordFileName: String? = null
     private var recorder: MediaRecorder? = null
     private var player: MediaPlayer? = null
-    private var cardIdx: Int? = null
+    var cardIdx: Int? = null
     val title = MutableLiveData<String>()
     val content = MutableLiveData<String>()
     val imageServer = MutableLiveData<String>()
     val recordServer = MutableLiveData<Boolean>()
     private val repository by lazy { CardRepository() }
+    var updateCardIdx: Int? = null
 
     @SuppressLint("CheckResult")
     fun initData(token: String?, cardIndex: Int?) {
@@ -259,11 +260,12 @@ class EditViewModel : BaseViewModel() {
         repository.putUpdateCard(token, cardIdx!!, photo, record, title, content, visibility)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+                updateCardIdx = it.cardData?.cardIdx
                 isSuccess.value = true
                 Log.d("EditViewModel", it.message)
             }, { error ->
                 error as FileNotFoundException
-                Log.d("EditViewModel err", error.printStackTrace().toString())
+                Log.d("EditViewModel err", error.message)
             })
     }
 }

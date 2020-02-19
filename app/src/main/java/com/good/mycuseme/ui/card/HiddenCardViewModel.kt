@@ -17,9 +17,12 @@ import retrofit2.HttpException
 class HiddenCardViewModel : BaseViewModel() {
     private val repository: CardRepository by lazy { CardRepository() }
     var cardList = MutableLiveData<List<CardData>>()
-    val updateCardList =
+    private val updateCardList =
         mutableListOf<UpdateArr>() //list는 MutableLiveData를 사용하지 못한다. 즉, observer 불가
     val isSaveClickable = MutableLiveData<Boolean>()
+    val getSuccessCards = MutableLiveData<Boolean>().apply {
+        value = false
+    }
 
     fun hiddenCards(token: String) =
         repository.getAllCard(token)
@@ -27,6 +30,7 @@ class HiddenCardViewModel : BaseViewModel() {
             .subscribe({
                 cardList.value = it.data.sortedBy { it.sequence }.filter { !it.visible }
                 Log.d("hiddenviewmodel getcard", it.message)
+                getSuccessCards.value = true
             }, { error ->
                 error as HttpException
                 Log.d("getcards error", error.message!!)
