@@ -64,7 +64,7 @@ class CreateViewModel : BaseViewModel() {
     val content = MutableLiveData<String>()
     private val repository by lazy { CardRepository() }
     private val recordTotalTime = MutableLiveData<Int>()
-    var rotateImage = MutableLiveData<Bitmap>()
+    var uriRotateImage = MutableLiveData<Uri>()
 
     @SuppressLint("SimpleDateFormat")
     fun setFlieName(cacheDir: String) {
@@ -237,13 +237,13 @@ class CreateViewModel : BaseViewModel() {
                 ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL
             )
             val exifDegree = exifOrientationToDegrees(exifOrientation)
-            rotateImage.value = rotate(image, exifDegree)
+            uriRotateImage.value = rotate(image, exifDegree, contentResolver)
         } catch (e: Exception) {
             Log.d("image err", e.localizedMessage!!)
         }
     }
 
-    private fun rotate(getBitmap: Bitmap, degrees: Int): Bitmap {
+    private fun rotate(getBitmap: Bitmap, degrees: Int, contentResolver: ContentResolver): Uri {
         var bitmap = getBitmap
         if (degrees != 0) {
             val m = Matrix()
@@ -263,7 +263,11 @@ class CreateViewModel : BaseViewModel() {
             } catch (ex: OutOfMemoryError) { // 메모리가 부족하여 회전을 시키지 못할 경우 그냥 원본을 반환합니다.
             }
         }
-        return bitmap
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path: String =
+            MediaStore.Images.Media.insertImage(contentResolver, bitmap, "Title", null)
+        return Uri.parse(path)
     }
 
     @SuppressLint("Recycle")
@@ -284,4 +288,5 @@ class CreateViewModel : BaseViewModel() {
             else -> 0
         }
     }
+
 }
