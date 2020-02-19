@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -26,7 +25,6 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding.editViewModel = editViewModel
 
         initData()
         initRecordButton()
@@ -39,28 +37,19 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
         pressAddCardButton()
     }
 
-    private fun initRecordButton() {
-        editViewModel.recordServer.observe(this@EditActivity, Observer {
-            if (it) {
-                iv_update_stop.setImageResource(R.drawable.btn_recording_selector)
-                iv_update_save_record.isSelected = true
-                iv_update_start.isSelected = false
-            }
-        })
-    }
-
     private fun initData() {
+        binding.editViewModel = editViewModel
         iv_back.setOnClickListener { finish() }
-        btn_user.text = "수정"
+        sv_card.text = "수정"
 
         editViewModel.apply {
             val cardIdx = intent.getIntExtra("cardIdx", -1)
             initData(token, cardIdx)
             title.observe(this@EditActivity, Observer {
-                et_update_card_title.hint = "카드 이름: $it"
+                et_update_card_title.hint = it
             })
             content.observe(this@EditActivity, Observer {
-                et_update_card_content.hint = "카드 내용: $it"
+                et_update_card_content.hint = it
             })
             imageServer.observe(this@EditActivity, Observer {
                 Glide.with(this@EditActivity)
@@ -69,6 +58,16 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
                 imageUri = Uri.parse(it)
             })
         }
+    }
+
+    private fun initRecordButton() {
+        editViewModel.recordServer.observe(this@EditActivity, Observer {
+            if (it) {
+                iv_update_stop.setImageResource(R.drawable.selector_btn_recording)
+                iv_update_save_record.isSelected = true
+                iv_update_start.isSelected = false
+            }
+        })
     }
 
     private fun bringImage() {
@@ -85,7 +84,6 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
             //선택한 이미지 uri로 가져오기 핸드폰 로컬 절대 경로가 나온다.
             //예: content://media/external/images/media/338
             imageUri = data?.data!!
-            Log.d("imageUri@@", imageUri.toString())
             Glide.with(this@EditActivity)
                 .load(imageUri)
                 .into(iv_update_card)
@@ -105,8 +103,7 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
                     Toast.makeText(this@EditActivity, "수정되었습니다.", Toast.LENGTH_SHORT).show()
                 }
             })
-            btn_user.setOnClickListener {
-                Log.d("edit@@", imageUri.toString() + "   " + title.value + "   " + content.value)
+            sv_card.setOnClickListener {
                 when {
                     imageUri.toString() == "null" -> {
                         iv_update_card.setBackgroundResource(R.drawable.round_all_border_pink_transparent_4)
@@ -170,7 +167,6 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
     private fun stopRecord() {
         editViewModel.apply {
             iv_update_stop.setOnClickListener {
-                Log.d("isRecording", isRecording.value.toString())
                 if (isRecording.value!!) {
                     stopRecord()
                     iv_update_save_record.isSelected = true
@@ -190,7 +186,7 @@ class EditActivity : BaseActivity<ActivityEditBinding>(R.layout.activity_edit) {
         cv_update_record.setOnClickListener {
             editViewModel.apply {
                 setFlieName(externalCacheDir!!.absolutePath)
-                iv_update_stop.setImageResource(R.drawable.btn_recording_selector)
+                iv_update_stop.setImageResource(R.drawable.selector_btn_recording)
                 iv_update_start.isSelected = true
                 startRecord()
             }
