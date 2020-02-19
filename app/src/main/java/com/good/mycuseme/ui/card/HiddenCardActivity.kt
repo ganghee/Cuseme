@@ -1,6 +1,7 @@
 package com.good.mycuseme.ui.card
 
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -37,6 +38,19 @@ class HiddenCardActivity : BaseActivity<ActivityHiddenCardBinding>(R.layout.acti
     override fun onStart() {
         super.onStart()
         getHiddenCards()
+        emptyCheck()
+    }
+
+    private fun emptyCheck() {
+        hiddenCardViewModel.cardList.observe(this, Observer {
+            if (it.isNullOrEmpty()) {
+                iv_hidden_empty.visibility = View.VISIBLE
+                tv_hidden_empty.visibility = View.VISIBLE
+            } else {
+                iv_hidden_empty.visibility = View.GONE
+                tv_hidden_empty.visibility = View.GONE
+            }
+        })
     }
 
     private fun initData() {
@@ -63,7 +77,7 @@ class HiddenCardActivity : BaseActivity<ActivityHiddenCardBinding>(R.layout.acti
                     viewType: Int
                 ): BaseViewHolder<RecyclerCardItemBinding> {
                     return super.onCreateViewHolder(parent, viewType).apply {
-                        itemView.iv_visibility.setOnClickListener {
+                        itemView.card_view_card_container.setOnClickListener {
                             hiddenCardViewModel.changeUpdateList(parent, items[position], position)
                         }
                     }
