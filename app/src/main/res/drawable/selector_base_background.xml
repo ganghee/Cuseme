@@ -6,7 +6,7 @@
             <solid android:color="@color/mainpink" />
         </shape>
     </item>
-    <item>
+    <item android:state_selected="false">
         <shape>
             <corners android:radius="100dp" />
             <solid android:color="@color/pinkish_grey_50" />

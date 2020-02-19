@@ -32,7 +32,6 @@ class PasswordViewModel : BaseViewModel() {
         }
     }
 
-
     @SuppressLint("CheckResult")
     fun changePassword(token: String, password: String, newPassword: String) {
         repository.changePassword(token, password, newPassword)

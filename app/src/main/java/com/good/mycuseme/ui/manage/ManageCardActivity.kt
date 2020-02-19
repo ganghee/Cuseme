@@ -2,15 +2,13 @@ package com.good.mycuseme.ui.manage
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseActivity
-import com.good.mycuseme.data.local.SharedPreferenceController
 import com.good.mycuseme.databinding.ActivityManageBinding
 import com.good.mycuseme.ui.card.CreateActivity
-import com.good.mycuseme.ui.card.DownloadActivity
+import com.good.mycuseme.ui.card.HiddenCardActivity
 import kotlinx.android.synthetic.main.activity_manage.*
 
 class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity_manage) {
@@ -26,32 +24,27 @@ class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity
         super.onCreate(savedInstanceState)
         binding.manageViewModel = manageCardViewModel
 
-        iv_bottom_preview.isSelected = true
-        tv_preview.resources.getColor(R.color.mainpink)
-
         callFragment(1)
-        setClickListener()
-        startCreateActivity()
-        startDownloadActivity()
+        changeBottomFragment()
+        startCreateCardActivity()
+        startHiddenCardActivity()
     }
 
-    private fun startDownloadActivity() {
-        ll_manage_down_load.setOnClickListener {
-            val intent = Intent(this, DownloadActivity::class.java)
+    private fun startHiddenCardActivity() {
+        ll_manage_hidden.setOnClickListener {
+            val intent = Intent(this, HiddenCardActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 
-    private fun startCreateActivity() {
+    private fun startCreateCardActivity() {
         ll_manage_new_card.setOnClickListener {
             val intent = Intent(this, CreateActivity::class.java)
             startActivity(intent)
-            finish()
         }
     }
 
-    private fun setClickListener() {
+    private fun changeBottomFragment() {
         ll_bottom_preview.setOnClickListener {
             callFragment(1)
         }

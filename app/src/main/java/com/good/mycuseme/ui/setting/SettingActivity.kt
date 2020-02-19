@@ -13,7 +13,7 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setUserInfo()
+        setUserInfoActivity()
         backButton()
     }
 
@@ -21,7 +21,8 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(R.layout.activity_s
         iv_back.setOnClickListener { finish() }
     }
 
-    private fun setUserInfo() {
+    private fun setUserInfoActivity() {
+        tv_tabbar_title.text = "설정"
         ll_change_pw.setOnClickListener {
             val intent = Intent(this, PasswordActivity::class.java)
             startActivity(intent)

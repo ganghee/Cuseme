@@ -18,6 +18,14 @@
         app:layoutDescription="@xml/activity_manage_xml_constraintlayout_scene"
         tools:context=".ui.manage.ManageCardActivity">
 
+        <View
+            android:id="@+id/view_manage_opaque"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#CDFFFFFF"
+            android:elevation="1dp"
+            android:visibility="visible" />
+
         <FrameLayout
             android:id="@+id/fl_manage"
             android:layout_width="match_parent"
@@ -42,7 +50,11 @@
             android:id="@+id/ll_manage_new_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@drawable/custom_ripple_effect_blue"
+            android:elevation="1dp"
+            android:orientation="horizontal"
+            android:paddingVertical="4dp"
+            android:paddingEnd="12dp">
 
             <ImageView
                 android:id="@+id/iv_manage_newcard"
@@ -63,25 +75,29 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_manage_down_load"
+            android:id="@+id/ll_manage_hidden"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:background="@drawable/custom_ripple_effect_blue"
+            android:elevation="1dp"
+            android:orientation="horizontal"
+            android:paddingVertical="4dp"
+            android:paddingEnd="12dp">
 
             <ImageView
-                android:id="@+id/iv_manage_download"
+                android:id="@+id/iv_manage_hidden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/btn_home_download" />
 
             <TextView
-                android:id="@+id/tv_manage_download"
+                android:id="@+id/tv_manage_hidden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="12dp"
-                android:text="@string/text_manage_download"
+                android:text="@string/hide_card"
                 android:textColor="@color/mainpink"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -91,6 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:background="@drawable/border_top"
+            android:paddingHorizontal="12dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -108,7 +125,7 @@
                     android:id="@+id/iv_bottom_preview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/btn_tabbar_home_selector" />
+                    android:src="@drawable/selector_btn_tabbar_home" />
 
                 <TextView
                     android:id="@+id/tv_preview"
@@ -131,7 +148,7 @@
                     android:id="@+id/iv_bottom_search"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/btn_tabbar_cardcare_selector" />
+                    android:src="@drawable/selector_btn_tabbar_cardcare" />
 
                 <TextView
                     android:id="@+id/tv_search"
@@ -140,11 +157,6 @@
                     android:text="@string/text_card_search"
                     android:textColor="@drawable/text_color_selector" />
             </LinearLayout>
-
-            <include
-                android:id="@+id/tabbar_manage_bottom"
-                layout="@layout/tabbar_bottom"
-                android:visibility="gone" />
         </LinearLayout>
 
     </androidx.constraintlayout.motion.widget.MotionLayout>

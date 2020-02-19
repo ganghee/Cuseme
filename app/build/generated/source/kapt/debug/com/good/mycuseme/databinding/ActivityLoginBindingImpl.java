@@ -15,8 +15,8 @@ public class ActivityLoginBindingImpl extends ActivityLoginBinding  {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
         sViewsWithIds.put(R.id.include, 3);
-        sViewsWithIds.put(R.id.tv_main_text, 4);
-        sViewsWithIds.put(R.id.tv_wrong_text, 5);
+        sViewsWithIds.put(R.id.tv_login_text, 4);
+        sViewsWithIds.put(R.id.tv_login_wrong_text, 5);
     }
     // views
     @NonNull

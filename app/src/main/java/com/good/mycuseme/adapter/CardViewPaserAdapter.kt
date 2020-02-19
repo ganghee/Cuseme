@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.good.mycuseme.ui.manage.PreviewArrayFragment
-import com.good.mycuseme.ui.manage.PreviewRearrayFragment
+import com.good.mycuseme.ui.manage.PreviewReorderFragment
 
 
 class CategoryViewPagerAdapter(fm: FragmentManager) :
@@ -19,9 +19,8 @@ class CategoryViewPagerAdapter(fm: FragmentManager) :
 
     override fun getItem(position: Int): Fragment {
         Log.d("position", position.toString())
-        return if(position == 0) PreviewRearrayFragment()
+        return if (position == 0) PreviewReorderFragment()
         else PreviewArrayFragment.newInstance(cardList[position])
-
     }
 
     override fun getCount(): Int = cardList.size

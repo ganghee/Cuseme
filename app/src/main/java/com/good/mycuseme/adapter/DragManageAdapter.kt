@@ -7,12 +7,12 @@ import com.good.mycuseme.data.card.CardData
 import com.good.mycuseme.data.card.UpdateArr
 import com.good.mycuseme.data.card.UpdateArrBody
 import com.good.mycuseme.databinding.RecyclerCardItemBinding
-import com.good.mycuseme.ui.manage.PreviewRearrayViewModel
+import com.good.mycuseme.ui.manage.PreviewReorderViewModel
 import kotlinx.android.synthetic.main.recycler_reorder_item.view.*
 
 class DragManageAdapter(
     adapter: BaseRecyclerViewAdapter<CardData, RecyclerCardItemBinding>,
-    private val viewmodel: PreviewRearrayViewModel,
+    private val viewmodel: PreviewReorderViewModel,
     private val token: String,
     dragDirs: Int,
     swipeDirs: Int

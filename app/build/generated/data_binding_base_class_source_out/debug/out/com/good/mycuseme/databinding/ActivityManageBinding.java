@@ -10,15 +10,26 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import com.good.mycuseme.R;
 import com.good.mycuseme.ui.manage.ManageCardViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class ActivityManageBinding extends ViewDataBinding {
+  @NonNull
+  public final MotionLayout constraintLayout;
+
+  @NonNull
+  public final LinearLayout cvBottomBar;
+
+  @NonNull
+  public final FloatingActionButton fbManageAddCard;
+
   @NonNull
   public final FrameLayout flManage;
 
@@ -29,10 +40,28 @@ public abstract class ActivityManageBinding extends ViewDataBinding {
   public final ImageView ivBottomSearch;
 
   @NonNull
+  public final ImageView ivManageHidden;
+
+  @NonNull
+  public final ImageView ivManageNewcard;
+
+  @NonNull
   public final LinearLayout llBottomPreview;
 
   @NonNull
   public final LinearLayout llBottomSearch;
+
+  @NonNull
+  public final LinearLayout llManageHidden;
+
+  @NonNull
+  public final LinearLayout llManageNewCard;
+
+  @NonNull
+  public final TextView tvManageHidden;
+
+  @NonNull
+  public final TextView tvManageNewcard;
 
   @NonNull
   public final TextView tvPreview;
@@ -40,21 +69,37 @@ public abstract class ActivityManageBinding extends ViewDataBinding {
   @NonNull
   public final TextView tvSearch;
 
+  @NonNull
+  public final View viewManageOpaque;
+
   @Bindable
   protected ManageCardViewModel mManageViewModel;
 
   protected ActivityManageBinding(Object _bindingComponent, View _root, int _localFieldCount,
+      MotionLayout constraintLayout, LinearLayout cvBottomBar, FloatingActionButton fbManageAddCard,
       FrameLayout flManage, ImageView ivBottomPreview, ImageView ivBottomSearch,
-      LinearLayout llBottomPreview, LinearLayout llBottomSearch, TextView tvPreview,
-      TextView tvSearch) {
+      ImageView ivManageHidden, ImageView ivManageNewcard, LinearLayout llBottomPreview,
+      LinearLayout llBottomSearch, LinearLayout llManageHidden, LinearLayout llManageNewCard,
+      TextView tvManageHidden, TextView tvManageNewcard, TextView tvPreview, TextView tvSearch,
+      View viewManageOpaque) {
     super(_bindingComponent, _root, _localFieldCount);
+    this.constraintLayout = constraintLayout;
+    this.cvBottomBar = cvBottomBar;
+    this.fbManageAddCard = fbManageAddCard;
     this.flManage = flManage;
     this.ivBottomPreview = ivBottomPreview;
     this.ivBottomSearch = ivBottomSearch;
+    this.ivManageHidden = ivManageHidden;
+    this.ivManageNewcard = ivManageNewcard;
     this.llBottomPreview = llBottomPreview;
     this.llBottomSearch = llBottomSearch;
+    this.llManageHidden = llManageHidden;
+    this.llManageNewCard = llManageNewCard;
+    this.tvManageHidden = tvManageHidden;
+    this.tvManageNewcard = tvManageNewcard;
     this.tvPreview = tvPreview;
     this.tvSearch = tvSearch;
+    this.viewManageOpaque = viewManageOpaque;
   }
 
   public abstract void setManageViewModel(@Nullable ManageCardViewModel manageViewModel);

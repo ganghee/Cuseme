@@ -1,30 +1,98 @@
 [
     {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_edit.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_edit.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_reorder_preview.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/fragment_reorder_preview.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_create.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_create.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/test2.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/test2.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/recycler_hidden_item.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_hidden_item.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_array_preview.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/fragment_array_preview.xml"
+    },
+    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_preview.xml",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/fragment_preview.xml"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_manage.xml",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_manage.xml"
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/recycler_search_item.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_search_item.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/test.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/test.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_phone_number.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_phone_number.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/recycler_card_item.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_card_item.xml"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_search.xml",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/fragment_search.xml"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/recycler_user_item.xml",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_user_item.xml"
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/recycler_reorder_item.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_reorder_item.xml"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_search_list.xml",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/fragment_search_list.xml"
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_home_end.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_home_end.xml"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_user.xml",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_user.xml"
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_download.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_download.xml"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_login.xml",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_login.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_password.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_password.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_hidden_card.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_hidden_card.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_content_card.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_content_card.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/recycler_order_item.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_order_item.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/fragment_rearray_preview.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/fragment_rearray_preview.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_home.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_home.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_manage.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_manage.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/incremental/mergeDebugResources/stripped.dir/layout/activity_setting.xml",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/activity_setting.xml"
     }
 ]

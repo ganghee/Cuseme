@@ -1,14 +1,12 @@
 package com.good.mycuseme.ui.setting
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseActivity
 import com.good.mycuseme.data.local.SharedPreferenceController
-import com.good.mycuseme.data.local.UserData
 import com.good.mycuseme.databinding.ActivityPhoneNumberBinding
 import kotlinx.android.synthetic.main.activity_phone_number.*
 import kotlinx.android.synthetic.main.toolbar_back.*
@@ -29,7 +27,10 @@ class PhoneNumberActivity :
         getPhoneNumber()
         changePhoneNumber()
         backButton()
-        Log.d("token", token)
+    }
+
+    private fun getPhoneNumber() {
+        phoneNumberViewModel.phoneNumber.value = currentNumber
     }
 
     private fun backButton() {
@@ -54,8 +55,10 @@ class PhoneNumberActivity :
                         "핸드폰 번호가 변경되었습니다.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    val userData = UserData(uuid, token, phoneNumber.value)
-                    SharedPreferenceController.setUserInfo(applicationContext, userData)
+                    SharedPreferenceController.setUserPhoneNumber(
+                        applicationContext,
+                        phoneNumber.value!!
+                    )
                 } else if (isSuccess.value == -1) {
                     Toast.makeText(
                         this@PhoneNumberActivity,
@@ -67,7 +70,5 @@ class PhoneNumberActivity :
         }
     }
 
-    private fun getPhoneNumber() {
-        phoneNumberViewModel.phoneNumber.value = currentNumber
-    }
+
 }

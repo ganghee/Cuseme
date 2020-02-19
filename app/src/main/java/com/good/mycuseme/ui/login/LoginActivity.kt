@@ -27,11 +27,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
         binding.loginViewModel = loginViewModel
 
         initButton()
-        backToUserActivity()
+        backToHomeActivity()
         startManageActivity()
     }
 
-    private fun backToUserActivity() {
+    private fun backToHomeActivity() {
         iv_back.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
@@ -46,7 +46,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding>(R.layout.activity_login
                 btn_login.isSelected = isClickable.value!!
             })
             wrongPassword.observe(this@LoginActivity, Observer {
-                if(it) tv_login_wrong_text.visibility = View.VISIBLE
+                if (it) tv_login_wrong_text.visibility = View.VISIBLE
                 else tv_login_wrong_text.visibility = View.INVISIBLE
             })
             token.observe(this@LoginActivity, Observer {

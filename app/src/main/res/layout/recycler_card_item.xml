@@ -22,8 +22,9 @@
             android:id="@+id/view_masking"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/card_background_selector"
+            android:background="@drawable/selector_card_background"
             android:elevation="1dp"
+            android:foreground="@drawable/custom_ripple_effect"
             android:orientation="vertical" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

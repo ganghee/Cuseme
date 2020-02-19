@@ -6,10 +6,11 @@
         <item name="colorPrimary">@color/mainpink</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/mainpink</item>
+        <item name="colorControlHighlight">@color/light_blue</item>
     </style>
 
     <style name="tab_text" parent="TextAppearance.Design.Tab">
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">15sp</item>
     </style>
 
 </resources>

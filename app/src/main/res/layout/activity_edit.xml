@@ -130,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:onClick="@{view->editViewModel.clickAutoSpeak(view)}"
-                        android:src="@drawable/btn_auto_record_selector"
+                        android:src="@drawable/selector_btn_auto_record"
                         app:layout_constraintBottom_toBottomOf="@+id/textView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/textView" />
@@ -177,6 +177,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="40dp"
+                            android:background="@drawable/custom_ripple_effect_dark"
                             android:clickable="@{editViewModel.isStopClickable}"
                             android:src="@drawable/btn_newcard_play_unslected"
                             app:layout_constraintBottom_toBottomOf="@+id/cv_update_record"
@@ -188,6 +189,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
+                            android:background="@drawable/custom_ripple_effect_dark"
                             android:clickable="@{editViewModel.isStartClickable}"
                             app:cardCornerRadius="60dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -200,7 +202,8 @@
                                 android:id="@+id/iv_update_start"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@drawable/btn_record_start_selector" />
+                                android:background="@drawable/custom_ripple_effect_dark"
+                                android:src="@drawable/selector_btn_record_start" />
 
                         </androidx.cardview.widget.CardView>
 
@@ -209,8 +212,9 @@
                             android:layout_width="66dp"
                             android:layout_height="30dp"
                             android:layout_marginEnd="8dp"
-                            android:background="@drawable/btn_newcard_complete_selector"
+                            android:background="@drawable/selector_btn_newcard_complete"
                             android:clickable="@{editViewModel.isRecordClickable}"
+                            android:foreground="@drawable/custom_ripple_effect_dark"
                             app:layout_constraintBottom_toBottomOf="@+id/cv_update_record"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="@+id/cv_update_record" />

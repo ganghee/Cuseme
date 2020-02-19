@@ -10,7 +10,7 @@ import com.good.mycuseme.data.card.UpdateArrBody
 import io.reactivex.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
 
-class PreviewRearrayViewModel : BaseViewModel() {
+class PreviewReorderViewModel : BaseViewModel() {
     private val cardRepository by lazy { CardRepository() }
     var cardList = MutableLiveData<List<CardData>>()
     var tempCardList = mutableListOf<CardData>()

@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/Users/ganghee/.gradle/caches/transforms-2/files-2.1/8ecbcab7ffa2a7d138c7debed0da993e/core-1.1.0/res/values-v21/values-v21.xml",
+                    "source": "/Users/ganghee/.gradle/caches/transforms-2/files-2.1/4aa802448159b92a8773923ea6842833/core-1.2.0/res/values-v21/values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

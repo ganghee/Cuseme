@@ -4,8 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.ScaleGestureDetector
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.good.mycuseme.BR
@@ -21,6 +25,7 @@ import com.good.mycuseme.databinding.RecyclerCardItemBinding
 import com.good.mycuseme.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.recycler_card_item.view.*
+import kotlin.system.exitProcess
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
@@ -31,20 +36,44 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
     private var gridLayoutManager = GridLayoutManager(this@HomeActivity, 2)
     var mParent: ViewGroup? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.homeViewModel = homeViewModel
 
         setUUID()//TODO : 사용자를 DB에서 지우고 시작하는 경우
         homeViewModel.setTextToSpeech(this)
-        touchEvent()
-        getCards(androidId)
-        setCardList()
+        initRecyclerView()
+        changeSpanCountEvent()
         startLoginActivity()
         reorderClick()
+        finishEvent()
     }
 
-    private fun touchEvent() {
+    override fun onStart() {
+        super.onStart()
+        getCards(androidId)
+        emptyCheck()
+    }
+
+    private fun finishEvent() {
+        homeViewModel.apply {
+            getFinishFlag()
+            finishFlag.observe(this@HomeActivity, Observer {
+                if (it) {
+                    finishAffinity()
+                    System.runFinalization()
+                    exitProcess(0)
+                } else Toast.makeText(
+                    this@HomeActivity,
+                    "뒤로가기 버튼을 한 번 더 누르면 종료",
+                    Toast.LENGTH_SHORT
+                ).show()
+            })
+        }
+    }
+
+    private fun changeSpanCountEvent() {
         val mScaleGestureDetector = ScaleGestureDetector(
             this,
             object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
@@ -92,7 +121,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
         homeViewModel.getCards(androidId)
     }
 
-    private fun setCardList() {
+    private fun initRecyclerView() {
         binding.recyclerHomeCardlist.apply {
             layoutManager = gridLayoutManager
             adapter = object : BaseRecyclerViewAdapter<CardData, RecyclerCardItemBinding>(
@@ -124,10 +153,28 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(R.layout.activity_home) {
 
     private fun reorderClick() {
         button_home_refresh.setOnClickListener {
-            for (i in 0 until mParent!!.childCount) {
+            for (i in 0 until (mParent!!.childCount)) {
                 mParent?.getChildAt(i)?.view_masking?.isSelected = false
             }
             homeViewModel.sort(homeViewModel.cardList.value)
         }
+    }
+
+    private fun emptyCheck() {
+        homeViewModel.isEmpty.observe(this, Observer {
+            if (it) {
+                binding.lavHomeLock.visibility = View.VISIBLE
+                binding.tvHomeEmpty.visibility = View.VISIBLE
+                binding.ivHomeEmpty.visibility = View.VISIBLE
+            } else {
+                binding.lavHomeLock.visibility = View.GONE
+                binding.tvHomeEmpty.visibility = View.GONE
+                binding.ivHomeEmpty.visibility = View.GONE
+            }
+        })
+    }
+
+    override fun onBackPressed() {
+        homeViewModel.backButtonSubject.onNext(System.currentTimeMillis())
     }
 }

@@ -28,23 +28,23 @@ public abstract class ActivityLoginBinding extends ViewDataBinding {
   public final View include;
 
   @NonNull
-  public final TextView tvMainText;
+  public final TextView tvLoginText;
 
   @NonNull
-  public final TextView tvWrongText;
+  public final TextView tvLoginWrongText;
 
   @Bindable
   protected LoginViewModel mLoginViewModel;
 
   protected ActivityLoginBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      Button btnLogin, EditText editTextLoginPassword, View include, TextView tvMainText,
-      TextView tvWrongText) {
+      Button btnLogin, EditText editTextLoginPassword, View include, TextView tvLoginText,
+      TextView tvLoginWrongText) {
     super(_bindingComponent, _root, _localFieldCount);
     this.btnLogin = btnLogin;
     this.editTextLoginPassword = editTextLoginPassword;
     this.include = include;
-    this.tvMainText = tvMainText;
-    this.tvWrongText = tvWrongText;
+    this.tvLoginText = tvLoginText;
+    this.tvLoginWrongText = tvLoginWrongText;
   }
 
   public abstract void setLoginViewModel(@Nullable LoginViewModel loginViewModel);

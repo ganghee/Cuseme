@@ -39,10 +39,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/selector_card_background_unpreference"
             android:elevation="1dp"
-            android:orientation="vertical">
-
-
-        </View>
+            android:orientation="vertical"></View>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rl_user_item"
@@ -66,7 +63,7 @@
                 android:id="@+id/iv_visibility"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:layout_margin="4dp"
+                android:layout_marginEnd="12dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/selector_visibility"
                 app:layout_constraintBottom_toBottomOf="parent"

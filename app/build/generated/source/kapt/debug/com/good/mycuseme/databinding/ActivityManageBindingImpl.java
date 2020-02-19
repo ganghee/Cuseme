@@ -14,37 +14,53 @@ public class ActivityManageBindingImpl extends ActivityManageBinding  {
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.fl_manage, 1);
-        sViewsWithIds.put(R.id.ll_bottom_preview, 2);
-        sViewsWithIds.put(R.id.iv_bottom_preview, 3);
-        sViewsWithIds.put(R.id.tv_preview, 4);
-        sViewsWithIds.put(R.id.ll_bottom_search, 5);
-        sViewsWithIds.put(R.id.iv_bottom_search, 6);
-        sViewsWithIds.put(R.id.tv_search, 7);
+        sViewsWithIds.put(R.id.view_manage_opaque, 1);
+        sViewsWithIds.put(R.id.fl_manage, 2);
+        sViewsWithIds.put(R.id.fb_manage_add_card, 3);
+        sViewsWithIds.put(R.id.ll_manage_new_card, 4);
+        sViewsWithIds.put(R.id.iv_manage_newcard, 5);
+        sViewsWithIds.put(R.id.tv_manage_newcard, 6);
+        sViewsWithIds.put(R.id.ll_manage_hidden, 7);
+        sViewsWithIds.put(R.id.iv_manage_hidden, 8);
+        sViewsWithIds.put(R.id.tv_manage_hidden, 9);
+        sViewsWithIds.put(R.id.cv_bottom_bar, 10);
+        sViewsWithIds.put(R.id.ll_bottom_preview, 11);
+        sViewsWithIds.put(R.id.iv_bottom_preview, 12);
+        sViewsWithIds.put(R.id.tv_preview, 13);
+        sViewsWithIds.put(R.id.ll_bottom_search, 14);
+        sViewsWithIds.put(R.id.iv_bottom_search, 15);
+        sViewsWithIds.put(R.id.tv_search, 16);
     }
     // views
-    @NonNull
-    private final androidx.constraintlayout.widget.ConstraintLayout mboundView0;
     // variables
     // values
     // listeners
     // Inverse Binding Event Handlers
 
     public ActivityManageBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 8, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 17, sIncludes, sViewsWithIds));
     }
     private ActivityManageBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
-            , (android.widget.FrameLayout) bindings[1]
-            , (android.widget.ImageView) bindings[3]
-            , (android.widget.ImageView) bindings[6]
-            , (android.widget.LinearLayout) bindings[2]
-            , (android.widget.LinearLayout) bindings[5]
-            , (android.widget.TextView) bindings[4]
-            , (android.widget.TextView) bindings[7]
+            , (androidx.constraintlayout.motion.widget.MotionLayout) bindings[0]
+            , (android.widget.LinearLayout) bindings[10]
+            , (com.google.android.material.floatingactionbutton.FloatingActionButton) bindings[3]
+            , (android.widget.FrameLayout) bindings[2]
+            , (android.widget.ImageView) bindings[12]
+            , (android.widget.ImageView) bindings[15]
+            , (android.widget.ImageView) bindings[8]
+            , (android.widget.ImageView) bindings[5]
+            , (android.widget.LinearLayout) bindings[11]
+            , (android.widget.LinearLayout) bindings[14]
+            , (android.widget.LinearLayout) bindings[7]
+            , (android.widget.LinearLayout) bindings[4]
+            , (android.widget.TextView) bindings[9]
+            , (android.widget.TextView) bindings[6]
+            , (android.widget.TextView) bindings[13]
+            , (android.widget.TextView) bindings[16]
+            , (android.view.View) bindings[1]
             );
-        this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];
-        this.mboundView0.setTag(null);
+        this.constraintLayout.setTag(null);
         setRootTag(root);
         // listeners
         invalidateAll();

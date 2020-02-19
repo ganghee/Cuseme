@@ -17,12 +17,14 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     val temp = mutableListOf<ITEM>()
     val searchItems = mutableListOf<ITEM>()
 
-    fun replaceAll(items: List<ITEM>?) {
+    fun replaceAll(item: List<ITEM>?) {
         temp.clear()
-        if (items != null) {
+        if (item != null) {
             this.items.run {
                 clear()
-                addAll(items)
+                addAll(item)
+                searchItems.clear()
+                searchItems.addAll(this)
             }
         }
     }
@@ -57,14 +59,12 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     }
 
     fun filter(charText: String?) {
-        searchItems.addAll(items)
         items.clear()
-        var charText = charText
-        charText = charText?.toLowerCase(Locale.getDefault())
-        if (charText!!.isNotEmpty()) {
+        val lowChar = charText?.toLowerCase(Locale.getDefault())
+        if (lowChar?.length != 0) {
             for (cardData in searchItems) {
                 cardData as CardData
-                if (cardData.title.toLowerCase(Locale.getDefault()).contains(charText)) {
+                if (cardData.title.toLowerCase(Locale.getDefault()).contains(lowChar.toString())) {
                     items.add(cardData)
                 }
             }
@@ -73,4 +73,31 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
         }
         notifyDataSetChanged()
     }
+//    fun filteraaa(charText: String?): android.widget.Filter {
+//        return object : android.widget.Filter() {
+//            override fun performFiltering(constraint: CharSequence?): FilterResults {
+//                items.clear()
+//                val lowChar = charText?.toLowerCase(Locale.getDefault())
+//                if (lowChar?.length != 0) {
+//                    for (cardData in searchItems) {
+//                        cardData as CardData
+//                        if (cardData.title.toLowerCase(Locale.getDefault()).contains(lowChar.toString())) {
+//                            items.add(cardData)
+//                        }
+//                    }
+//                } else {
+//                    items.addAll(searchItems)
+//                }
+//                val filterResults = FilterResults()
+//                filterResults.values = items
+//                return filterResults
+//            }
+//
+//            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+//                items.addAll(results?.values as MutableList<ITEM>)
+//                notifyDataSetChanged()
+//            }
+//        }
+//    }
+
 }

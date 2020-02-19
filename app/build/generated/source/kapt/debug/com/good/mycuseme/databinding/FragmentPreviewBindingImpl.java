@@ -13,7 +13,9 @@ public class FragmentPreviewBindingImpl extends FragmentPreviewBinding  {
     private static final android.util.SparseIntArray sViewsWithIds;
     static {
         sIncludes = null;
-        sViewsWithIds = null;
+        sViewsWithIds = new android.util.SparseIntArray();
+        sViewsWithIds.put(R.id.tl_preview, 1);
+        sViewsWithIds.put(R.id.vp_preview, 2);
     }
     // views
     @NonNull
@@ -24,15 +26,15 @@ public class FragmentPreviewBindingImpl extends FragmentPreviewBinding  {
     // Inverse Binding Event Handlers
 
     public FragmentPreviewBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 2, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 3, sIncludes, sViewsWithIds));
     }
     private FragmentPreviewBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
-        super(bindingComponent, root, 1
-            , (androidx.recyclerview.widget.RecyclerView) bindings[1]
+        super(bindingComponent, root, 0
+            , (com.google.android.material.tabs.TabLayout) bindings[1]
+            , (androidx.viewpager.widget.ViewPager) bindings[2]
             );
         this.mboundView0 = (android.widget.LinearLayout) bindings[0];
         this.mboundView0.setTag(null);
-        this.rvPreview.setTag(null);
         setRootTag(root);
         // listeners
         invalidateAll();
@@ -41,7 +43,7 @@ public class FragmentPreviewBindingImpl extends FragmentPreviewBinding  {
     @Override
     public void invalidateAll() {
         synchronized(this) {
-                mDirtyFlags = 0x4L;
+                mDirtyFlags = 0x2L;
         }
         requestRebind();
     }
@@ -70,27 +72,11 @@ public class FragmentPreviewBindingImpl extends FragmentPreviewBinding  {
 
     public void setPreviewViewModel(@Nullable com.good.mycuseme.ui.manage.PreviewViewModel PreviewViewModel) {
         this.mPreviewViewModel = PreviewViewModel;
-        synchronized(this) {
-            mDirtyFlags |= 0x2L;
-        }
-        notifyPropertyChanged(BR.previewViewModel);
-        super.requestRebind();
     }
 
     @Override
     protected boolean onFieldChange(int localFieldId, Object object, int fieldId) {
         switch (localFieldId) {
-            case 0 :
-                return onChangePreviewViewModelCardList((androidx.lifecycle.MutableLiveData<java.util.List<com.good.mycuseme.data.card.CardData>>) object, fieldId);
-        }
-        return false;
-    }
-    private boolean onChangePreviewViewModelCardList(androidx.lifecycle.MutableLiveData<java.util.List<com.good.mycuseme.data.card.CardData>> PreviewViewModelCardList, int fieldId) {
-        if (fieldId == BR._all) {
-            synchronized(this) {
-                    mDirtyFlags |= 0x1L;
-            }
-            return true;
         }
         return false;
     }
@@ -102,41 +88,15 @@ public class FragmentPreviewBindingImpl extends FragmentPreviewBinding  {
             dirtyFlags = mDirtyFlags;
             mDirtyFlags = 0;
         }
-        com.good.mycuseme.ui.manage.PreviewViewModel previewViewModel = mPreviewViewModel;
-        java.util.List<com.good.mycuseme.data.card.CardData> previewViewModelCardListGetValue = null;
-        androidx.lifecycle.MutableLiveData<java.util.List<com.good.mycuseme.data.card.CardData>> previewViewModelCardList = null;
-
-        if ((dirtyFlags & 0x7L) != 0) {
-
-
-
-                if (previewViewModel != null) {
-                    // read previewViewModel.cardList
-                    previewViewModelCardList = previewViewModel.getCardList();
-                }
-                updateLiveDataRegistration(0, previewViewModelCardList);
-
-
-                if (previewViewModelCardList != null) {
-                    // read previewViewModel.cardList.getValue()
-                    previewViewModelCardListGetValue = previewViewModelCardList.getValue();
-                }
-        }
         // batch finished
-        if ((dirtyFlags & 0x7L) != 0) {
-            // api target 1
-
-            com.good.mycuseme.util.AdapterUilKt.replaceAll(this.rvPreview, previewViewModelCardListGetValue);
-        }
     }
     // Listener Stub Implementations
     // callback impls
     // dirty flag
     private  long mDirtyFlags = 0xffffffffffffffffL;
     /* flag mapping
-        flag 0 (0x1L): previewViewModel.cardList
-        flag 1 (0x2L): previewViewModel
-        flag 2 (0x3L): null
+        flag 0 (0x1L): previewViewModel
+        flag 1 (0x2L): null
     flag mapping end*/
     //end
 }

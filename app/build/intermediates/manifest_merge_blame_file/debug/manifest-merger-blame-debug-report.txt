@@ -19,62 +19,106 @@
 13    <uses-permission android:name="android.permission.WAKE_LOCK" />
 13-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:8:5-68
 13-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:8:22-65
-14
-15    <application
-15-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:10:5-31:19
-16        android:allowBackup="true"
-16-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:11:9-35
-17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-17-->[androidx.core:core:1.1.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/8ecbcab7ffa2a7d138c7debed0da993e/core-1.1.0/AndroidManifest.xml:24:18-86
-18        android:debuggable="true"
-19        android:icon="@mipmap/ic_launcher"
-19-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:12:9-43
-20        android:label="@string/app_name"
-20-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:13:9-41
-21        android:networkSecurityConfig="@xml/network_security_config"
-21-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:14:9-69
-22        android:roundIcon="@mipmap/ic_launcher_round"
-22-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:15:9-54
-23        android:supportsRtl="true"
-23-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:16:9-35
-24        android:testOnly="true"
-25        android:theme="@style/AppTheme" >
-25-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:17:9-40
-26        <activity android:name="com.good.mycuseme.ui.login.LoginActivity" />
-26-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:19:9-60
-26-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:19:19-57
-27        <activity android:name="com.good.mycuseme.ui.cardedit.EditActivity" />
-27-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:20:9-62
-27-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:20:19-59
-28        <activity android:name="com.good.mycuseme.ui.manage.ManageCardActivity" >
-28-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:9-27:20
-28-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:19-63
-29            <intent-filter>
-29-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:22:13-26:29
-30                <action android:name="android.intent.action.MAIN" />
-30-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:17-69
-30-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:25-66
-31
-32                <category android:name="android.intent.category.LAUNCHER" />
-32-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:25:17-77
-32-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:25:27-74
-33            </intent-filter>
-34        </activity>
-35        <activity android:name="com.good.mycuseme.ui.user.UserActivity" >
-35-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:28:9-30:20
-35-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:28:19-55
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:9:5-80
+14-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:9:22-77
+15    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+15-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:10:5-71
+15-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:10:22-68
+16    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+16-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:11:5-81
+16-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:11:22-78
+17
+18    <application
+18-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:13:5-54:19
+19        android:allowBackup="true"
+19-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:14:9-35
+20        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+20-->[androidx.core:core:1.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/4aa802448159b92a8773923ea6842833/core-1.2.0/AndroidManifest.xml:24:18-86
+21        android:debuggable="true"
+22        android:icon="@drawable/img_splash_logo"
+22-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:15:9-49
+23        android:label="@string/app_name"
+23-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:16:9-41
+24        android:networkSecurityConfig="@xml/network_security_config"
+24-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:17:9-69
+25        android:requestLegacyExternalStorage="true"
+25-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:21:9-52
+26        android:roundIcon="@drawable/img_splash_logo"
+26-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:18:9-54
+27        android:supportsRtl="true"
+27-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:19:9-35
+28        android:testOnly="true"
+29        android:theme="@style/AppTheme" >
+29-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:20:9-40
+30        <activity android:name="com.good.mycuseme.ui.card.HiddenCardActivity" >
+30-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:9-25:20
+30-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:23:19-61
+31        </activity>
+32        <activity android:name="com.good.mycuseme.ui.setting.PhoneNumberActivity" />
+32-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:26:9-68
+32-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:26:19-65
+33        <activity android:name="com.good.mycuseme.ui.setting.PasswordActivity" />
+33-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:27:9-65
+33-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:27:19-62
+34        <activity android:name="com.good.mycuseme.ui.setting.SettingActivity" />
+34-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:28:9-64
+34-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:28:19-61
+35        <activity android:name="com.good.mycuseme.ui.card.ContentCardActivity" >
+35-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:29:9-31:20
+35-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:29:19-62
 36        </activity>
-37
-38        <provider
-38-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:25:9-29:43
-39            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-39-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:26:13-79
-40            android:authorities="com.good.mycuseme.lifecycle-process"
-40-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:27:13-69
-41            android:exported="false"
-41-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:28:13-37
-42            android:multiprocess="true" />
-42-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:29:13-40
-43    </application>
-44
-45</manifest>
+37        <activity
+37-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:32:9-36:20
+38            android:name="com.good.mycuseme.ui.card.CreateActivity"
+38-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:33:13-51
+39            android:windowSoftInputMode="adjustResize" >
+39-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:34:13-55
+40        </activity>
+41        <activity android:name="com.good.mycuseme.ui.card.DownloadActivity" />
+41-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:37:9-62
+41-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:37:19-59
+42        <activity android:name="com.good.mycuseme.ui.login.LoginActivity" />
+42-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:38:9-60
+42-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:38:19-57
+43        <activity
+43-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:39:9-41:58
+44            android:name="com.good.mycuseme.ui.card.EditActivity"
+44-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:40:13-49
+45            android:windowSoftInputMode="adjustResize" />
+45-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:41:13-55
+46        <activity
+46-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:42:9-50:20
+47            android:name="com.good.mycuseme.ui.manage.ManageCardActivity"
+47-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:43:13-57
+48            android:windowSoftInputMode="adjustPan" >
+48-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:44:13-52
+49            <intent-filter>
+49-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:45:13-49:29
+50                <action android:name="android.intent.action.MAIN" />
+50-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:46:17-69
+50-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:46:25-66
+51
+52                <category android:name="android.intent.category.LAUNCHER" />
+52-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:48:17-77
+52-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:48:27-74
+53            </intent-filter>
+54        </activity>
+55        <activity android:name="com.good.mycuseme.ui.home.HomeActivity" >
+55-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:51:9-53:20
+55-->/Users/ganghee/project/android/Android_MyCuseme/app/src/main/AndroidManifest.xml:51:19-55
+56        </activity>
+57
+58        <provider
+58-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:25:9-29:43
+59            android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
+59-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:26:13-79
+60            android:authorities="com.good.mycuseme.lifecycle-process"
+60-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:27:13-69
+61            android:exported="false"
+61-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:28:13-37
+62            android:multiprocess="true" />
+62-->[androidx.lifecycle:lifecycle-process:2.2.0] /Users/ganghee/.gradle/caches/transforms-2/files-2.1/522c8bd4729da947258f57e9e0b7d8d8/jetified-lifecycle-process-2.2.0/AndroidManifest.xml:29:13-40
+63    </application>
+64
+65</manifest>

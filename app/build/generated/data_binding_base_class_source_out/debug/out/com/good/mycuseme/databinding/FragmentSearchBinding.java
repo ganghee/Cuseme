@@ -4,33 +4,49 @@ package com.good.mycuseme.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.good.mycuseme.R;
 import com.good.mycuseme.ui.manage.SearchViewModel;
-import com.google.android.material.tabs.TabLayout;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class FragmentSearchBinding extends ViewDataBinding {
   @NonNull
-  public final TabLayout tlSearch;
+  public final ImageView ivSearchDownload;
 
   @NonNull
-  public final ViewPager vpSearch;
+  public final RecyclerView rvSearch;
+
+  @NonNull
+  public final SwipeRefreshLayout srlSearch;
+
+  @NonNull
+  public final SearchView svCard;
+
+  @NonNull
+  public final TextView textView2;
 
   @Bindable
   protected SearchViewModel mSearchViewModel;
 
   protected FragmentSearchBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      TabLayout tlSearch, ViewPager vpSearch) {
+      ImageView ivSearchDownload, RecyclerView rvSearch, SwipeRefreshLayout srlSearch,
+      SearchView svCard, TextView textView2) {
     super(_bindingComponent, _root, _localFieldCount);
-    this.tlSearch = tlSearch;
-    this.vpSearch = vpSearch;
+    this.ivSearchDownload = ivSearchDownload;
+    this.rvSearch = rvSearch;
+    this.srlSearch = srlSearch;
+    this.svCard = svCard;
+    this.textView2 = textView2;
   }
 
   public abstract void setSearchViewModel(@Nullable SearchViewModel searchViewModel);

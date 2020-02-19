@@ -9,23 +9,28 @@ import androidx.annotation.Nullable;
 import androidx.databinding.Bindable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 import com.good.mycuseme.R;
 import com.good.mycuseme.ui.manage.PreviewViewModel;
+import com.google.android.material.tabs.TabLayout;
 import java.lang.Deprecated;
 import java.lang.Object;
 
 public abstract class FragmentPreviewBinding extends ViewDataBinding {
   @NonNull
-  public final RecyclerView rvPreview;
+  public final TabLayout tlPreview;
+
+  @NonNull
+  public final ViewPager vpPreview;
 
   @Bindable
   protected PreviewViewModel mPreviewViewModel;
 
   protected FragmentPreviewBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      RecyclerView rvPreview) {
+      TabLayout tlPreview, ViewPager vpPreview) {
     super(_bindingComponent, _root, _localFieldCount);
-    this.rvPreview = rvPreview;
+    this.tlPreview = tlPreview;
+    this.vpPreview = vpPreview;
   }
 
   public abstract void setPreviewViewModel(@Nullable PreviewViewModel previewViewModel);
