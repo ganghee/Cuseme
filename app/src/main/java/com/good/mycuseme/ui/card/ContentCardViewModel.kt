@@ -1,6 +1,5 @@
 package com.good.mycuseme.ui.card
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.media.MediaPlayer
 import android.speech.tts.TextToSpeech
@@ -10,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.good.mycuseme.base.BaseViewModel
 import com.good.mycuseme.data.card.CardRepository
+import com.good.mycuseme.data.card.HideBody
 import io.reactivex.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
 import java.io.IOException
@@ -23,16 +23,19 @@ class ContentCardViewModel : BaseViewModel() {
     var recordFileName: String? = null
     var recordFlag = 0
     private val player: MediaPlayer by lazy { MediaPlayer() }
-    val isVisibility = MutableLiveData<Boolean>().apply {
+    val hideSuccess = MutableLiveData<Boolean>().apply {
         value = false
     }
+    val deleteSuccess = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val visibility = MutableLiveData<Boolean>()
     private lateinit var textToSpeech: TextToSpeech
-
+    val recordTotalTime = MutableLiveData<Int>()
 
     private val repository by lazy { CardRepository() }
 
-    @SuppressLint("CheckResult")
-    fun getCard(token: String, cardIdx: Int) {
+    fun getCard(token: String, cardIdx: Int) =
         repository.getCard(token, cardIdx)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -41,12 +44,11 @@ class ContentCardViewModel : BaseViewModel() {
                 recordFileName = it.cardData?.record
                 serialNumber.value = "일련번호 | " + it.cardData?.serialNum
                 image.value = it.cardData?.image
-                isVisibility.value = it.cardData?.visible
+                visibility.value = it.cardData?.visible
             }, { error ->
                 error as HttpException
-                error.message()
+                error.message
             })
-    }
 
     fun setTextToSpeech(context: Context) {
         textToSpeech = TextToSpeech(context,
@@ -93,6 +95,7 @@ class ContentCardViewModel : BaseViewModel() {
                         setDataSource(recordFileName)
                         prepareAsync()   //비동기
                         setOnPreparedListener {
+                            recordTotalTime.value = duration
                             it.start()
                         }
                         recordFlag = -1
@@ -101,10 +104,31 @@ class ContentCardViewModel : BaseViewModel() {
                     }
                 }
                 player.setOnCompletionListener {
-                    Log.d("playerError2", "SDSD")
                     recordFlag = 0
                 }
             }
         }
     }
+
+    fun hideCard(token: String, cardIdx: Int, visibility: HideBody) =
+        repository.hideCard(token, cardIdx, visibility)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d("contentviewmodel hide", it.message)
+                hideSuccess.value = true
+            }, { error ->
+                error as HttpException
+                error.message
+            })
+
+    fun deleteCard(token: String, cardIdx: Int) =
+        repository.deleteCard(token, cardIdx)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                Log.d("contentviewmodel delete", it.message)
+                deleteSuccess.value = true
+            }, { error ->
+                error as HttpException
+                error.message
+            })
 }
