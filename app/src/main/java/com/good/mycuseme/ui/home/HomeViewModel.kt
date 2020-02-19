@@ -15,6 +15,8 @@ import com.good.mycuseme.data.card.CardRepository
 import com.good.mycuseme.data.card.CountBody
 import com.good.mycuseme.data.start.StartRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.subjects.BehaviorSubject
 import kotlinx.android.synthetic.main.recycler_card_item.view.*
 import retrofit2.HttpException
 import java.io.IOException
@@ -27,8 +29,14 @@ class HomeViewModel : BaseViewModel() {
     private val sortList = listOf("visibility", "title", "count")
     private var index = 0
     lateinit var textToSpeech: TextToSpeech
+    val isEmpty = MutableLiveData<Boolean>().apply {
+        value = false
+    }
+    val finishFlag = MutableLiveData<Boolean>()
     private val player: MediaPlayer by lazy { MediaPlayer() }
-
+    private lateinit var backPressedDisposable: Disposable
+    val backButtonSubject: io.reactivex.subjects.Subject<Long> =
+        BehaviorSubject.createDefault(0L)
 
     var recordFlag = 0
 
@@ -50,7 +58,11 @@ class HomeViewModel : BaseViewModel() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Log.d("UserViewModel getCard", it.message)
-                sort(it.data)
+                if (!it.data.isNullOrEmpty()) {
+                    sort(it.data)
+                } else {
+                    isEmpty.value = it.data.isNullOrEmpty()
+                }
             }, {
                 Log.d("UserViewModel getCard", it.message)
             })
@@ -67,7 +79,7 @@ class HomeViewModel : BaseViewModel() {
                 index = 2
             }
             "count" -> {
-                cardList.value = sortedList?.sortedBy { it.count }
+                cardList.value = sortedList?.sortedByDescending { it.count }
                 index = 0
             }
         }
@@ -158,5 +170,14 @@ class HomeViewModel : BaseViewModel() {
         textToSpeech.stop()
         textToSpeech.shutdown()
         super.onCleared()
+    }
+
+    fun getFinishFlag() {
+        backPressedDisposable = backButtonSubject
+            .buffer(2, 1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { t ->
+                finishFlag.value = t[1] - t[0] <= 1500
+            }
     }
 }
