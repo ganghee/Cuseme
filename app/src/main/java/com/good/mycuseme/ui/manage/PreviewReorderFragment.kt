@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -16,19 +17,18 @@ import com.good.mycuseme.base.BaseRecyclerViewAdapter
 import com.good.mycuseme.base.BaseViewHolder
 import com.good.mycuseme.data.card.CardData
 import com.good.mycuseme.data.local.SharedPreferenceController
-import com.good.mycuseme.databinding.FragmentRearrayPreviewBinding
+import com.good.mycuseme.databinding.FragmentReorderPreviewBinding
 import com.good.mycuseme.databinding.RecyclerCardItemBinding
 import com.good.mycuseme.ui.card.ContentCardActivity
-import kotlinx.android.synthetic.main.activity_manage.*
-import kotlinx.android.synthetic.main.fragment_rearray_preview.*
+import kotlinx.android.synthetic.main.fragment_reorder_preview.*
 
-class PreviewRearrayFragment :
-    BaseFragment<FragmentRearrayPreviewBinding>(R.layout.fragment_rearray_preview),
+class PreviewReorderFragment :
+    BaseFragment<FragmentReorderPreviewBinding>(R.layout.fragment_reorder_preview),
     SwipeRefreshLayout.OnRefreshListener {
 
-    private val previewRearrayViewModel by lazy {
+    private val previewReorderViewModel by lazy {
         ViewModelProvider(this).get(
-            PreviewRearrayViewModel::class.java
+            PreviewReorderViewModel::class.java
         )
     }
     private val token by lazy { SharedPreferenceController.getUserToken(parentFragment?.activity!!.applicationContext)!! }
@@ -37,27 +37,27 @@ class PreviewRearrayFragment :
         super.onActivityCreated(savedInstanceState)
 
         initData()
-    }
-
-    private fun initData() {
-        binding.previewRearrayViewModel = previewRearrayViewModel
-        srl_reorder.apply {
-            setOnRefreshListener(this@PreviewRearrayFragment)
-            setColorSchemeResources(R.color.mainpink, R.color.light_blue)
-        }
+        emptyCheck()
     }
 
     override fun onStart() {
         super.onStart()
+        initRecyclerView()
         getReorderCards()
-        initBottomTab()
     }
 
-    private fun getReorderCards() {
-        previewRearrayViewModel.getCard(token)
+    private fun initData() {
+        binding.previewReorderViewModel = previewReorderViewModel
+        srl_reorder.apply {
+            setOnRefreshListener(this@PreviewReorderFragment)
+            setColorSchemeResources(R.color.mainpink, R.color.light_blue)
+        }
+    }
+
+    private fun initRecyclerView() {
         binding.rvPreview.apply {
             layoutManager = GridLayoutManager(this.context, 2)
-            val adapter = object : BaseRecyclerViewAdapter<CardData, RecyclerCardItemBinding>(
+            val baseAdapter = object : BaseRecyclerViewAdapter<CardData, RecyclerCardItemBinding>(
                 layoutRes = R.layout.recycler_reorder_item,
                 bindingId = BR.cardData
             ) {
@@ -74,10 +74,10 @@ class PreviewRearrayFragment :
                     }
                 }
             }
-            this.adapter = adapter
+            this.adapter = baseAdapter
             val callback = DragManageAdapter(
-                adapter,
-                previewRearrayViewModel,
+                baseAdapter,
+                previewReorderViewModel,
                 token,
                 ItemTouchHelper.UP.or(ItemTouchHelper.DOWN).or(ItemTouchHelper.LEFT).or(
                     ItemTouchHelper.RIGHT
@@ -91,17 +91,24 @@ class PreviewRearrayFragment :
         }
     }
 
-    private fun initBottomTab() {
-        (this@PreviewRearrayFragment.context as ManageCardActivity).tabbar_manage_bottom.visibility =
-            View.GONE
-        (this@PreviewRearrayFragment.context as ManageCardActivity).cv_bottom_bar.visibility =
-            View.VISIBLE
-        (this@PreviewRearrayFragment.context as ManageCardActivity).fb_manage_add_card.visibility =
-            View.VISIBLE
+    private fun emptyCheck() {
+        previewReorderViewModel.cardList.observe(this, Observer {
+            if (it.isNullOrEmpty()) {
+                iv_reorder_empty.visibility = View.VISIBLE
+                tv_reorder_empty.visibility = View.VISIBLE
+            } else {
+                iv_reorder_empty.visibility = View.GONE
+                tv_reorder_empty.visibility = View.GONE
+            }
+        })
+    }
+
+    private fun getReorderCards() {
+        previewReorderViewModel.getCard(token)
     }
 
     override fun onRefresh() {
-        previewRearrayViewModel.getCard(token)
+        getReorderCards()
         srl_reorder.isRefreshing = false
     }
 }
