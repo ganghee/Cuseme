@@ -10,6 +10,7 @@ import com.good.mycuseme.databinding.ActivityManageBinding
 import com.good.mycuseme.ui.card.CreateActivity
 import com.good.mycuseme.ui.card.HiddenCardActivity
 import kotlinx.android.synthetic.main.activity_manage.*
+import kotlinx.android.synthetic.main.fragment_reorder_preview.*
 
 class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity_manage) {
 
@@ -28,6 +29,14 @@ class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity
         changeBottomFragment()
         startCreateCardActivity()
         startHiddenCardActivity()
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        ml_manage.setTransitionDuration(1)
+        ml_manage.transitionToStart()
+        ml_manage.setTransitionDuration(500)
     }
 
     private fun startHiddenCardActivity() {
