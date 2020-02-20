@@ -37,13 +37,13 @@ class PreviewReorderFragment :
         super.onActivityCreated(savedInstanceState)
 
         initData()
-        emptyCheck()
+        initRecyclerView()
     }
 
     override fun onStart() {
         super.onStart()
-        initRecyclerView()
         getReorderCards()
+        emptyCheck()
     }
 
     private fun initData() {
