@@ -44,9 +44,6 @@ class CreateViewModel : BaseViewModel() {
     val isSaveRecordClickable = MutableLiveData<Boolean>().apply {
         value = false
     }
-    val isStopClickable = MutableLiveData<Boolean>().apply {
-        value = false
-    }
     val isRecording = MutableLiveData<Boolean>().apply {
         value = false
     }
@@ -63,7 +60,6 @@ class CreateViewModel : BaseViewModel() {
     val title = MutableLiveData<String>()
     val content = MutableLiveData<String>()
     private val repository by lazy { CardRepository() }
-    private val recordTotalTime = MutableLiveData<Int>()
     var uriRotateImage = MutableLiveData<Uri>()
 
     @SuppressLint("SimpleDateFormat")
@@ -74,7 +70,6 @@ class CreateViewModel : BaseViewModel() {
 
     fun startRecord() {
         speakFileNull()
-        isStopClickable.value = true
         isSaveRecordClickable.value = false
         isPlayingRecord.value = true
         recorder = MediaRecorder().apply {
@@ -99,20 +94,21 @@ class CreateViewModel : BaseViewModel() {
                 setDataSource(recordFileName)
                 prepare()
                 setOnPreparedListener {
-                    recordTotalTime.value = duration
                     it.start()
                 }
-                isStopClickable.value = false
                 isPlayingRecord.value = true
             } catch (e: IOException) {
                 Log.e("startPlay", "prepare() failed")
             }
             setOnCompletionListener {
-                isPlayingRecord.value = false
-                isStopClickable.value = true
+                stopPlaying()
             }
         }
+    }
 
+    fun stopPlaying() {
+        isPlayingRecord.value = false
+        player?.stop()
     }
 
     fun stopRecord() {
