@@ -22,9 +22,6 @@ import java.lang.Object;
 
 public abstract class ActivityManageBinding extends ViewDataBinding {
   @NonNull
-  public final MotionLayout constraintLayout;
-
-  @NonNull
   public final LinearLayout cvBottomBar;
 
   @NonNull
@@ -58,6 +55,9 @@ public abstract class ActivityManageBinding extends ViewDataBinding {
   public final LinearLayout llManageNewCard;
 
   @NonNull
+  public final MotionLayout mlManage;
+
+  @NonNull
   public final TextView tvManageHidden;
 
   @NonNull
@@ -76,14 +76,13 @@ public abstract class ActivityManageBinding extends ViewDataBinding {
   protected ManageCardViewModel mManageViewModel;
 
   protected ActivityManageBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      MotionLayout constraintLayout, LinearLayout cvBottomBar, FloatingActionButton fbManageAddCard,
-      FrameLayout flManage, ImageView ivBottomPreview, ImageView ivBottomSearch,
-      ImageView ivManageHidden, ImageView ivManageNewcard, LinearLayout llBottomPreview,
-      LinearLayout llBottomSearch, LinearLayout llManageHidden, LinearLayout llManageNewCard,
+      LinearLayout cvBottomBar, FloatingActionButton fbManageAddCard, FrameLayout flManage,
+      ImageView ivBottomPreview, ImageView ivBottomSearch, ImageView ivManageHidden,
+      ImageView ivManageNewcard, LinearLayout llBottomPreview, LinearLayout llBottomSearch,
+      LinearLayout llManageHidden, LinearLayout llManageNewCard, MotionLayout mlManage,
       TextView tvManageHidden, TextView tvManageNewcard, TextView tvPreview, TextView tvSearch,
       View viewManageOpaque) {
     super(_bindingComponent, _root, _localFieldCount);
-    this.constraintLayout = constraintLayout;
     this.cvBottomBar = cvBottomBar;
     this.fbManageAddCard = fbManageAddCard;
     this.flManage = flManage;
@@ -95,6 +94,7 @@ public abstract class ActivityManageBinding extends ViewDataBinding {
     this.llBottomSearch = llBottomSearch;
     this.llManageHidden = llManageHidden;
     this.llManageNewCard = llManageNewCard;
+    this.mlManage = mlManage;
     this.tvManageHidden = tvManageHidden;
     this.tvManageNewcard = tvManageNewcard;
     this.tvPreview = tvPreview;

@@ -11,7 +11,7 @@ import com.good.mycuseme.ui.manage.PreviewReorderFragment
 class CategoryViewPagerAdapter(fm: FragmentManager) :
     FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
-    val cardTitleList =
+    private val cardTitleList =
         listOf("재배열", "이름 순", "조회 순")
 
     val cardList =

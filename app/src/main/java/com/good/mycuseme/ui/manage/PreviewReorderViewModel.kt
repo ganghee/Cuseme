@@ -13,7 +13,7 @@ import retrofit2.HttpException
 class PreviewReorderViewModel : BaseViewModel() {
     private val cardRepository by lazy { CardRepository() }
     var cardList = MutableLiveData<List<CardData>>()
-    var tempCardList = mutableListOf<CardData>()
+    private var tempCardList = mutableListOf<CardData>()
     val getSuccessCards = MutableLiveData<Boolean>().apply {
         value = false
     }
@@ -22,7 +22,6 @@ class PreviewReorderViewModel : BaseViewModel() {
         cardRepository.getAllCard(token)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                Log.d("PViewModel getCard", it.toString())
                 cardList.value = it.data.sortedBy { it.sequence }.filter {
                     it.visible
                 }.toMutableList()
@@ -36,21 +35,13 @@ class PreviewReorderViewModel : BaseViewModel() {
 
     @SuppressLint("CheckResult")
     fun reorderCard(token: String, updateArrBody: UpdateArrBody) {
-        for (i in updateArrBody.updateArr.indices) {
-            Log.d(
-                "updateArr   ",
-                updateArrBody.updateArr[i].cardIdx.toString() + "   " +
-                        updateArrBody.updateArr[i].sequence.toString()
-            )
-
-        }
         cardRepository.reorder(token, updateArrBody)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 Log.d("PViewModel reorderCard", it.message)
+                getCard(token)
             }, { error ->
                 error as HttpException
-                Log.d("list", updateArrBody.toString())
                 Log.d("PViewModel reorder err", error.message())
             })
     }

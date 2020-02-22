@@ -42,7 +42,6 @@ public class ActivityManageBindingImpl extends ActivityManageBinding  {
     }
     private ActivityManageBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 0
-            , (androidx.constraintlayout.motion.widget.MotionLayout) bindings[0]
             , (android.widget.LinearLayout) bindings[10]
             , (com.google.android.material.floatingactionbutton.FloatingActionButton) bindings[3]
             , (android.widget.FrameLayout) bindings[2]
@@ -54,13 +53,14 @@ public class ActivityManageBindingImpl extends ActivityManageBinding  {
             , (android.widget.LinearLayout) bindings[14]
             , (android.widget.LinearLayout) bindings[7]
             , (android.widget.LinearLayout) bindings[4]
+            , (androidx.constraintlayout.motion.widget.MotionLayout) bindings[0]
             , (android.widget.TextView) bindings[9]
             , (android.widget.TextView) bindings[6]
             , (android.widget.TextView) bindings[13]
             , (android.widget.TextView) bindings[16]
             , (android.view.View) bindings[1]
             );
-        this.constraintLayout.setTag(null);
+        this.mlManage.setTag(null);
         setRootTag(root);
         // listeners
         invalidateAll();

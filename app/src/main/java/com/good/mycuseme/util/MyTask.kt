@@ -15,9 +15,9 @@ class MyTask(
 ) :
     AsyncTask<Void?, Void?, Void?>() {
 
-    var result: InputStream? = null
+    private var result: InputStream? = null
     var bitmap: Bitmap? = null
-    var inputStream: InputStream? = null
+    private var inputStream: InputStream? = null
 
     override fun doInBackground(vararg params: Void?): Void? {
         try {
