@@ -1,5 +1,6 @@
 package com.good.mycuseme.base
 
+import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
@@ -14,8 +15,8 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
 ) : RecyclerView.Adapter<BaseViewHolder<B>>() {
 
     val items = mutableListOf<ITEM>()
-    val temp = mutableListOf<ITEM>()
-    val searchItems = mutableListOf<ITEM>()
+    private val temp = mutableListOf<ITEM>()
+    private val searchItems = mutableListOf<ITEM>()
 
     fun replaceAll(item: List<ITEM>?) {
         temp.clear()
@@ -41,22 +42,29 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     override fun onBindViewHolder(holder: BaseViewHolder<B>, position: Int) =
         holder.onBindViewHolder(items[position])
 
-    fun swapItems(fromPosition: Int, toPosition: Int) {
-        if (fromPosition < toPosition) {
-            for (i in fromPosition until toPosition) {
-                temp.add(items[i])
-                items[i] = items[i + 1]
-                items[i + 1] = temp[0]
-            }
-        } else {
-            for (i in fromPosition..toPosition + 1) {
-                temp.add(items[i - 1])
-                items[i - 1] = items[i]
-                items[i] = temp[0]
-            }
-        }
-        notifyItemMoved(fromPosition, toPosition)
-    }
+//    fun swapItems(fromPosition: Int, toPosition: Int) {
+//        if (fromPosition < toPosition) {
+//            for (i in fromPosition until toPosition) {
+//                temp.add(items[i])
+//                items[i] = items[i + 1]
+//                items[i + 1] = temp[0]
+//            }
+//        } else {
+//            for (i in fromPosition..toPosition + 1) {
+//                temp.add(items[i - 1])
+//                items[i - 1] = items[i]
+//                items[i] = temp[0]
+//            }
+//        }
+//        notifyItemMoved(fromPosition, toPosition)
+//        for (i in items) {
+//            i as CardData
+//            Log.d(
+//                "onMove index", i.cardIdx.toString() +
+//                        "   sequence   " + i.sequence.toString()
+//            )
+//        }
+//    }
 
     fun filter(charText: String?) {
         items.clear()
