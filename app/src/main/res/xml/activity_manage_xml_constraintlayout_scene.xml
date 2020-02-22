@@ -4,6 +4,7 @@
     xmlns:motion="http://schemas.android.com/apk/res-auto">
 
     <Transition
+        app:motionInterpolator="easeOut"
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
         motion:duration="500">
@@ -17,8 +18,8 @@
                 motion:motionTarget="@+id/fb_manage_add_card" />
             <KeyAttribute
                 android:alpha="0.0"
-                motion:framePosition="70"
-                motion:motionTarget="@+id/tv_manage_hidden" />
+                motion:framePosition="60"
+                motion:motionTarget="@+id/ll_manage_hidden" />
         </KeyFrameSet>
     </Transition>
     <Transition
@@ -35,11 +36,10 @@
                 motion:motionTarget="@+id/fb_manage_add_card" />
             <KeyAttribute
                 android:alpha="0.0"
-                motion:framePosition="70"
-                motion:motionTarget="@+id/tv_manage_hidden" />
+                motion:framePosition="60"
+                motion:motionTarget="@+id/ll_manage_hidden" />
         </KeyFrameSet>
     </Transition>
-
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/cl_manage"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:alpha="0.0"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/cv_bottom_bar"
             app:layout_constraintStart_toStartOf="@+id/fb_manage_add_card" />
         <Constraint
@@ -75,9 +75,10 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:alpha="0.0"
-            android:visibility="gone"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/cv_bottom_bar"
-            app:layout_constraintStart_toStartOf="@+id/fb_manage_add_card" />
+            app:layout_constraintStart_toStartOf="@+id/fb_manage_add_card"
+            app:layout_constraintTop_toTopOf="@+id/fb_manage_add_card" />
 
     </ConstraintSet>
 
