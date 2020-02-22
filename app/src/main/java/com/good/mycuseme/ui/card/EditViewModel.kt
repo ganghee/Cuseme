@@ -29,7 +29,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class EditViewModel : BaseViewModel() {
-    val isStartRecord = MutableLiveData<Boolean>().apply {
+    private val isStartRecord = MutableLiveData<Boolean>().apply {
         value = false
     }
     val isAutoSpeak = MutableLiveData<Boolean>().apply {
@@ -57,7 +57,7 @@ class EditViewModel : BaseViewModel() {
         value = false
     }
     private lateinit var dialogBuilder: AlertDialog.Builder
-    var recordFileName: String? = null
+    private var recordFileName: String? = null
     private var recorder: MediaRecorder? = null
     private var player: MediaPlayer? = null
     var cardIdx: Int? = null
@@ -212,15 +212,15 @@ class EditViewModel : BaseViewModel() {
     fun updateCard(token: String, image: Uri, contentResolver: ContentResolver) {
         Log.d("imageimage", image.toString())
         val bitmap: Bitmap?
-        if (image.toString().slice(IntRange(0, 5)) == "https:") {
+        bitmap = if (image.toString().slice(IntRange(0, 5)) == "https:") {
             //TODO: http로 시작하는 image인 경우에 서버에 저장되지 않는다 빈 파일이 저장된다.
             val myTask = MyTask(image)
             myTask.execute()
-            bitmap = myTask.bitmap
+            myTask.bitmap
         } else {
             val options = BitmapFactory.Options()
             val inputStream: InputStream = contentResolver.openInputStream(image)!!
-            bitmap = BitmapFactory.decodeStream(inputStream, null, options)
+            BitmapFactory.decodeStream(inputStream, null, options)
         }
         val byteArrayOutputStream = ByteArrayOutputStream()
         //비트맵으로 변환된 이미지 data를 byteArrayOutuptStream으로 저장한다.

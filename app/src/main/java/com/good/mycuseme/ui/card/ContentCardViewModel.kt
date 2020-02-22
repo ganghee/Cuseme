@@ -20,7 +20,7 @@ class ContentCardViewModel : BaseViewModel() {
     val content = MutableLiveData<String>()
     val image = MutableLiveData<String>()
     val serialNumber = MutableLiveData<String>()
-    var recordFileName: String? = null
+    private var recordFileName: String? = null
     var recordFlag = 0
     private val player: MediaPlayer by lazy { MediaPlayer() }
     val hideSuccess = MutableLiveData<Boolean>().apply {
