@@ -148,8 +148,12 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
                 iv_create_save_record.isSelected = true
                 progressbar.max = count
             } else {
-                startPlay()
-                progressBarCounter.start()
+                if (isPlayingRecord.value == true) {
+                    stopPlaying()
+                } else {
+                    startPlay()
+                    progressBarCounter.start()
+                }
             }
             isPlayingRecord.observe(this@CreateActivity, Observer {
                 if (it) {
@@ -178,8 +182,8 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
 
     private fun startRecord() {
         setRecordFileName()
-        tv_create_save_record.visibility = View.INVISIBLE
         cv_create_record.setOnClickListener {
+            tv_create_save_record.visibility = View.INVISIBLE
             progressbar.progress = 0
             progressbar.max = 10000
             second = 0.0
@@ -187,7 +191,6 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
             secondCounter.start()
             createViewModel.apply {
                 iv_create_stop.setImageResource(R.drawable.selector_btn_recording)
-                iv_create_start.isSelected = true
                 cv_create_record.visibility = View.GONE
                 progressbar.visibility = View.VISIBLE
                 tv_create_timer.visibility = View.VISIBLE
