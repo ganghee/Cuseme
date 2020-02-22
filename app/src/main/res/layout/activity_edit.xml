@@ -55,7 +55,8 @@
                             android:layout_marginHorizontal="70dp"
                             android:layout_marginTop="108dp"
                             android:layout_marginBottom="32dp"
-                            android:src="@drawable/ic_newcard_photo" />
+                            android:src="@drawable/ic_newcard_photo"
+                            android:contentDescription="TODO" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -71,7 +72,8 @@
                         android:id="@+id/iv_update_card"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        android:contentDescription="TODO" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -133,7 +135,8 @@
                         android:src="@drawable/selector_btn_auto_record"
                         app:layout_constraintBottom_toBottomOf="@+id/textView"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/textView" />
+                        app:layout_constraintTop_toTopOf="@+id/textView"
+                        android:contentDescription="TODO" />
 
                     <TextView
                         android:id="@+id/tv_update_save_record"
@@ -182,7 +185,8 @@
                             android:src="@drawable/btn_newcard_play_unslected"
                             app:layout_constraintBottom_toBottomOf="@+id/cv_update_record"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/cv_update_record" />
+                            app:layout_constraintTop_toTopOf="@+id/cv_update_record"
+                            android:contentDescription="TODO" />
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/cv_update_record"
@@ -203,7 +207,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:background="@drawable/custom_ripple_effect_dark"
-                                android:src="@drawable/selector_btn_record_start" />
+                                android:src="@drawable/selector_btn_record_start"
+                                android:contentDescription="TODO" />
 
                         </androidx.cardview.widget.CardView>
 

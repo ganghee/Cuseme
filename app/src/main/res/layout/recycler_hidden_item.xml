@@ -39,7 +39,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/selector_card_background_unpreference"
             android:elevation="1dp"
-            android:orientation="vertical"></View>
+            android:orientation="vertical" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rl_user_item"

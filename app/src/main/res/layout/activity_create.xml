@@ -54,7 +54,8 @@
                             android:layout_marginHorizontal="70dp"
                             android:layout_marginTop="108dp"
                             android:layout_marginBottom="32dp"
-                            android:src="@drawable/ic_newcard_photo" />
+                            android:src="@drawable/ic_newcard_photo"
+                            android:contentDescription="TODO" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -70,7 +71,8 @@
                         android:id="@+id/iv_create_card"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop" />
+                        android:scaleType="centerCrop"
+                        android:contentDescription="TODO" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -171,12 +173,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
-                        android:clickable="@{createViewModel.isStopClickable}"
                         android:padding="16dp"
                         android:src="@drawable/btn_newcard_play_unslected"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="TODO" />
 
                     <ProgressBar
                         android:id="@+id/progressbar"
