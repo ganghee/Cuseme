@@ -28,7 +28,7 @@ class HomeViewModel : BaseViewModel() {
     val cardList = MutableLiveData<List<CardData>>()
     private val sortList = listOf("visibility", "title", "count")
     private var index = 0
-    lateinit var textToSpeech: TextToSpeech
+    private lateinit var textToSpeech: TextToSpeech
     val isEmpty = MutableLiveData<Boolean>().apply {
         value = false
     }
@@ -102,10 +102,12 @@ class HomeViewModel : BaseViewModel() {
             TextToSpeech.OnInitListener { status ->
                 if (status == TextToSpeech.SUCCESS) {
                     textToSpeech.setLanguage(Locale.KOREA).let {
-                        if (it == TextToSpeech.LANG_MISSING_DATA
-                            || it == TextToSpeech.LANG_NOT_SUPPORTED
-                        ) {
-                            //Toast.makeText(this, "지금 지원되지 않습니다.", Toast.LENGTH_LONG).show()
+                        when (it) {
+                            TextToSpeech.LANG_MISSING_DATA,
+                            TextToSpeech.LANG_NOT_SUPPORTED
+                            -> {
+                                //Toast.makeText(this, "지금 지원되지 않습니다.", Toast.LENGTH_LONG).show()
+                            }
                         }
                     }
                 }
