@@ -11,7 +11,7 @@ import retrofit2.HttpException
 class PhoneNumberViewModel : BaseViewModel() {
     val phoneNumber = MutableLiveData<String>()
     val isClickable = MutableLiveData<Boolean>()
-    val repository by lazy { UserRepository() }
+    private val repository by lazy { UserRepository() }
     val isSuccess = MutableLiveData<Int>().apply {
         value = 0
     }

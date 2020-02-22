@@ -17,7 +17,7 @@ class PasswordViewModel : BaseViewModel() {
         value = ""
     }
     val successChange = MutableLiveData<Int>()
-    val repository by lazy { UserRepository() }
+    private val repository by lazy { UserRepository() }
 
     fun confirmNewPassword() {
         isClickable.value =
