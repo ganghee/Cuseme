@@ -33,13 +33,13 @@ class PreviewArrayFragment :
         super.onActivityCreated(savedInstanceState)
 
         initData()
-        emptyCheck()
+        initRecyclerView()
     }
 
     override fun onStart() {
         super.onStart()
-        initRecyclerView()
         getArrayCards()
+        emptyCheck()
     }
 
     private fun initData() {
