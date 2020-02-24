@@ -108,7 +108,10 @@ class CreateViewModel : BaseViewModel() {
 
     fun stopPlaying() {
         isPlayingRecord.value = false
-        player?.stop()
+        player?.apply {
+            stop()
+            release()
+        }
     }
 
     fun stopRecord() {
@@ -118,7 +121,6 @@ class CreateViewModel : BaseViewModel() {
             isPlayingRecord.value = false
             isSaveRecordClickable.value = true
             isRecording.value = false
-            recorder = null
         }
     }
 
@@ -160,7 +162,6 @@ class CreateViewModel : BaseViewModel() {
     }
 
     fun clickAutoSpeak(view: View) {
-        Log.d("view.select12", view.isSelected.toString())
         if (!view.isSelected) {
             speakFileNull()
         }
@@ -169,14 +170,6 @@ class CreateViewModel : BaseViewModel() {
     }
 
     private fun speakFileNull() {
-        recorder?.apply {
-            stop()
-            release()
-        }
-        player?.apply {
-            stop()
-            release()
-        }
         recorder = null
         player = null
     }
