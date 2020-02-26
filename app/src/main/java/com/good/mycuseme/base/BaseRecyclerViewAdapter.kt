@@ -4,9 +4,10 @@ import android.util.Log
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.good.mycuseme.data.card.CardData
-import java.util.*
+import com.good.mycuseme.ui.manage.SearchViewModel
 
 abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     @LayoutRes
@@ -17,6 +18,7 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
     val items = mutableListOf<ITEM>()
     private val temp = mutableListOf<ITEM>()
     private val searchItems = mutableListOf<ITEM>()
+    private val updateList = MutableLiveData<List<ITEM>>()
 
     fun replaceAll(item: List<ITEM>?) {
         temp.clear()
@@ -37,10 +39,15 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
             bindingId = bindingId
         ) {}
 
-    override fun getItemCount(): Int = items.size
+    override fun getItemCount(): Int {
+        Log.d("count", items.size.toString())
+        return items.size
+    }
 
-    override fun onBindViewHolder(holder: BaseViewHolder<B>, position: Int) =
+    override fun onBindViewHolder(holder: BaseViewHolder<B>, position: Int) {
+        Log.d("Bind", items[position].toString())
         holder.onBindViewHolder(items[position])
+    }
 
 //    fun swapItems(fromPosition: Int, toPosition: Int) {
 //        if (fromPosition < toPosition) {
@@ -67,20 +74,28 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
 //    }
 
     fun filter(charText: String?) {
-        items.clear()
-        val lowChar = charText?.toLowerCase(Locale.getDefault())
-        if (lowChar?.length != 0) {
+        val searchViewModel = SearchViewModel()
+        if (charText?.isEmpty()!!) {
+            items.clear()
+            items.addAll(searchItems)
+        } else {
+            val result = ArrayList<ITEM>()
+            val text = charText.toLowerCase()
             for (cardData in searchItems) {
                 cardData as CardData
-                if (cardData.title.toLowerCase(Locale.getDefault()).contains(lowChar.toString())) {
-                    items.add(cardData)
+                if (cardData.title.toLowerCase().contains(text)) {
+                    result.add(cardData)
                 }
             }
-        } else {
-            items.addAll(searchItems)
+            items.clear()
+            items.addAll(result)
         }
+        updateList.value = items
+        searchViewModel.cardList.value = items as MutableList<CardData>
         notifyDataSetChanged()
     }
+}
+
 //    fun filteraaa(charText: String?): android.widget.Filter {
 //        return object : android.widget.Filter() {
 //            override fun performFiltering(constraint: CharSequence?): FilterResults {
@@ -108,4 +123,3 @@ abstract class BaseRecyclerViewAdapter<ITEM : Any, B : ViewDataBinding>(
 //        }
 //    }
 
-}
