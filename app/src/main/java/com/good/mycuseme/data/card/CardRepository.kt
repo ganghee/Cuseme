@@ -25,13 +25,23 @@ class CardRepository {
     fun putUpdateCard(
         token: String,
         cardIdx: Int,
-        image: MultipartBody.Part,
+        image: MultipartBody.Part?,
         record: MultipartBody.Part?,
         title: RequestBody,
         content: RequestBody,
-        visible: RequestBody
+        visible: RequestBody,
+        tts: Boolean?
     ): Single<CardResponse> =
-        CardRemoteDataSource.putUpdateCard(token, cardIdx, image, record, title, content, visible)
+        CardRemoteDataSource.putUpdateCard(
+            token,
+            cardIdx,
+            image,
+            record,
+            title,
+            content,
+            visible,
+            tts
+        )
 
     fun hideCard(
         token: String,
