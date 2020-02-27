@@ -49,13 +49,14 @@ object CardRemoteDataSource {
     fun putUpdateCard(
         token: String,
         cardIdx: Int,
-        image: MultipartBody.Part,
+        image: MultipartBody.Part?,
         record: MultipartBody.Part?,
         title: RequestBody,
         content: RequestBody,
-        visible: RequestBody
+        visible: RequestBody,
+        tts: Boolean?
     ): Single<CardResponse> =
-        retrofit.putUpdateCard(token, cardIdx, image, record, title, content, visible)
+        retrofit.putUpdateCard(token, cardIdx, image, record, title, content, visible, tts)
             .subscribeOn(Schedulers.io())
 
     fun getCard(token: String, cardIdx: Int): Single<CardResponse> =
