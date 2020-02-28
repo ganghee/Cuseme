@@ -47,11 +47,12 @@ interface NetworkService {
     fun putUpdateCard(
         @Header("token") token: String,
         @Path("cardIdx") cardIdx: Int,
-        @Part image: MultipartBody.Part,
+        @Part image: MultipartBody.Part?,
         @Part record: MultipartBody.Part?,
         @Part("title") title: RequestBody,
         @Part("content") content: RequestBody,
-        @Part("visible") visible: RequestBody
+        @Part("visible") visible: RequestBody,
+        @Part("tts") tts: Boolean?
     ): Single<CardResponse>
 
     @GET("cards/{cardIdx}")
