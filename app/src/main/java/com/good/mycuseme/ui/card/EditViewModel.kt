@@ -4,19 +4,21 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.MutableLiveData
 import com.good.mycuseme.base.BaseViewModel
 import com.good.mycuseme.data.card.CardRepository
-import com.good.mycuseme.util.MyTask
 import com.good.mycuseme.util.isPermissionNotGranted
 import com.good.mycuseme.util.startSettingActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -29,23 +31,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class EditViewModel : BaseViewModel() {
-    private val isStartRecord = MutableLiveData<Boolean>().apply {
-        value = false
-    }
     val isAutoSpeak = MutableLiveData<Boolean>().apply {
         value = false
     }
     val isSaveRecord = MutableLiveData<Boolean>().apply {
         value = false
     }
-    val isRecordClickable = MutableLiveData<Boolean>().apply {
+    val isSaveRecordClickable = MutableLiveData<Boolean>().apply {
         value = false
-    }
-    val isStopClickable = MutableLiveData<Boolean>().apply {
-        value = false
-    }
-    val isStartClickable = MutableLiveData<Boolean>().apply {
-        value = true
     }
     val isRecording = MutableLiveData<Boolean>().apply {
         value = false
@@ -57,9 +50,11 @@ class EditViewModel : BaseViewModel() {
         value = false
     }
     private lateinit var dialogBuilder: AlertDialog.Builder
-    private var recordFileName: String? = null
+    private lateinit var recordFileName: String
+    private var photo: MultipartBody.Part? = null
     private var recorder: MediaRecorder? = null
     private var player: MediaPlayer? = null
+    private var record: MultipartBody.Part? = null
     var cardIdx: Int? = null
     val title = MutableLiveData<String>()
     val content = MutableLiveData<String>()
@@ -67,6 +62,8 @@ class EditViewModel : BaseViewModel() {
     val recordServer = MutableLiveData<Boolean>()
     private val repository by lazy { CardRepository() }
     var updateCardIdx: Int? = null
+    var uriRotateImage = MutableLiveData<Uri>()
+    var recordServerTime = MutableLiveData<Int>()
 
     @SuppressLint("CheckResult")
     fun initData(token: String?, cardIndex: Int?) {
@@ -80,31 +77,42 @@ class EditViewModel : BaseViewModel() {
                 if (it.cardData?.record != null) {
                     recordServer.value = true
                     recordFileName = it.cardData.record
-                    isStopClickable.value = true
+                    setPlayTime()
                 } else {
                     recordServer.value = false
-                    isStopClickable.value = false
+                    isAutoSpeak.value = true
+                    recordFileName = ""
                 }
-                Log.d("imageServer", it.cardData?.image)
-                Log.d("recordServer", it.cardData?.record.toString())
             }, { error ->
                 error as HttpException
                 Log.d("EditViewModel err", error.message())
             })
     }
 
+    private fun setPlayTime() {
+        player = MediaPlayer().apply {
+            try {
+                setDataSource(recordFileName)
+                prepare()
+                setOnPreparedListener {
+                    recordServerTime.value = duration
+                }
+            } catch (e: IOException) {
+                Log.e("setPlayTime", "prepare() failed")
+            }
+        }
+    }
+
     @SuppressLint("SimpleDateFormat")
-    fun setFlieName(cacheDir: String) {
+    fun setFileName(cacheDir: String) {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         recordFileName = "${cacheDir}/audiorecord$timeStamp.m4a"
-        Log.d("recordFileName", recordFileName)
     }
 
     fun startRecord() {
-        isStartRecord.value = true
-        isStopClickable.value = true
-        isRecordClickable.value = false
-        isStartClickable.value = false
+        speakFileNull()
+        Log.d("recordName", recordFileName)
+        isSaveRecordClickable.value = false
         isPlayingRecord.value = true
         recorder = MediaRecorder().apply {
             setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -116,7 +124,7 @@ class EditViewModel : BaseViewModel() {
                 isRecording.value = true
                 Log.d("recording", isRecording.value.toString())
             } catch (e: IOException) {
-                Log.e("startRecord", e.message)
+                Log.e("startRecord", "prepare() failed")
             }
             start()
         }
@@ -126,17 +134,25 @@ class EditViewModel : BaseViewModel() {
         player = MediaPlayer().apply {
             try {
                 setDataSource(recordFileName)
-                isStartClickable.value = false
                 prepare()
-                start()
+                setOnPreparedListener {
+                    it.start()
+                }
                 isPlayingRecord.value = true
             } catch (e: IOException) {
                 Log.e("startPlay", "prepare() failed")
             }
             setOnCompletionListener {
-                isPlayingRecord.value = false
-                isStartClickable.value = true
+                stopPlaying()
             }
+        }
+    }
+
+    fun stopPlaying() {
+        isPlayingRecord.value = false
+        player?.apply {
+            stop()
+            release()
         }
     }
 
@@ -145,10 +161,8 @@ class EditViewModel : BaseViewModel() {
             stop()
             release()
             isPlayingRecord.value = false
-            isRecordClickable.value = true
-            isStartClickable.value = true
+            isSaveRecordClickable.value = true
             isRecording.value = false
-            recorder = null
         }
     }
 
@@ -189,62 +203,88 @@ class EditViewModel : BaseViewModel() {
         }
     }
 
-    fun clickAutoSpeak(view: View) {
-        Log.d("view.select12", view.isSelected.toString())
-        if (!view.isSelected) {
-            recorder?.apply {
-                stop()
-                release()
-            }
-            player?.apply {
-                stop()
-                release()
-            }
-            recorder = null
-            player = null
+    private fun speakFileNull() {
+        recorder = null
+        player = null
+    }
+
+    fun setRotateImage(imageUri: Uri, contentResolver: ContentResolver) {
+        try {
+            val imagePath = absolutelyPath(imageUri, contentResolver)
+            val image = BitmapFactory.decodeFile(imagePath)
+            val exif = ExifInterface(imagePath)
+            val exifOrientation = exif.getAttributeInt(
+                ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL
+            )
+            val exifDegree = exifOrientationToDegrees(exifOrientation)
+            uriRotateImage.value = rotate(image, exifDegree, contentResolver)
+        } catch (e: Exception) {
+            Log.d("image err", e.localizedMessage!!)
         }
-        view.isSelected = !view.isSelected
-        isAutoSpeak.value = view.isSelected
-        Log.d("view.select", isAutoSpeak.value.toString())
+    }
+
+    private fun rotate(getBitmap: Bitmap, degrees: Int, contentResolver: ContentResolver): Uri {
+        var bitmap = getBitmap
+        if (degrees != 0) {
+            val m = Matrix()
+            m.setRotate(
+                degrees.toFloat(), bitmap.width.toFloat() / 2,
+                bitmap.height.toFloat() / 2
+            )
+            try {
+                val converted = Bitmap.createBitmap(
+                    bitmap, 0, 0,
+                    bitmap.width, bitmap.height, m, true
+                )
+                if (bitmap != converted) {
+                    bitmap.recycle()
+                    bitmap = converted
+                }
+            } catch (ex: OutOfMemoryError) { // 메모리가 부족하여 회전을 시키지 못할 경우 그냥 원본을 반환합니다.
+            }
+        }
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path: String =
+            MediaStore.Images.Media.insertImage(contentResolver, bitmap, "Title", null)
+        return Uri.parse(path)
+    }
+
+    @SuppressLint("Recycle")
+    fun absolutelyPath(path: Uri, contentResolver: ContentResolver): String {
+        val proj: Array<String> = arrayOf(MediaStore.Images.Media.DATA)
+        val c: Cursor = contentResolver.query(path, proj, null, null, null)!!
+        val index = c.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        c.moveToFirst()
+
+        return c.getString(index)
     }
 
     @SuppressLint("CheckResult")
-    fun updateCard(token: String, image: Uri, contentResolver: ContentResolver) {
-        Log.d("imageimage", image.toString())
-        val bitmap: Bitmap?
-        bitmap = if (image.toString().slice(IntRange(0, 5)) == "https:") {
-            //TODO: http로 시작하는 image인 경우에 서버에 저장되지 않는다 빈 파일이 저장된다.
-            val myTask = MyTask(image)
-            myTask.execute()
-            myTask.bitmap
+    fun updateCard(token: String, image: Uri?, contentResolver: ContentResolver) {
+        if (image.toString().startsWith("http")) {
+            photo = null
         } else {
             val options = BitmapFactory.Options()
-            val inputStream: InputStream = contentResolver.openInputStream(image)!!
-            BitmapFactory.decodeStream(inputStream, null, options)
+            val inputStream: InputStream = image.let { contentResolver.openInputStream(it!!) }!!
+            val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
+            val byteArrayOutputStream = ByteArrayOutputStream()
+            bitmap?.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
+            val photoBody =
+                RequestBody.create(
+                    MediaType.parse("image/jpg"),
+                    byteArrayOutputStream.toByteArray()
+                )
+            photo =
+                MultipartBody.Part.createFormData(
+                    "image",
+                    File(image.toString()).name + ".jpg",
+                    photoBody
+                )
         }
-        val byteArrayOutputStream = ByteArrayOutputStream()
-        //비트맵으로 변환된 이미지 data를 byteArrayOutuptStream으로 저장한다.
-        bitmap?.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
-        //retrofit으로 image데이터를 전송할 때는 반드시 다음과 같은 작업을 거쳐 RequestBody형태로 바꾼다.
-        val photoBody =
-            RequestBody.create(MediaType.parse("image/jpg"), byteArrayOutputStream.toByteArray())
-        //retrofit으로 image데이터를 전송할 때는 MultipartBody.Part 형태로 바꾼다.
-        val photo =
-            MultipartBody.Part.createFormData(
-                "image",
-                File(image.toString()).name + ".jpg",
-                photoBody
-            )
-        val title = RequestBody.create(MediaType.parse("text/plain"), title.value!!)
-        val content = RequestBody.create(MediaType.parse("text/plain"), content.value!!)
-        val visibility = RequestBody.create(MediaType.parse("text/plain"), "true")
-        val record: MultipartBody.Part?
-        record = if (isAutoSpeak.value!! || recordFileName == null) {
+        record = if (recordFileName.startsWith("http") || isAutoSpeak.value!!) {
             null
         } else {
-            //TODO: http로 시작하는 recordFileName인 경우에 W/System.err: java.io.FileNotFoundException:
-            // https:/s3sopt25.s3.ap-northeast-2.amazonaws.com/1580795950807.MP3: open failed:
-            // ENOENT (No such file or directory) 이라는 에러가 나온다.
             val audioFile = File(recordFileName)
             val audioUri = Uri.fromFile(File(recordFileName))
             val audioBody =
@@ -254,10 +294,20 @@ class EditViewModel : BaseViewModel() {
                 )
             MultipartBody.Part.createFormData("record", audioFile.name + ".mp3", audioBody)
         }
-        Log.d("RequestImage", image.toString())
-        Log.d("RequestRecord", record.toString())
+        val title = RequestBody.create(MediaType.parse("text/plain"), title.value!!)
+        val content = RequestBody.create(MediaType.parse("text/plain"), content.value!!)
+        val visibility = RequestBody.create(MediaType.parse("text/plain"), "true")
 
-        repository.putUpdateCard(token, cardIdx!!, photo, record, title, content, visibility)
+        repository.putUpdateCard(
+            token,
+            cardIdx!!,
+            photo,
+            record,
+            title,
+            content,
+            visibility,
+            isAutoSpeak.value
+        )
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 updateCardIdx = it.cardData?.cardIdx
@@ -267,5 +317,14 @@ class EditViewModel : BaseViewModel() {
                 error as FileNotFoundException
                 Log.d("EditViewModel err", error.message)
             })
+    }
+
+    private fun exifOrientationToDegrees(exifOrientation: Int): Int {
+        return when (exifOrientation) {
+            ExifInterface.ORIENTATION_ROTATE_90 -> 90
+            ExifInterface.ORIENTATION_ROTATE_180 -> 180
+            ExifInterface.ORIENTATION_ROTATE_270 -> 270
+            else -> 0
+        }
     }
 }
