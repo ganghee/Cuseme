@@ -50,7 +50,7 @@
                 replaceAll="@{hiddenCardViewModel.cardList}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:padding="20dp" />
+                android:paddingHorizontal="8dp" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ImageView

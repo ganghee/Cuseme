@@ -17,28 +17,30 @@ public class FragmentSearchBindingImpl extends FragmentSearchBinding  {
         sViewsWithIds.put(R.id.textView2, 2);
         sViewsWithIds.put(R.id.iv_search_download, 3);
         sViewsWithIds.put(R.id.sv_card, 4);
-        sViewsWithIds.put(R.id.srl_search, 5);
+        sViewsWithIds.put(R.id.progress_search, 5);
+        sViewsWithIds.put(R.id.srl_search, 6);
     }
     // views
     @NonNull
-    private final android.widget.LinearLayout mboundView0;
+    private final androidx.constraintlayout.widget.ConstraintLayout mboundView0;
     // variables
     // values
     // listeners
     // Inverse Binding Event Handlers
 
     public FragmentSearchBindingImpl(@Nullable androidx.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
-        this(bindingComponent, root, mapBindings(bindingComponent, root, 6, sIncludes, sViewsWithIds));
+        this(bindingComponent, root, mapBindings(bindingComponent, root, 7, sIncludes, sViewsWithIds));
     }
     private FragmentSearchBindingImpl(androidx.databinding.DataBindingComponent bindingComponent, View root, Object[] bindings) {
         super(bindingComponent, root, 1
             , (android.widget.ImageView) bindings[3]
+            , (android.widget.ProgressBar) bindings[5]
             , (androidx.recyclerview.widget.RecyclerView) bindings[1]
-            , (androidx.swiperefreshlayout.widget.SwipeRefreshLayout) bindings[5]
+            , (androidx.swiperefreshlayout.widget.SwipeRefreshLayout) bindings[6]
             , (androidx.appcompat.widget.SearchView) bindings[4]
             , (android.widget.TextView) bindings[2]
             );
-        this.mboundView0 = (android.widget.LinearLayout) bindings[0];
+        this.mboundView0 = (androidx.constraintlayout.widget.ConstraintLayout) bindings[0];
         this.mboundView0.setTag(null);
         this.rvSearch.setTag(null);
         setRootTag(root);

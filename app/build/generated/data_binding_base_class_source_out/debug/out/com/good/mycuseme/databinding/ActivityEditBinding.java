@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,9 @@ import java.lang.Object;
 public abstract class ActivityEditBinding extends ViewDataBinding {
   @NonNull
   public final CardView cardView;
+
+  @NonNull
+  public final ConstraintLayout clUpdate;
 
   @NonNull
   public final CardView cvUpdateRecord;
@@ -53,13 +57,13 @@ public abstract class ActivityEditBinding extends ViewDataBinding {
   public final LinearLayout llUpdateDefaultPicture;
 
   @NonNull
-  public final ConstraintLayout llUpdateRecord;
+  public final ProgressBar progressbarEdit;
 
   @NonNull
   public final View tbUpdateCard;
 
   @NonNull
-  public final TextView textView;
+  public final TextView textViewEdit;
 
   @NonNull
   public final TextView tvUpdateNoRecord;
@@ -67,17 +71,22 @@ public abstract class ActivityEditBinding extends ViewDataBinding {
   @NonNull
   public final TextView tvUpdateSaveRecord;
 
+  @NonNull
+  public final TextView tvUpdateTimer;
+
   @Bindable
   protected EditViewModel mEditViewModel;
 
   protected ActivityEditBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      CardView cardView, CardView cvUpdateRecord, EditText etUpdateCardContent,
-      EditText etUpdateCardTitle, ImageView ivUpdateCard, ImageView ivUpdateRecord,
-      Button ivUpdateSaveRecord, ImageView ivUpdateStart, ImageView ivUpdateStop,
-      LinearLayout llUpdateDefaultPicture, ConstraintLayout llUpdateRecord, View tbUpdateCard,
-      TextView textView, TextView tvUpdateNoRecord, TextView tvUpdateSaveRecord) {
+      CardView cardView, ConstraintLayout clUpdate, CardView cvUpdateRecord,
+      EditText etUpdateCardContent, EditText etUpdateCardTitle, ImageView ivUpdateCard,
+      ImageView ivUpdateRecord, Button ivUpdateSaveRecord, ImageView ivUpdateStart,
+      ImageView ivUpdateStop, LinearLayout llUpdateDefaultPicture, ProgressBar progressbarEdit,
+      View tbUpdateCard, TextView textViewEdit, TextView tvUpdateNoRecord,
+      TextView tvUpdateSaveRecord, TextView tvUpdateTimer) {
     super(_bindingComponent, _root, _localFieldCount);
     this.cardView = cardView;
+    this.clUpdate = clUpdate;
     this.cvUpdateRecord = cvUpdateRecord;
     this.etUpdateCardContent = etUpdateCardContent;
     this.etUpdateCardTitle = etUpdateCardTitle;
@@ -87,11 +96,12 @@ public abstract class ActivityEditBinding extends ViewDataBinding {
     this.ivUpdateStart = ivUpdateStart;
     this.ivUpdateStop = ivUpdateStop;
     this.llUpdateDefaultPicture = llUpdateDefaultPicture;
-    this.llUpdateRecord = llUpdateRecord;
+    this.progressbarEdit = progressbarEdit;
     this.tbUpdateCard = tbUpdateCard;
-    this.textView = textView;
+    this.textViewEdit = textViewEdit;
     this.tvUpdateNoRecord = tvUpdateNoRecord;
     this.tvUpdateSaveRecord = tvUpdateSaveRecord;
+    this.tvUpdateTimer = tvUpdateTimer;
   }
 
   public abstract void setEditViewModel(@Nullable EditViewModel editViewModel);

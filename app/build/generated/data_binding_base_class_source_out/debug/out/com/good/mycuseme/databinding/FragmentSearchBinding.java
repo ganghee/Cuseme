@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,9 @@ public abstract class FragmentSearchBinding extends ViewDataBinding {
   public final ImageView ivSearchDownload;
 
   @NonNull
+  public final ProgressBar progressSearch;
+
+  @NonNull
   public final RecyclerView rvSearch;
 
   @NonNull
@@ -39,10 +43,11 @@ public abstract class FragmentSearchBinding extends ViewDataBinding {
   protected SearchViewModel mSearchViewModel;
 
   protected FragmentSearchBinding(Object _bindingComponent, View _root, int _localFieldCount,
-      ImageView ivSearchDownload, RecyclerView rvSearch, SwipeRefreshLayout srlSearch,
-      SearchView svCard, TextView textView2) {
+      ImageView ivSearchDownload, ProgressBar progressSearch, RecyclerView rvSearch,
+      SwipeRefreshLayout srlSearch, SearchView svCard, TextView textView2) {
     super(_bindingComponent, _root, _localFieldCount);
     this.ivSearchDownload = ivSearchDownload;
+    this.progressSearch = progressSearch;
     this.rvSearch = rvSearch;
     this.srlSearch = srlSearch;
     this.svCard = svCard;

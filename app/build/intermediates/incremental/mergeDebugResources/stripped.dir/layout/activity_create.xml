@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+                                                   
+
+    
+
+                 
+                                  
+                                                               
+           
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_color"
+        android:orientation="vertical" android:tag="layout/activity_create_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools">
+
+        <include
+            android:id="@+id/tb_create_card"
+            layout="@layout/toolbar_card" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingVertical="12dp"
+                tools:context=".ui.card.CreateActivity">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="360dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@drawable/round_all_white_20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:id="@+id/ll_create_default_picture"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/round_all_white_20"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginHorizontal="70dp"
+                            android:layout_marginTop="108dp"
+                            android:layout_marginBottom="32dp"
+                            android:contentDescription="TODO"
+                            android:src="@drawable/ic_newcard_photo" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="60dp"
+                            android:text="@string/bring_picture_from_album"
+                            android:textColor="@color/pinkish_grey_two"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_create_card"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="TODO"
+                        android:scaleType="centerCrop" />
+
+                </androidx.cardview.widget.CardView>
+
+                <EditText
+                    android:id="@+id/et_create_card_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@drawable/round_all_white_20"
+                    android:hint="@string/input_card_title"
+                    android:padding="20dp"
+                    android:tag="binding_1"                 
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/very_light_pink"
+                    android:textSize="20sp"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView"
+                    tools:layout_editor_absoluteX="20dp" />
+
+                <EditText
+                    android:id="@+id/et_create_card_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@drawable/round_all_white_20"
+                    android:gravity="top"
+                    android:hint="@string/input_card_content"
+                    android:padding="20dp"
+                    android:tag="binding_2"                   
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/very_light_pink"
+                    app:layout_constraintTop_toBottomOf="@+id/et_create_card_title" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="12dp"
+                    android:text="@string/record_text"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_create_card_content" />
+
+                <ImageView
+                    android:id="@+id/iv_create_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:tag="binding_3"                                        
+                    android:src="@drawable/selector_btn_auto_record"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/tv_create_save_record"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="@string/save_record"
+                    android:textColor="@color/mainpink"
+                    android:textSize="12sp"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+                <TextView
+                    android:id="@+id/tv_create_no_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@color/white_two"
+                    android:gravity="center"
+                    android:text="@string/no_record"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_create_save_record" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ll_create_record"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@drawable/round_all_white_20"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_create_save_record">
+
+                    <ImageView
+                        android:id="@+id/iv_create_stop"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="40dp"
+                        android:background="@drawable/custom_ripple_effect_dark"
+                        android:contentDescription="TODO"
+                        android:padding="16dp"
+                        android:src="@drawable/btn_newcard_play_unslected"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ProgressBar
+                        android:id="@+id/progressbar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/timer_gray"
+                        android:indeterminate="false"
+                        android:max="10000"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/timer_pink"
+                        android:rotation="-90"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_create_save_record"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_create_save_record"
+                        app:layout_constraintHorizontal_bias="0.575"
+                        app:layout_constraintStart_toEndOf="@+id/iv_create_stop"
+                        app:layout_constraintTop_toTopOf="@+id/iv_create_save_record" />
+
+                    <TextView
+                        android:id="@+id/tv_create_timer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 초"
+                        android:textSize="20sp"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@+id/progressbar"
+                        app:layout_constraintEnd_toEndOf="@+id/progressbar"
+                        app:layout_constraintStart_toStartOf="@+id/progressbar"
+                        app:layout_constraintTop_toTopOf="@+id/progressbar" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_create_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:foreground="@drawable/custom_ripple_effect_dark"
+                        android:visibility="visible"
+                        app:cardCornerRadius="60dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_create_save_record"
+                        app:layout_constraintEnd_toStartOf="@+id/iv_create_save_record"
+                        app:layout_constraintHorizontal_bias="0.561"
+                        app:layout_constraintStart_toEndOf="@+id/iv_create_stop"
+                        app:layout_constraintTop_toTopOf="@+id/iv_create_save_record">
+
+                        <ImageView
+                            android:id="@+id/iv_create_start"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_start" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <Button
+                        android:id="@+id/iv_create_save_record"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/selector_btn_newcard_complete"
+                        android:tag="binding_4"                                       
+                        android:foreground="@drawable/custom_ripple_effect_dark"
+                        app:layout_constraintBottom_toBottomOf="@+id/iv_create_stop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/iv_create_stop" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+         

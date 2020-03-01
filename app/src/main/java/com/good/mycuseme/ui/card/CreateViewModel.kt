@@ -63,7 +63,7 @@ class CreateViewModel : BaseViewModel() {
     var uriRotateImage = MutableLiveData<Uri>()
 
     @SuppressLint("SimpleDateFormat")
-    fun setFlieName(cacheDir: String) {
+    fun setFileName(cacheDir: String) {
         val timeStamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         recordFileName = "${cacheDir}/audiorecord$timeStamp.m4a"
     }
@@ -204,7 +204,6 @@ class CreateViewModel : BaseViewModel() {
         if (recorder == null) {
             record = null
         }
-        Log.d("record", record.toString())
         repository.postCreateCard(token, photo, record, title, content, visibility)
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

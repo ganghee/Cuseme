@@ -2,6 +2,7 @@ package com.good.mycuseme.ui.manage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -26,19 +27,18 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     private val token by lazy {
         SharedPreferenceController.getUserToken(activity!!.applicationContext)
     }
-    lateinit var recycleAdapter: BaseRecyclerViewAdapter<CardData, RecyclerCardItemBinding>
-
+    lateinit var recyclerAdapter: BaseRecyclerViewAdapter<CardData, RecyclerCardItemBinding>
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initData()
         initRecyclerView()
         download()
+        getCards()
     }
 
     override fun onStart() {
         super.onStart()
-        getCards()
         searchCard()
         searchFilter()
     }
@@ -52,12 +52,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 R.color.light_blue
             )
         }
+
     }
 
     private fun initRecyclerView() {
         binding.rvSearch.apply {
             layoutManager = GridLayoutManager(this.context, 2)
-            recycleAdapter = object : BaseRecyclerViewAdapter<CardData, RecyclerCardItemBinding>(
+            recyclerAdapter = object : BaseRecyclerViewAdapter<CardData, RecyclerCardItemBinding>(
                 layoutRes = R.layout.recycler_search_item,
                 bindingId = BR.cardData
             ) {
@@ -73,28 +74,37 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                         }
                     }
                 }
+
+                override fun onBindViewHolder(
+                    holder: BaseViewHolder<RecyclerCardItemBinding>,
+                    position: Int
+                ) {
+                    Log.d("binding", "   binding")
+                    super.onBindViewHolder(holder, position)
+                }
             }
-            this.adapter = recycleAdapter
+            this.adapter = recyclerAdapter
         }
     }
-
 
     private fun searchCard() {
         binding.svCard.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
+                recyclerAdapter.filter(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                recycleAdapter.filter(newText)
+                Log.d("change   ", newText!!)
+                recyclerAdapter.filter(newText)
                 return false
             }
         })
     }
 
     private fun searchFilter() {
-        recycleAdapter.filter(sv_card.query.toString())
+        recyclerAdapter.filter(sv_card.query.toString())
     }
 
     private fun getCards() {

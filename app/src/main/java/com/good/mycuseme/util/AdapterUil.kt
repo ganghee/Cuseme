@@ -3,11 +3,9 @@ package com.good.mycuseme.util
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.provider.Settings
-import android.util.Log
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -48,19 +46,6 @@ private fun createLoggerListener(name: String): RequestListener<Drawable> {
             dataSource: com.bumptech.glide.load.DataSource?,
             isFirstResource: Boolean
         ): Boolean {
-            if (resource is BitmapDrawable) {
-                val bitmap = resource.bitmap
-                Log.d(
-                    "GlideApp",
-                    String.format(
-                        "Ready %s bitmap %,d bytes, size: %d x %d",
-                        name,
-                        bitmap.byteCount,
-                        bitmap.width,
-                        bitmap.height
-                    )
-                )
-            }
             return false
         }
     }

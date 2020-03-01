@@ -1,6 +1,5 @@
 package com.good.mycuseme.adapter
 
-import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.good.mycuseme.base.BaseRecyclerViewAdapter
@@ -30,7 +29,6 @@ class DragManageAdapter(
     ): Int {
         updateItem.clear()
         updateItem.addAll(dragAdapter.items)
-
         viewHolder.itemView.view_masking.isSelected = true
         fromPosition = viewHolder.adapterPosition
         return 0

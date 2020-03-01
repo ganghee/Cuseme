@@ -13,6 +13,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background_color"
         android:orientation="vertical">
 
         <include
@@ -21,22 +22,22 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:fillViewport="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="10dp"
+                android:paddingVertical="12dp"
                 tools:context=".ui.card.CreateActivity">
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cardView"
                     android:layout_width="match_parent"
                     android:layout_height="360dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="8dp"
-                    android:background="@color/white"
+                    android:background="@drawable/round_all_white_20"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -45,6 +46,7 @@
                         android:id="@+id/ll_create_default_picture"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:background="@drawable/round_all_white_20"
                         android:orientation="vertical">
 
                         <ImageView
@@ -54,8 +56,8 @@
                             android:layout_marginHorizontal="70dp"
                             android:layout_marginTop="108dp"
                             android:layout_marginBottom="32dp"
-                            android:src="@drawable/ic_newcard_photo"
-                            android:contentDescription="TODO" />
+                            android:contentDescription="TODO"
+                            android:src="@drawable/ic_newcard_photo" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -71,8 +73,8 @@
                         android:id="@+id/iv_create_card"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:contentDescription="TODO" />
+                        android:contentDescription="TODO"
+                        android:scaleType="centerCrop" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -80,13 +82,14 @@
                     android:id="@+id/et_create_card_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="8dp"
-                    android:background="@drawable/round_all_white"
+                    android:background="@drawable/round_all_white_20"
                     android:hint="@string/input_card_title"
                     android:padding="20dp"
                     android:text="@={createViewModel.title}"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/very_light_pink"
                     android:textSize="20sp"
                     app:layout_constraintTop_toBottomOf="@+id/cardView"
                     tools:layout_editor_absoluteX="20dp" />
@@ -95,21 +98,22 @@
                     android:id="@+id/et_create_card_content"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="8dp"
-                    android:background="@drawable/round_all_white"
+                    android:background="@drawable/round_all_white_20"
                     android:gravity="top"
                     android:hint="@string/input_card_content"
                     android:padding="20dp"
                     android:text="@={createViewModel.content}"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/very_light_pink"
                     app:layout_constraintTop_toBottomOf="@+id/et_create_card_title" />
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="12dp"
                     android:text="@string/record_text"
                     android:textColor="@color/black"
@@ -121,7 +125,7 @@
                     android:id="@+id/iv_create_record"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:onClick="@{view->createViewModel.clickAutoSpeak(view)}"
                     android:src="@drawable/selector_btn_auto_record"
                     app:layout_constraintBottom_toBottomOf="@+id/textView"
@@ -158,27 +162,25 @@
                     android:id="@+id/ll_create_record"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginHorizontal="16dp"
                     android:layout_marginVertical="8dp"
-                    android:background="@color/white"
-                    android:orientation="horizontal"
+                    android:background="@drawable/round_all_white_20"
                     android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_create_save_record"
-                    tools:layout_editor_absoluteX="20dp">
-
+                    app:layout_constraintTop_toBottomOf="@+id/tv_create_save_record">
 
                     <ImageView
                         android:id="@+id/iv_create_stop"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="40dp"
+                        android:background="@drawable/custom_ripple_effect_dark"
+                        android:contentDescription="TODO"
                         android:padding="16dp"
                         android:src="@drawable/btn_newcard_play_unslected"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:contentDescription="TODO" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ProgressBar
                         android:id="@+id/progressbar"

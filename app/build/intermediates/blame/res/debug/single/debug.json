@@ -1,11 +1,11 @@
 [
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_text_color_selector.xml.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable/text_color_selector.xml"
-    },
-    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_ic_reoder_black.xml.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable/ic_reoder_black.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_text_color_selector.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable/text_color_selector.xml"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_btn_newcard_complete_selected.png.flat",
@@ -60,12 +60,12 @@
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxxhdpi/btn_setting.png"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_btn_newcard_maketts_unselected.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/btn_newcard_maketts_unselected.png"
-    },
-    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxhdpi_img_home_quote_right.png.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxhdpi/img_home_quote_right.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_btn_newcard_maketts_unselected.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/btn_newcard_maketts_unselected.png"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_btn_setting.png.flat",
@@ -220,12 +220,12 @@
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xxhdpi/btn_content_modify.png"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_btn_setting.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/btn_setting.png"
-    },
-    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_round_all_border_pink.xml.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable/round_all_border_pink.xml"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_btn_setting.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/btn_setting.png"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxhdpi_btn_newcard_close.png.flat",
@@ -936,12 +936,12 @@
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/toolbar_back.xml"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/layout_recycler_hidden_item.xml.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_hidden_item.xml"
-    },
-    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xhdpi_btn_tabbar_home_unselected.png.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-xhdpi/btn_tabbar_home_unselected.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/layout_recycler_hidden_item.xml.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/layout/recycler_hidden_item.xml"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable_ic_pause.xml.flat",
@@ -1040,12 +1040,12 @@
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/btn_managerhome_delete.png"
     },
     {
-        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_btn_content_delete.png.flat",
-        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/btn_content_delete.png"
-    },
-    {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_img_cardmanagement_empty.png.flat",
         "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/img_cardmanagement_empty.png"
+    },
+    {
+        "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-hdpi_btn_content_delete.png.flat",
+        "source": "/Users/ganghee/project/android/Android_MyCuseme/app/src/main/res/drawable-hdpi/btn_content_delete.png"
     },
     {
         "merged": "/Users/ganghee/project/android/Android_MyCuseme/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_btn_newcard_complete_unselected.png.flat",

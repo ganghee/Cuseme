@@ -2,6 +2,7 @@ package com.good.mycuseme.ui.manage
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
@@ -36,6 +37,7 @@ class PreviewReorderFragment :
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        Log.d("token", token)
         initData()
         initRecyclerView()
     }

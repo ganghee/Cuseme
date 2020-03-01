@@ -27,11 +27,12 @@
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="24dp"
+                android:background="@drawable/custom_ripple_effect_blue"
+                android:contentDescription="TODO"
                 android:src="@drawable/btn_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="TODO" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_content_title"
@@ -39,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:text="@={contentViewModel.title}"
-                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/iv_back"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -49,33 +51,36 @@
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
+                android:background="@drawable/custom_ripple_effect_blue"
+                android:contentDescription="TODO"
                 android:src="@drawable/selector_visibility"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_content_update"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="TODO" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/iv_content_update"
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="8dp"
+                android:background="@drawable/custom_ripple_effect_blue"
+                android:contentDescription="TODO"
                 android:src="@drawable/btn_content_modify"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_content_delete"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="TODO" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/iv_content_delete"
                 android:layout_width="32dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="20dp"
+                android:background="@drawable/custom_ripple_effect_blue"
+                android:contentDescription="TODO"
                 android:src="@drawable/btn_content_delete"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="TODO" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -98,11 +103,11 @@
                     android:layout_height="360dp"
                     android:layout_margin="20dp"
                     android:background="@drawable/round_all_white_20"
+                    android:contentDescription="TODO"
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="TODO" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/tv_content_serial_number"

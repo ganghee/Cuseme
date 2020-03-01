@@ -174,11 +174,8 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun setRecordFileName() {
-        createViewModel.apply {
-            setFlieName(externalCacheDir!!.absolutePath)
-        }
-    }
+    private fun setRecordFileName() =
+        createViewModel.setFileName(externalCacheDir!!.absolutePath)
 
     private fun startRecord() {
         setRecordFileName()
@@ -196,12 +193,6 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
                 tv_create_timer.visibility = View.VISIBLE
                 startRecord()
             }
-        }
-    }
-
-    private fun backButton() {
-        iv_back.setOnClickListener {
-            finish()
         }
     }
 
@@ -229,6 +220,12 @@ class CreateActivity : BaseActivity<ActivityCreateBinding>(R.layout.activity_cre
             second += 0.1
             val sec = String.format("%.1f", second)
             tv_create_timer.text = "$sec 초"
+        }
+    }
+
+    private fun backButton() {
+        iv_back.setOnClickListener {
+            finish()
         }
     }
 

@@ -60,6 +60,9 @@ public abstract class TestBinding extends ViewDataBinding {
   public final TextView tvHomeTitle;
 
   @NonNull
+  public final View view;
+
+  @NonNull
   public final View viewGreen;
 
   @Bindable
@@ -70,7 +73,7 @@ public abstract class TestBinding extends ViewDataBinding {
       ImageView imageviewCumi, ImageView imageviewQuoteLeft, ImageView imageviewQuoteRight,
       ImageView ivHomeEmpty, LottieAnimationView lavHomeLock, LottieAnimationView lottieAnimView,
       RecyclerView recyclerHomeCardlist, TextView textviewHomeCardcontent, TextView tvHomeEmpty,
-      TextView tvHomeTitle, View viewGreen) {
+      TextView tvHomeTitle, View view, View viewGreen) {
     super(_bindingComponent, _root, _localFieldCount);
     this.buttonHomeLogin = buttonHomeLogin;
     this.buttonHomeRefresh = buttonHomeRefresh;
@@ -85,6 +88,7 @@ public abstract class TestBinding extends ViewDataBinding {
     this.textviewHomeCardcontent = textviewHomeCardcontent;
     this.tvHomeEmpty = tvHomeEmpty;
     this.tvHomeTitle = tvHomeTitle;
+    this.view = view;
     this.viewGreen = viewGreen;
   }
 
