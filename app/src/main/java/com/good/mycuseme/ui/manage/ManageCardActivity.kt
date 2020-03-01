@@ -2,7 +2,9 @@ package com.good.mycuseme.ui.manage
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.good.mycuseme.R
 import com.good.mycuseme.base.BaseActivity
@@ -10,7 +12,7 @@ import com.good.mycuseme.databinding.ActivityManageBinding
 import com.good.mycuseme.ui.card.CreateActivity
 import com.good.mycuseme.ui.card.HiddenCardActivity
 import kotlinx.android.synthetic.main.activity_manage.*
-import kotlinx.android.synthetic.main.fragment_reorder_preview.*
+import kotlin.system.exitProcess
 
 class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity_manage) {
 
@@ -29,7 +31,7 @@ class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity
         changeBottomFragment()
         startCreateCardActivity()
         startHiddenCardActivity()
-
+        finishEvent()
     }
 
     override fun onStart() {
@@ -84,5 +86,26 @@ class ManageCardActivity : BaseActivity<ActivityManageBinding>(R.layout.activity
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fl_manage, nowFrag)
         transaction.commit()
+    }
+
+    private fun finishEvent() {
+        manageCardViewModel.apply {
+            getFinishFlag()
+            finishFlag.observe(this@ManageCardActivity, Observer {
+                if (it) {
+                    finishAffinity()
+                    System.runFinalization()
+                    exitProcess(0)
+                } else Toast.makeText(
+                    this@ManageCardActivity,
+                    "뒤로가기 버튼을 한 번 더 누르면 종료",
+                    Toast.LENGTH_SHORT
+                ).show()
+            })
+        }
+    }
+
+    override fun onBackPressed() {
+        manageCardViewModel.backButtonSubject.onNext(System.currentTimeMillis())
     }
 }
